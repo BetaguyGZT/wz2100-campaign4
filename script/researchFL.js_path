@@ -1,0 +1,110 @@
+// Part of the Campaign 4 Weapon Paths Research implementation
+// by Goth | September 2013 | wz2100.net
+
+// Weapons - Flamers
+function eventResearched(research, structure)
+{
+	if (structure.player == selectedPlayer && research.done == true)
+	{
+		
+		if (research.name == "R-PATH-Wpn-Flame")
+		{
+			enableResearch("R-Wpn-Flamer01Mk1", selectedPlayer);
+			resPathFlame = 1;
+		}
+		
+		if (research.name == "R-Wpn-Flamer01Mk1")
+		{
+			enableResearch("R-Wpn-Flamer-Damage01", selectedPlayer);
+			enableResearch("R-Wpn-Flamer-ROF01", selectedPlayer);
+			enableResearch("R-Wpn-Flame1Med", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Flamer-ROF01")
+		{
+			enableResearch("R-Wpn-Flamer-ROF02", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Flamer-ROF02")
+		{
+			enableResearch("R-Wpn-Flamer-ROF03", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Flamer-Damage01")
+		{
+			enableResearch("R-Wpn-Flamer-Damage02", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Flamer-Damage02")
+		{
+			enableResearch("R-Wpn-Flamer-Damage03", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Flamer-Damage03")
+		{
+			enableResearch("R-Wpn-Flame1Hvy", selectedPlayer);
+			resPathFlame = 2;
+		}
+		
+		if (research.name == "R-Wpn-Flamer-ROF04")
+		{
+			enableResearch("R-Wpn-Flamer-ROF05", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Flamer-ROF05")
+		{
+			enableResearch("R-Wpn-Flamer-ROF06", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Flamer-ROF06")
+		{
+			enableResearch("R-Wpn-Flame2", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Flamer-Damage04")
+		{
+			enableResearch("R-Wpn-Flamer-Damage05", selectedPlayer);
+			enableResearch("R-Wpn-Flame2Med", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Flamer-Damage05")
+		{
+			enableResearch("R-Wpn-Flamer-Damage06", selectedPlayer);
+			enableResearch("R-Wpn-Flame2Hvy", selectedPlayer);
+			resPathFlame = 3;
+		}
+		
+		if (research.name == "R-Wpn-Flamer-ROF07")
+		{
+			enableResearch("R-Wpn-Flamer-ROF07", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Flamer-ROF07")
+		{
+			enableResearch("R-Wpn-Flamer-ROF08", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Flamer-ROF08")
+		{
+			enableResearch("R-Wpn-Flamer-ROF09", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Flamer-Damage07")
+		{
+			enableResearch("R-Wpn-Flamer-Damage08", selectedPlayer);
+			enableResearch("R-Wpn-Plasmite-Flamer", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Flamer-Damage08")
+		{
+			enableResearch("R-Wpn-Flamer-Damage09", selectedPlayer);
+			enableResearch("R-Wpn-Plasmite-FlamerMed", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Flamer-Damage09")
+		{
+			enableResearch("R-Wpn-Plasmite-FlamerHvy", selectedPlayer);
+			resPathFlame = 4;
+		}
+	}
+}

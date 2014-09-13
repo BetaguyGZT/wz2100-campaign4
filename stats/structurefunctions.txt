@@ -1,0 +1,45 @@
+A0ResearchFacility,Research Facility,4
+A0LightFactory,FacProd1,5
+A0PowerGenerator,PowGen1,6
+A0FacMod1,FacMod1,12
+A0ResourceExtractor,Resource,14
+A0BaBaFactory,BaBaFacProd,22
+A0BaBaPowerGenerator,BaBaPowGen,23
+A0ResearchModule1,Research Module,24
+A0PowMod1,PowerModule,36
+A0HardcreteMk1Wall,Hardcrete Wall1,41
+SupercreteWall,Supercrete Wall,41
+PlascreteWall,Plascrete Wall,41
+PlasteelWall,Plasteel Wall,41
+A0BaBaHorizontalWall,baba Wall Function,45
+A0ComDroidControl,Research Facility,50
+A0CyborgFactory,FacProd2,57
+A0TankTrap,TankTrapFunc,60
+A0VtolPad,ReArm,68
+A0CommandCentre,Basic Wall Function,69
+A0CommandCentreCO,Basic Wall Function,70
+A0CommandCentreNP,Basic Wall Function,71
+A0VTolFactory1,FacProd1,72
+A0CommandCentreNE,Basic Wall Function,79
+CollectiveWall,Collective Wall1,80
+NEXUSWall,NEXUS Wall1,81
+A0RepairCentre,RepairFacilityFunc,83
+A0RepairCentre2,RepairFacilityFunc2,83
+A0RepairCentre3,RepairFacilityFunc3,83
+A0RepairCentre4,RepairFacilityFunc4,83
+NX-CruiseSite,Basic Wall Function,84
+NX-ANTI-SATSite,Basic Wall Function,85
+A0BaBaVtolFactory,BaBaFacProd,87
+ScavRepairCentre,RepairFacilityFuncBaBa,83
+P0Cam4FakeHQ,Basic Wall Function,69
+ScavHQ,Basic Wall Function,87
+ScavLab,Basic Wall Function,87
+MiniPowerGenerator,MiniPowGen1,91
+MiniLightFactory,MiniFacProd1,87
+MiniLaboratory,MiniLab1,90
+A0ResourceExtractor,MiniResource,14
+MiniAdvancedLaboratory,MiniLab2,94
+MiniChopperFactory,MiniFacProd2,92
+MiniHeavyFactory,MiniFacProd2,93
+MiniRepairFacility,MiniRepFac1,88
+MiniRearmPad,MiniReArm1,95

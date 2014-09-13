@@ -1,0 +1,209 @@
+// Part of the Campaign 4 Research implementation
+// by Goth | September 2013 | wz2100.net
+
+// Weapons -- Machineguns
+function eventResearched(research, structure)
+{
+	if (structure.player == selectedPlayer && research.done == true)
+	{
+		if (research.name == "R-PATH-Wpn-MG")
+		{
+			enableResearch("R-Wpn-MG1Mk1", selectedPlayer);
+			resPathMG=1; // First upgrade set (1-3)
+		}
+	
+		if (research.name == "R-Wpn-MG1Mk1")
+		{
+			//enableResearch("R-Defense-Tower-MG1", selectedPlayer); // prresearch.txt being weird again. 
+			//enableResearch("R-Defense-Bunker-MG1", selectedPlayer);
+			enableResearch("R-Wpn-MG-ROF01", selectedPlayer);
+			enableResearch("R-Wpn-MG-Damage01", selectedPlayer);
+			enableResearch("R-Wpn-MG-Accuracy01", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-ROF01")
+		{
+			enableResearch("R-Wpn-MG2Mk1", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-Damage01")
+		{
+			enableResearch("R-Wpn-MG3Mk1", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG2Mk1")
+		{
+			enableResearch("R-Defense-Tower-MG2", selectedPlayer);
+			enableResearch("R-Defense-Bunker-MG2", selectedPlayer);
+			enableResearch("R-Wpn-MG-ROF02", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-ROF02")
+		{
+			enableResearch("R-Wpn-MG-ROF03", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG3Mk1")
+		{
+			enableResearch("R-Defense-Tower-MG3", selectedPlayer);
+			enableResearch("R-Defense-Bunker-MG3", selectedPlayer);
+			enableResearch("R-Defense-WallTower-MG3", selectedPlayer);
+			enableResearch("R-Wpn-MG-Accuracy02", selectedPlayer);
+			enableResearch("R-Wpn-MG-Damage02", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-Damage02")
+		{
+			enableResearch("R-Wpn-MG3Twin", selectedPlayer);
+			enableResearch("R-Wpn-MG-Accuracy03", selectedPlayer);
+			enableResearch("R-Wpn-MG-Damage03", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG3Twin")
+		{
+			enableResearch("R-Defense-Bunker-MG3Twin", selectedPlayer);
+			enableResearch("R-Defense-WallTower-MG3Twin", selectedPlayer);
+			resPathMG=2; // Second set of upgrades
+		}
+		
+		if (research.name == "R-Wpn-MG-Accuracy04")
+		{
+			enableResearch("R-Wpn-MG-Accuracy05", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-Accuracy05")
+		{
+			enableResearch("R-Wpn-MG-Accuracy06", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-Accuracy06")
+		{
+			enableResearch("R-Wpn-MG-Accuracy07", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-Accuracy07")
+		{
+			enableResearch("R-Wpn-MG-Accuracy08", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-Accuracy08")
+		{
+			enableResearch("R-Wpn-MG-Accuracy09", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-Accuracy09")
+		{
+			enableResearch("R-Wpn-MG-Accuracy10", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-ROF04")
+		{
+			enableResearch("R-Wpn-MG-ROF05", selectedPlayer);
+			enableResearch("R-Wpn-MG4", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-ROF05")
+		{
+			enableResearch("R-Wpn-MG-ROF06", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-ROF06")
+		{
+			resPathMG=3; // Third upgrade set
+		}
+
+		if (research.name == "R-Wpn-MG4")
+		{
+			enableResearch("R-Defense-WallTower2-MG4", selectedPlayer);
+			enableResearch("R-Defense-Tower2-MG4", selectedPlayer);
+			enableResearch("R-Defense-Bunker2-MG4", selectedPlayer);
+			enableResearch("R-Wpn-MG-Damage05", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-Damage05")
+		{
+			enableResearch("R-Wpn-MG-Damage06", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-Damage06")
+		{
+			enableResearch("R-Wpn-MG-Damage07", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-Damage07")
+		{
+			enableResearch("R-Wpn-MG5", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG5")
+		{
+			enableResearch("R-Defense-WallTower-TwinAGun", selectedPlayer);
+			enableResearch("R-Defense-Bunker2-MG5", selectedPlayer);
+			enableResearch("R-Wpn-MG-ROF08", selectedPlayer);
+			enableResearch("R-Wpn-MG-Accuracy08", selectedPlayer);
+			enableResearch("R-Wpn-MG-Damage08", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-Damage08")
+		{
+			enableResearch("R-Wpn-MG-Damage09", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-Damage09")
+		{
+			enableResearch("R-Wpn-MG-Damage10", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-Accuracy08")
+		{
+			enableResearch("R-Wpn-MG-Accuracy09", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-Accuracy09")
+		{
+			enableResearch("R-Wpn-MG-Accuracy10", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-ROF08")
+		{
+			enableResearch("R-Wpn-MG-ROF09", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-ROF09")
+		{
+			enableResearch("R-Wpn-MG-ROF10", selectedPlayer);
+		}
+
+		if (research.name == "R-Wpn-MG-AntiTank")
+		{
+			enableResearch("R-Defense-WallTower-MG-AntiTank", selectedPlayer);
+			enableResearch("R-Defense-Tower-MG-AntiTank", selectedPlayer);
+			enableResearch("R-Defense-Bunker-MG-AntiTank", selectedPlayer);
+			enableResearch("R-Wpn-MG-AntiTankTwin", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-AntiTankTwin")
+		{
+			enableResearch("R-Defense-WallTower-MG-AntiTankTwin", selectedPlayer);
+			enableResearch("R-Defense-Tower-MG-AntiTankTwin", selectedPlayer);
+			enableResearch("R-Defense-Bunker-MG-AntiTankTwin", selectedPlayer);
+			enableResearch("R-Wpn-MG-AntiTank2", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-MG-AntiTank2")
+		{
+			enableResearch("R-Defense-WallTower-MG-AntiTank2", selectedPlayer);
+			enableResearch("R-Defense-Tower-MG-AntiTank2", selectedPlayer);
+			enableResearch("R-Defense-Bunker-MG-AntiTank2", selectedPlayer);
+			enableResearch("R-Wpn-MG-AntiTank2Twin", selectedPlayer);
+			resPathMG=4; // Set us up for best weapon in class
+		}
+	
+		if (research.name == "R-Wpn-MG-AntiTank2Twin")
+		{
+			enableResearch("R-Defense-WallTower-MG-AntiTank2Twin", selectedPlayer);
+			enableResearch("R-Defense-Tower-MG-AntiTank2Twin", selectedPlayer);
+			enableResearch("R-Defense-Bunker-MG-AntiTank2Twin", selectedPlayer);
+		}
+	}
+}

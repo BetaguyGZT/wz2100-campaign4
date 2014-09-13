@@ -1,0 +1,949 @@
+RES_DF_HCW1
+{
+	{
+		_("New Construction Options Available"),
+		_("Titanium-reinforced concrete"),
+		_("Enables Hardcrete walls"),
+		_("Defensive Strength: Medium"),
+	},
+	.imdName = "MICAPSUL.pie",
+	.imdName2 = NULL,
+	.sequenceName = "res_struttech.ogg",
+	.audioName = NULL,
+};
+RES_ST_VF
+{
+	{
+		_("New Base Structure Available"),
+		_("VTOL factory enables VTOL production"),
+		_("VTOL rearming pads required to keep VTOLs flying"),
+		_("May be upgraded using factory modules"),
+	},
+	.imdName = "MICAPSUL.pie",
+	.imdName2 = NULL,
+	.sequenceName = "res_struttech.ogg",
+	.audioName = NULL,
+};
+RES_ST_VP
+{
+	{
+		_("New Base Structure Available"),
+		_("Refuels, rearms and repairs VTOLs"),
+		_("Assign a VTOL by selecting the rearming pad as its target"),
+		_("The VTOL returns to the selected pad for rearming"),
+	},
+	.imdName = "MICAPSUL.pie",
+	.imdName2 = NULL,
+	.sequenceName = "res_struttech.ogg",
+	.audioName = NULL,
+};
+RES_REPTU1
+{
+	{
+		_("New Systems Turret Available"),
+		_("Battlefield repair unit"),
+		_("Automatically Repairs Damaged Units"),
+		_("Or damaged units may be selected as target"),
+	},
+	.imdName = "MICAPSUL.pie",
+	.imdName2 = NULL,
+	.sequenceName = "res_systech.ogg",
+	.audioName = NULL,
+};
+RES_SENSO1
+{
+	{
+		_("New Systems Turret Available For Design"),
+		_("Improved sensor range"),
+		_("Makes excellent scout vehicle"),
+		_("May be assigned as spotter for indirect fire weapons"),
+	},
+	.imdName = "MICAPSUL.pie",
+	.imdName2 = NULL,
+	.sequenceName = "res_systech.ogg",
+	.audioName = NULL,
+};
+RES_SY_STW1
+{
+	{
+		_("New Systems Tower Available"),
+		_("Extended sensor range"),
+		_("Keeps map areas under constant surveillance"),
+		_("May be assigned as spotter for indirect fire weapons"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_systech.ogg",
+	.audioName = NULL,
+};
+RES_SY_SU1
+{
+	{
+		_("Sensors Improved"),
+		_("New Thermal Emissions detection"),
+		_("Extends Sensor Range"),
+		_("All sensors upgraded automatically"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_systech.ogg",
+	.audioName = NULL,
+};
+RES_SY_CBSTW1
+{
+	{
+		_("New Systems Tower Available"),
+		_("Counter-battery tower detects enemy indirect fire batteries"),
+		_("Orders assigned indirect fire units to fire at the enemy batteries"),
+		_("Counter-battery fire continues until enemy battery is suppressed"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_systech.ogg",
+	.audioName = NULL,
+};
+RES_V_B09
+{
+	{
+		_("Collective Heavy Body"),
+		_("More armor and body points than Python"),
+		_("Slower than Python"),
+		_("High power costs and slow to produce"),
+	},
+	.imdName = "MICAPSUL.pie",
+	.imdName2 = NULL,
+	.sequenceName = "res_droid.ogg",
+	.audioName = NULL,
+};
+RES_V_P_V1
+{
+	{
+		_("New Propulsion Available for Design"),
+		_("Vertical Take Off and Landing Propulsion"),
+		_("Speed: VTOL"),
+		_("Body Points: Low"),
+	},
+	.imdName = "MICAPSUL.pie",
+	.imdName2 = NULL,
+	.sequenceName = "res_droid.ogg",
+	.audioName = NULL,
+};
+RES_W_SRK_AC3
+{
+	{
+		_("Rocket Upgrade"),
+		_("Rocket detects and locks on to engine emissions"),
+		_("Increases Rocket accuracy"),
+		_("All rockets upgraded automatically"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_W_RK_LTAT1
+{
+	{
+		_("New Rocket Available"),
+		_("Anti-tank rocket"),
+		_("Best Targets: Vehicles"),
+		_("Body Points: Very Low"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_W_RK_HVAT1
+{
+	{
+		_("New Rocket Available"),
+		_("High explosive shaped charge missile"),
+		_("Best Targets: Bunkers and hardpoints"),
+		_("Body Points: Very Low"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_W_CNAC2
+{
+	{
+		_("Cannon Upgrade"),
+		_("Laser designator paints and guides rounds to the target"),
+		_("Increases Cannon accuracy"),
+		_("All cannons upgraded automatically"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_CYW_TFL
+{
+	{
+		_("Thermite Flamer"),
+		_("Upgrade to Cyborg Flamers"),
+		_("Increases Flame Damage"),
+		_("All Flamers upgraded automatically"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_CYW_GRN
+{
+	{
+		_("Cyborg Grenadier"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_CYS_CEN
+{
+	{
+		_("Combat Engineer"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_CYS_MCH
+{
+	{
+		_("Cyborg Mechanic"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_W_INH
+{
+	{
+		_("Incendiary Howitzer"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_EMP_INH
+{
+	{
+		_("Incendiary Howitzer Emplacement"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_PLFL
+{
+	{
+		_("Plasmite Flamer"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_EMP_PFL
+{
+	{
+		_("Plasmite Flamer Bunker"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_IMORT
+{
+	{
+		_("Incendiary Mortar"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_EMP_IMP
+{
+	{
+		_("Incendiary Mortar Pit"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_CYTRANS
+{
+	{
+		_("Cyborg Tranport"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_V_AH7
+{
+	{
+		_("Cyborg Thermal Armor Upgrade 7"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_REPTUHVY
+{
+	{
+		_("Heavy Repair Turret"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_SY_SPT
+{
+	{
+		_("NexusLink Turret"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_CYW_H_HPV
+{
+	{
+		_("Super HPV Cannon Cyborg"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_EMP_MD
+{
+	{
+		_("Mass Driver Fortress"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_EMP_CAN
+{
+	{
+		_("Cannon Fortress"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_SY_SU2
+{
+	{
+		_("Sensor Upgrade Level Two"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_CYW_H_MC
+{
+	{
+		_("Super Heavy Cannon Cyborg"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_CYW_H_AC
+{
+	{
+		_("Super Auto-Cannon Cyborg"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_CYW_H_TK
+{
+	{
+		_("Super Scourge Cyborg"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_SY_AR
+{
+	{
+		_("Auto-Repair"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_SY_RC
+{
+	{
+		_("Nexus Resistance Circuits"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_W_CN6_T_A
+{
+	{
+		_("Twin Assault Cannon"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_W_HLAS
+{
+	{
+		_("Heavy Laser"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_EMP_HEAVYLAS
+{
+	{
+		_("Heavy Laser Emplacement"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_SY_S_WS
+{
+	{
+		_("Wide Spectrum Sensor Tower"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_SY_S_UP
+{
+	{
+		_("Uplink Center"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_W_LASSAT
+{
+	{
+		_("Laser Satellite Command Post"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_W_PLASCAN
+{
+	{
+		_("Plasma Cannon"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_CYW_H_PLAS
+{
+	{
+		_("Super Pulse Laser Cyborg"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_CYW_H_RG
+{
+	{
+		_("Super Rail Gunner Cyborg"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_CYW_H_AT
+{
+	{
+		_("Super Scourge Cyborg II"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_EMP_PLASCAN
+{
+	{
+		_("Plasma Cannon Emplacement"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_DEF_EMP
+{
+	{
+		_("EMP Cannon Emplacement"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_EMP_RKT
+{
+	{
+		_("Super Rocket Fortress"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_EMP_MSL
+{
+	{
+		_("Heavy Missile Bastion"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_V_B13
+{
+	{
+		_("Body 13"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_V_B14
+{
+	{
+		_("Body 14"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_W_FL_D7
+{
+	{
+		_("Plasmite Flamer"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_ST_FU7
+{
+	{
+		_("Factory Upgrade - Level 7"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_ST_FCY7
+{
+	{
+		_("Cyborg Factory Upgrade - Level 7"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_DEF_AALAS
+{
+	{
+		_("Stormbringer AA Laser"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_DEF_EMPM
+{
+	{
+		_("EMP Mortar Pit"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_MS_SAM2WT
+{
+	{
+		_("SAM-2 Walltower"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_WT_QUADAA
+{
+	{
+		_("Quad-AA Walltower"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_SY_S_WST
+{
+	{
+		_("Wide Spectrum Sensor"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_EMP_CANT
+{
+	{
+		_("EMP Cannon"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_WT_DOUBLEAA
+{
+	{
+		_("Dual-AA Walltower"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_MS_SAM1WT
+{
+	{
+		_("SAM-1 Walltower"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_WT_TWINAGUN
+{
+	{
+		_("Twin Assault Gun"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_WT_TWINAGHP
+{
+	{
+		_("Twin Assault Gun Hardpoint"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_W_BMB5
+{
+	{
+		_("VTOL Plasmite Bomb"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_W_BMB6
+{
+	{
+		_("VTOL EMP Bomb"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_C_CT2
+{
+	{
+		_("Command Turret II"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_C_CT3
+{
+	{
+		_("Command Turret III"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_C_CT4
+{
+	{
+		_("Command Turret IV"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_SY_SU3
+{
+	{
+		_("Sensor Upgrade Level Three"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};
+RES_SY_RDST1
+{
+	{
+		_("Radar Detector"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+		_("[NO TEXT]"),
+	},
+	.imdName = "MICAPSUL.PIE",
+	.imdName2 = NULL,
+	.sequenceName = "res_weapons.ogg",
+	.audioName = NULL,
+};

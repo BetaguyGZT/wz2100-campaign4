@@ -1,0 +1,98 @@
+// Part of the Campaign 4 Weapon Paths Research implementation
+// by Goth | September 2013 | wz2100.net
+
+// Weapons - Anti-Aircraft
+var playerDoingAA = 0; // So we can flag upgrades at various points -- simple but it works!
+
+function eventResearched(research, structure)
+{
+	if (structure.player == selectedPlayer && research.done == true)
+	{
+		if (research.name == "R-PATH-Wpn-AA")
+		{
+			enableResearch("R-Wpn-AAGun-Accuracy01", selectedPlayer); //3
+			enableResearch("R-Wpn-AAGun-Damage01", selectedPlayer); //6
+			enableResearch("R-Wpn-AAGun-ROF01", selectedPlayer); //6
+			enableResearch("R-Wpn-MG-AALgt", selectedPlayer);
+			playerDoingAA=1; // See how easy that is?
+		}
+		
+		if (research.name == "R-Defense-SupercreteWall")
+		{
+			if (playerDoingAA=1)
+			{
+				enableResearch("R-Wpn-MG-AA", selectedPlayer);
+				enableResearch("R-Wpn-AAGun-Accuracy02", selectedPlayer); //3
+				enableResearch("R-Wpn-AAGun-Damage03", selectedPlayer); //6
+				enableResearch("R-Wpn-AAGun-ROF03", selectedPlayer); //6
+			}
+		}
+		
+		if (research.name == "R-Defense-PlascreteWall")
+		{
+			if (playerDoingAA=1)
+			{
+				enableResearch("R-Wpn-MG-AA2Lgt", selectedPlayer);
+				enableResearch("R-Wpn-AAGun-Accuracy03", selectedPlayer); //3
+				enableResearch("R-Wpn-AAGun-Damage05", selectedPlayer); //6
+				enableResearch("R-Wpn-AAGun-ROF05", selectedPlayer); //6
+			}
+		}
+		
+		if (research.name == "R-Defense-PlasteelWall")
+		{
+			if (playerDoingAA=1)
+			{
+				enableResearch("R-Wpn-MG-AA2", selectedPlayer);
+			}
+		}
+		
+		if (research.name == "R-Wpn-MG-AA2")
+		{
+			if (playerDoingAA=1)
+			{
+				enableResearch("R-Wpn-Laser-AA", selectedPlayer);
+			}
+		}
+		
+		if (research.name == "R-Wpn-Laser-AA")
+		{
+			if (playerDoingAA=1)
+			{
+				enableResearch("R-Wpn-Laser-AA2", selectedPlayer);
+			}
+		}
+		
+		if (research.name == "R-Wpn-Laser-AA2")
+		{
+			if (playerDoingAA=1)
+			{
+				enableResearch("R-Wpn-AAGun03", selectedPlayer);
+			}	
+		}
+		
+		if (research.name == "R-Wpn-AAGun03")
+		{
+			if (playerDoingAA=1)
+			{
+				enableResearch("R-Wpn-Railgun-GattlingAALgt", selectedPlayer);
+			}
+		}
+		
+		if (research.name == "R-Wpn-Railgun-GattlingAALgt")
+		{
+			if (playerDoingAA=1)
+			{
+				enableResearch("R-Wpn-Railgun-GattlingAA", selectedPlayer);
+			}
+		}	
+			
+		if (research.name == "R-Wpn-Railgun-GattlingAA")
+		{
+			if (playerDoingAA=1)
+			{
+				enableResearch("R-Wpn-AAGun04", selectedPlayer);
+			}
+		}
+	}
+}

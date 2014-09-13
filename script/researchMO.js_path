@@ -1,0 +1,181 @@
+// Part of the Campaign 4 Weapon Paths Research implementation
+// by Goth | September 2013 | wz2100.net
+
+// Weapons - Mortars
+function eventResearched(research, structure)
+{
+	if (structure.player == selectedPlayer && research.done == true)
+	{
+		if (research.name == "R-PATH-Wpn-Mortar")
+		{
+			enableResearch("R-Wpn-Mortar01Lt", selectedPlayer);
+			resPathMor=1; // Flag for first upgrade set
+		}
+	
+		if (research.name == "R-Wpn-Mortar01Lt")
+		{
+			enableResearch("R-Defense-Empl-Mortar", selectedPlayer);
+		}
+		
+		if (research.name == "R-Defense-Empl-Mortar")
+		{
+			enableResearch("R-Wpn-Artillery-Accuracy01", selectedPlayer);
+			enableResearch("R-Wpn-Artillery--Damage01", selectedPlayer);
+			enableResearch("R-Wpn-Artillery--ROF01", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-Artillery--ROF01")
+		{
+			enableResearch("R-Wpn-Artillery--ROF02", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-Artillery--ROF02")
+		{
+			enableResearch("R-Wpn-Artillery--ROF03", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-Artillery--ROF03")
+		{
+			enableResearch("R-Wpn-Mortar3", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-Mortar3")
+		{
+			enableResearch("R-Defense-Empl-MortarRot", selectedPlayer); // Pepperpot
+			resPathMor=2; // Flag for second upgrade set
+		}
+	
+		if (research.name == "R-Wpn-Artillery-Accuracy01")
+		{
+			enableResearch("R-Wpn-Artillery-Accuracy02", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-Artillery-Accuracy02")
+		{
+			enableResearch("R-Wpn-Artillery-Accuracy03", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-Artillery--Damage01")
+		{
+			enableResearch("R-Wpn-Artillery--Damage02", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-Artillery--Damage02")
+		{
+			enableResearch("R-Wpn-Artillery--Damage03", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-Artillery--Damage03")
+		{
+			enableResearch("R-Wpn-Mortar02Hvy", selectedPlayer); // Bombard
+		}
+
+		if (research.name == "R-Wpn-Artillery-Accuracy04")
+		{
+			enableResearch("R-Wpn-Artillery-Accuracy05", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Artillery-Accuracy05")
+		{
+			enableResearch("R-Wpn-Artillery-Accuracy06", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Artillery-Accuracy06")
+		{
+			enableResearch("R-Wpn-Mortar-Ramjet", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Artillery--Damage04")
+		{
+			enableResearch("R-Wpn-Artillery--Damage05", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Artillery--Damage05")
+		{
+			enableResearch("R-Wpn-Artillery--Damage06", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Artillery--Damage06")
+		{
+			enableResearch("R-Wpn-Mortar-RamjetHvy", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-Artillery-ROF01")
+		{
+			completeResearch("R-Wpn-Artillery-ROF02");
+		}
+		
+		if (research.name == "R-Wpn-Artillery-ROF02")
+		{
+			completeResearch("R-Wpn-Artillery-ROF03");
+		}
+		
+		if (research.name == "R-Wpn-Artillery-ROF04")
+		{
+			completeResearch("R-Wpn-Artillery-ROF05");
+		}
+		
+		if (research.name == "R-Wpn-Artillery-ROF05")
+		{
+			enableResearch("R-Wpn-Artillery-ROF06", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Artillery-ROF06")
+		{
+			enableResearch("R-Wpn-Mortar-RamjetRot", selectedPlayer);
+			resPathMor=3; // Flag for next level of upgrades (Second Upgrade set)
+		}
+		
+		if (research.name == "R-Wpn-Artillery-ROF07")
+		{
+			enableResearch("R-Wpn-Artillery-ROF08", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Artillery-ROF08")
+		{
+			enableResearch("R-Wpn-Artillery-ROF09", selectedPlayer);
+		}
+	
+		if (research.name == "R-Wpn-Artillery--Damage07")
+		{
+			enableResearch("R-Wpn-Artillery--Damage08", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Mortar-Damage08")
+		{
+			enableResearch("R-Wpn-Artillery--Damage09", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Artillery-Accuracy07")
+		{
+			enableResearch("R-Wpn-Artillery-Accuracy08", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Artillery-Accuracy08")
+		{
+			enableResearch("R-Wpn-Artillery-Accuracy09", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Artillery-Accuracy09")
+		{
+			resPathMor=4; // Third and final upgrade set.
+		}
+		
+		if (research.name == "R-Wpn-Mortar-Gauss")
+		{
+			enableResearch("R-Wpn-Mortar-GaussRot", selectedPlayer);
+			enableResearch("R-Wpn-Mortar-GaussHvy", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Mortar-GaussRot")
+		{
+			enableResearch("R-Wpn-Mortar-GaussRamjet", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Mortar-GaussRamjet")
+		{
+			enableResearch("R-Wpn-Mortar-GaussRamjetHvy", selectedPlayer);
+			enableResearch("R-Wpn-Mortar-GaussRamjetRot", selectedPlayer);
+		}
+	}
+}

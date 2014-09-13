@@ -1,0 +1,756 @@
+// research.js_inc -- by Goth | Spetember 2013 | wz2100.net
+// This will be the standard research implementation for Campaign 4
+// It's not very elegant and rather brute-force ... sure as heck isn't perfect.
+// The basis of Research will be according to the Engineering and Research Facility upgrades. This will also tie in with Factory, Sensor, Power and Wall upgrades.
+// Can't trust prresearch.txt, redcomponents or redstructures to handle it fully in campaign mode -- likely will be depreciated in Warzone 3.2 or 3.3
+
+//Weapon Paths variables -- we'll flag each path so that the appropriate things are unlocked.
+var resPathMG = 0;  
+var resPathMor = 0;
+var resPathCannon = 0;
+var resPathArty = 0;
+var resPathFlame = 0;
+var resPathLaser = 0;
+var resPathRail = 0;
+var resPathRocket = 0;
+var resPathHY=0;
+
+function eventResearched(research, structure)
+{
+	if (structure.player == selectedPlayer && research.done == true) // research == done and which player completed it ... this way we only have to check once per cycle.
+	{
+		// Sensors
+		if (research.name == "R-Sys-Sensor-Turret01")
+		{
+			enableResearch("R-Sys-Sensor-Tower01", selectedPlayer);
+		}
+	
+		if (research.name == "R-Sys-Sensor-Tower01")
+		{
+			enableResearch("R-Sys-Sensor-TurretHvy", selectedPlayer);
+		}
+	
+		if (research.name == "R-Sys-Sensor-TurretHvy")
+		{
+			enableResearch("R-Sys-Sensor-Tower02", selectedPlayer);
+		}
+
+		if (research.name == "R-Sys-Sensor-Upgrade01")
+		{
+			enableResearch("R-Sys-RadarDetector01", selectedPlayer); // Unlock structures for components on a case-by-case basis .. sometimes prresearch gets it right.
+			enableResearch("R-Sys-CBSensor-Turret01", selectedPlayer);
+			enableResearch("R-Sys-VTOLStrike-Turret01", selectedPlayer);
+			enableResearch("R-Sys-VTOLCBS-Turret01", selectedPlayer);
+			enableResearch("R-Sys-Sensor-Upgrade02", selectedPlayer);
+		}
+
+		if (research.name == "R-Sys-Sensor-Upgrade03")
+		{
+			enableResearch("R-Sys-Sensor-WS", selectedPlayer);
+		}
+								
+		if (research.name == "R-Sys-Sensor-WS")
+		{
+			enableResearch("R-Sys-Sensor-WSTower", selectedPlayer);
+		}
+
+		if (research.name == "R-Sys-Sensor-UpLink")
+		{
+			enableResearch("R-Wpn-LasSat", selectedPlayer);
+		}
+
+		// Walls and Construction items
+		if (research.name == "R-Defense-TankTrap01")
+		{
+			enableResearch("R-Defense-TowerConst01", selectedPlayer);
+		}
+
+		if (research.name == "R-Defense-TowerConst01")
+		{
+			enableResearch("R-Defense-EmplConst01", selectedPlayer);
+		}
+
+		if (research.name == "R-Defense-EmplConst01")
+		{
+			enableResearch("R-Defense-HardcreteWall", selectedPlayer);
+		}
+
+		if (research.name == "R-Defense-HardcreteWall")
+		{
+			enableResearch("R-Defense-HardcreteGate", selectedPlayer);
+			enableResearch("R-Defense-TowerConst02", selectedPlayer);
+			enableResearch("R-Defense-BunkerConst01", selectedPlayer);
+			enableResearch("R-Defense-WallTowerConst01", selectedPlayer);
+			enableResearch("R-Defense-TankTrapGate", selectedPlayer);
+			enableResearch("R-Defense-WallUpgrade01", selectedPlayer);
+		}
+
+		if (research.name == "R-Defense-WallUpgrade01")
+		{
+			enableResearch("R-Defense-WallUpgrade02", selectedPlayer);
+			enableResearch("R-Struc-Materials01", selectedPlayer);
+		}
+	
+		if (research.name == "R-Defense-WallUpgrade02")
+		{
+			enableResearch("R-Defense-WallUpgrade03", selectedPlayer);
+		}
+	
+		if (research.name == "R-Defense-WallUpgrade03")
+		{
+			enableResearch("R-Defense-WallUpgrade04", selectedPlayer);
+		}
+
+		if (research.name == "R-Defense-SupercreteWall")
+		{
+			enableResearch("R-Defense-SupercreteGate", selectedPlayer);
+			enableResearch("R-Defense-TowerConst03", selectedPlayer);
+			enableResearch("R-Defense-EmplConst02", selectedPlayer);
+			enableResearch("R-Defense-WallTowerConst02", selectedPlayer);
+			enableResearch("R-Defense-BunkerConst02", selectedPlayer);
+			enableResearch("R-Defense-SuperEmplConst01", selectedPlayer);
+			enableResearch("R-Defense-FortConst01", selectedPlayer);
+			enableResearch("R-Defense-WallUpgrade05", selectedPlayer);
+		}
+
+		if (research.name == "R-Defense-WallUpgrade05")
+		{
+			enableResearch("R-Defense-WallUpgrade06", selectedPlayer);
+		}
+	
+		if (research.name == "R-Defense-WallUpgrade06")
+		{
+			enableResearch("R-Defense-WallUpgrade07", selectedPlayer);
+		}
+
+		if (research.name == "R-Defense-PlascreteWall")
+		{
+			enableResearch("R-Defense-PlascreteGate", selectedPlayer);
+			enableResearch("R-Defense-TowerConst04", selectedPlayer);
+			enableResearch("R-Defense-EmplConst03", selectedPlayer);
+			enableResearch("R-Defense-WallTowerConst03", selectedPlayer);
+			enableResearch("R-Defense-BunkerConst03", selectedPlayer);
+			enableResearch("R-Defense-SuperEmplConst02", selectedPlayer);
+			enableResearch("R-Defense-FortConst02", selectedPlayer);
+			enableResearch("R-Defense-WallUpgrade08", selectedPlayer);
+		}
+	
+		if (research.name == "R-Defense-WallUpgrade08")
+		{
+			enableResearch("R-Defense-WallUpgrade09", selectedPlayer);
+		}
+	
+		if (research.name == "R-Defense-WallUpgrade09")
+		{
+			enableResearch("R-Defense-WallUpgrade10", selectedPlayer);
+		}
+
+		if (research.name == "R-Defense-PlasteelWall")
+		{
+			enableResearch("R-Defense-TowerConst05", selectedPlayer);
+			enableResearch("R-Defense-EmplConst04", selectedPlayer);
+			enableResearch("R-Defense-WallTowerConst04", selectedPlayer);
+			enableResearch("R-Defense-BunkerConst04", selectedPlayer);
+			enableResearch("R-Defense-SuperEmplConst03", selectedPlayer);
+			enableResearch("R-Defense-FortConst03", selectedPlayer);
+			enableResearch("R-Defense-WallUpgrade11", selectedPlayer);	
+		}
+	
+		if (research.name == "R-Defense-WallUpgrade11")
+		{
+			enableResearch("R-Defense-WallUpgrade12", selectedPlayer);
+		}
+	
+		// Base Materials -- we really should tie these into the Hardcrete/Walls line more.
+		if (research.name == "R-Struc-Materials01")
+		{
+			enableResearch("R-Struc-Materials02", selectedPlayer);
+		}
+
+		if (research.name == "R-Struc-Materials02")
+		{
+			enableResearch("R-Struc-Materials03", selectedPlayer);
+		}
+
+		if (research.name == "R-Struc-Materials04")
+		{
+			enableResearch("R-Struc-Materials05", selectedPlayer);
+		}
+
+		if (research.name == "R-Struc-Materials05")
+		{
+			enableResearch("R-Struc-Materials06", selectedPlayer);
+		}
+
+		if (research.name == "R-Struc-Materials07")
+		{
+			enableResearch("R-Struc-Materials08", selectedPlayer);
+		}
+
+		if (research.name == "R-Struc-Materials08")
+		{
+			enableResearch("R-Struc-Materials09", selectedPlayer);
+		}
+
+		// Engineering & Construction - This is really the main research topic that gets the ball rolling. We need to thread this with Research, Power, Factory and Repair upgrades.
+		if (research.name == "R-Sys-Engineering01")
+		{
+			enableResearch("R-Sys-Engineering02", selectedPlayer);
+			enableResearch("R-Struc-PowerModuleMk1", selectedPlayer);
+			enableResearch("R-Struc-Research-Module", selectedPlayer);
+			enableResearch("R-Sys-MobileRepairTurret01", selectedPlayer);
+			enableResearch("R-Struc-Factory-Module", selectedPlayer);
+			enableResearch("R-Struc-Factory-Cyborg", selectedPlayer);
+			enableResearch("R-Vehicle-Engine01", selectedPlayer);
+			enableResearch("R-Vehicle-Prop-Halftracks", selectedPlayer);
+			enableResearch("R-Sys-Sensor-Turret01", selectedPlayer);
+		}
+	
+		if (research.name == "R-Sys-Engineering02")
+		{
+			enableResearch("R-Sys-Engineering03", selectedPlayer);
+		}
+	
+		if (research.name == "R-Sys-Engineering03")
+		{
+			enableResearch("R-Struc-CommandRelay", selectedPlayer);
+			enableResearch("R-Comp-CommandTurret01", selectedPlayer);
+		}
+
+		if (research.name == "R-Sys-Engineering04")
+		{
+			enableResearch("R-Sys-Spade2Mk1", selectedPlayer);
+			enableResearch("R-Sys-Spade2Hvy", selectedPlayer);
+		}
+	
+		if (research.name == "R-Sys-Spade2Hvy")
+		{
+			enableResearch("R-Sys-Engineering05", selectedPlayer);
+		}
+	
+		if (research.name == "R-Sys-Engineering05")
+		{
+			enableResearch("R-Sys-Engineering06", selectedPlayer);
+		}
+
+		if (research.name == "R-Sys-Spade3Hvy")
+		{
+			enableResearch("R-Sys-Engineering07", selectedPlayer);
+		}
+	
+		if (research.name == "R-Sys-Engineering07")
+		{
+			enableResearch("R-Sys-Engineering08", selectedPlayer);
+		}
+	
+		if (research.name == "R-Sys-Engineering08")
+		{
+			enableResearch("R-Sys-Engineering09", selectedPlayer);
+		}
+
+		if (research.name == "R-Sys-Spade4Hvy")
+		{
+			enableResearch("R-Sys-Engineering10", selectedPlayer);
+		}
+	
+		// Research
+		if (research.name == "R-Struc-Research-Module")
+		{
+			enableResearch("R-Struc-Research-Upgrade01", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Research-Upgrade01")
+		{
+			enableResearch("R-Struc-Research-Upgrade02", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Research-Upgrade02")
+		{
+			enableResearch("R-Struc-Research-Upgrade03", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Research-Upgrade03") // FIRST UPGRADE SET
+		{
+			enableResearch("R-Struc-Research-Upgrade04", selectedPlayer);
+			enableResearch("R-Sys-Sensor-Upgrade01", selectedPlayer);
+			enableResearch("R-Struc-Power-Upgrade04", selectedPlayer);
+			enableResearch("R-Struc-Factory-Upgrade04", selectedPlayer);
+			enableResearch("R-Sys-Engineering04", selectedPlayer);
+			enableResearch("R-Struc-Materials04", selectedPlayer);
+			enableResearch("R-Vehicle-Metals02", selectedPlayer);
+			enableResearch("R-Vehicle-Engine04", selectedPlayer);
+			enableResearch("R-Sys-MobileRepairTurret02", selectedPlayer);
+			enableResearch("R-Defense-SupercreteWall", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Research-Upgrade04")
+		{
+			enableResearch("R-Struc-Research-Upgrade05", selectedPlayer);
+			enableResearch("R-Vehicle-Armor-Kinetic04", selectedPlayer);
+			enableResearch("R-Vehicle-Armor-Heat04", selectedPlayer);
+			enableResearch("R-Vehicle-Body23", selectedPlayer); // Couatl
+			enableResearch("R-Vehicle-Body08", selectedPlayer); // Scorpion
+		}
+	
+		if (research.name == "R-Struc-Research-Upgrade05")
+		{
+			enableResearch("R-Struc-Research-Upgrade06", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Research-Upgrade06") // SECOND UPGRADE SET
+		{
+			enableResearch("R-Struc-Research-Upgrade07", selectedPlayer);
+			enableResearch("R-Vehicle-Engine07", selectedPlayer);
+			enableResearch("R-Struc-Power-Upgrade07", selectedPlayer);
+			enableResearch("R-Struc-Factory-Upgrade07", selectedPlayer);
+			enableResearch("R-Vehicle-Metals04", selectedPlayer);
+			enableResearch("R-Sys-MobileRepairTurret03", selectedPlayer);
+			enableResearch("R-Sys-Spade3Mk1", selectedPlayer);
+			enableResearch("R-Sys-Spade3Hvy", selectedPlayer);
+			enableResearch("R-Struc-Materials07", selectedPlayer);
+			enableResearch("R-Defense-PlascreteWall", selectedPlayer);
+			enableResearch("R-Sys-RadarDetectorHvy", selectedPlayer);
+			enableResearch("R-Sys-CBSensor-TurretHvy", selectedPlayer);
+			enableResearch("R-Sys-VTOLStrike-TurretHvy", selectedPlayer);
+			enableResearch("R-Sys-VTOLCBS-TurretHvy", selectedPlayer);
+			enableResearch("R-Sys-Sensor-Upgrade03", selectedPlayer);
+			enableResearch("R-Struc-VTOLPad-Upgrade04", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Research-Upgrade07")
+		{
+			enableResearch("R-Struc-Research-Upgrade08", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Research-Upgrade08")
+		{
+			enableResearch("R-Struc-Research-Upgrade09", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Research-Upgrade09") // THIRD UPGRADE SET
+		{
+			enableResearch("R-Sys-Sensor-UpLink", selectedPlayer);
+			enableResearch("R-Sys-Spade4Mk1", selectedPlayer);
+			enableResearch("R-Sys-Spade4Hvy", selectedPlayer);
+			enableResearch("R-Defense-PlasteelWall", selectedPlayer);
+			enableResearch("R-Vehicle-Body06", selectedPlayer); // Panther
+			enableResearch("R-Vehicle-Body03", selectedPlayer); // Retaliation
+			enableResearch("R-Vehicle-Body24", selectedPlayer); // Abaddon
+			enableResearch("R-Vehicle-Body17", selectedPlayer); // Falcon
+			enableResearch("R-Vehicle-Metals06", selectedPlayer);
+		}
+
+		// Power
+		if (research.name == "R-Struc-PowerModuleMk1")
+		{
+			enableResearch("R-Struc-Power-Upgrade01", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Power-Upgrade01")
+		{
+			enableResearch("R-Struc-Power-Upgrade01b", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Power-Upgrade01b")
+		{
+			enableResearch("R-Struc-Power-Upgrade01c", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Power-Upgrade01c")
+		{
+			enableResearch("R-Struc-Power-Upgrade02", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Power-Upgrade02")
+		{
+			enableResearch("R-Struc-Power-Upgrade03", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Power-Upgrade03")
+		{
+			enableResearch("R-Struc-Power-Upgrade03a", selectedPlayer);
+		}
+
+		if (research.name == "R-Struc-Power-Upgrade04")
+		{
+			enableResearch("R-Struc-Power-Upgrade05", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Power-Upgrade05")
+		{
+			enableResearch("R-Struc-Power-Upgrade06", selectedPlayer);
+		}
+
+		if (research.name == "R-Struc-Power-Upgrade07")
+		{
+			enableResearch("R-Struc-Power-Upgrade08", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Power-Upgrade08")
+		{
+			enableResearch("R-Struc-Power-Upgrade09", selectedPlayer);
+		}
+	
+		// Factories
+		if (research.name == "R-Struc-Factory-Module")
+		{
+			enableResearch("R-Struc-Factory-Upgrade01", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Factory-Upgrade01")
+		{
+			enableResearch("R-Struc-Factory-Upgrade02", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Factory-Upgrade02")
+		{
+			enableResearch("R-Struc-Factory-Upgrade03", selectedPlayer);
+		}
+
+		if (research.name == "R-Struc-Factory-Upgrade04")
+		{
+			enableResearch("R-Struc-Factory-Upgrade05", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Factory-Upgrade05")
+		{
+			enableResearch("R-Struc-Factory-Upgrade06", selectedPlayer);
+		}
+
+		if (research.name == "R-Struc-Factory-Upgrade07")
+		{
+			enableResearch("R-Struc-Factory-Upgrade08", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-Factory-Upgrade08")
+		{
+			enableResearch("R-Struc-Factory-Upgrade09", selectedPlayer);
+		}
+	
+		// Bodies -- FIXME: We should tie these in with Factory and Engine together...
+		if (research.name == "R-Vehicle-Body04")
+		{
+			enableResearch("R-Vehicle-Metals01", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Metals01")
+		{
+			enableResearch("R-Vehicle-Body05", selectedPlayer); // Cobra
+			enableResearch("R-Vehicle-Armor-Kinetic01", selectedPlayer);
+			enableResearch("R-Vehicle-Armor-Heat01", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Armor-Kinetic01")
+		{
+			enableResearch("R-Vehicle-Armor-Kinetic02", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Armor-Kinetic02")
+		{
+			enableResearch("R-Vehicle-Armor-Kinetic03", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Armor-Heat01")
+		{
+			enableResearch("R-Vehicle-Armor-Heat02", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Armor-Heat02")
+		{
+			enableResearch("R-Vehicle-Armor-Heat03", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Metals02")
+		{
+			enableResearch("R-Vehicle-Body11", selectedPlayer); // Python
+			enableResearch("R-Vehicle-Body12", selectedPlayer); // Mantis -- since these and Python are pretty much the same
+			enableResearch("R-Vehicle-Metals03", selectedPlayer);
+		}
+
+		if (research.name == "R-Vehicle-Armor-Kinetic04")
+		{
+			enableResearch("R-Vehicle-Armor-Kinetic05", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Armor-Kinetic05")
+		{
+			enableResearch("R-Vehicle-Armor-Kinetic06", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Armor-Heat04")
+		{
+			enableResearch("R-Vehicle-Armor-Heat05", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Armor-Heat05")
+		{
+			enableResearch("R-Vehicle-Armor-Heat06", selectedPlayer);
+		}
+
+		if (research.name == "R-Vehicle-Metals04")
+		{
+			enableResearch("R-Vehicle-Armor-Kinetic07", selectedPlayer);
+			enableResearch("R-Vehicle-Armor-Heat07", selectedPlayer);
+			enableResearch("R-Vehicle-Body02", selectedPlayer); // Leopard
+		}
+	
+		if (research.name == "R-Vehicle-Armor-Kinetic07")
+		{
+			enableResearch("R-Vehicle-Armor-Kinetic08", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Armor-Kinetic08")
+		{
+			enableResearch("R-Vehicle-Armor-Kinetic09", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Armor-Heat07")
+		{
+			enableResearch("R-Vehicle-Armor-Heat08", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Armor-Heat08")
+		{
+			enableResearch("R-Vehicle-Armor-Heat09", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Armor-Kinetic09")
+		{
+			enableResearch("R-Vehicle-Metals05", selectedPlayer);
+		}
+
+		if (research.name == "R-Vehicle-Metals06")
+		{
+			enableResearch("R-Vehicle-Body09", selectedPlayer); // Tiger
+			enableResearch("R-Vehicle-Body07", selectedPlayer); // Retribution
+			enableResearch("R-Vehicle-Body20", selectedPlayer); // Gladius
+			enableResearch("R-Vehicle-Body18", selectedPlayer); // Warhawk
+			enableResearch("R-Vehicle-Metals07", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Metals07")
+		{
+			enableResearch("R-Vehicle-Body25", selectedPlayer); // Sabretooth
+			enableResearch("R-Vehicle-Body10", selectedPlayer); // Vengeance
+			enableResearch("R-Vehicle-Body21", selectedPlayer); // Longsword
+			enableResearch("R-Vehicle-Body19", selectedPlayer); // Eagle
+			enableResearch("R-Vehicle-Metals08", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Metals08")
+		{
+			enableResearch("R-Vehicle-Body13", selectedPlayer); // Wyvern
+			enableResearch("R-Vehicle-Body28", selectedPlayer); // Nemesis
+			enableResearch("R-Vehicle-Body22", selectedPlayer); // Claymore
+			enableResearch("R-Vehicle-Body26", selectedPlayer); // Phoenix
+			enableResearch("R-Vehicle-Metals09", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Metals09")
+		{
+			enableResearch("R-Vehicle-Body14", selectedPlayer); // Dragon
+			enableResearch("R-Vehicle-Body27", selectedPlayer); // Excalibur
+		}
+	
+		// Engines, Propulsion & VTOL Pads
+		if (research.name == "R-Vehicle-Prop-Halftracks")
+		{	
+			enableResearch("R-Vehicle-Prop-Tracks", selectedPlayer);
+			enableResearch("R-Vehicle-Engine01", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Prop-Tracks")
+		{	
+			enableResearch("R-Vehicle-Prop-Hover", selectedPlayer);
+		}	
+	
+		if (research.name == "R-Vehicle-Prop-Hover")
+		{	
+			enableResearch("R-Vehicle-Prop-VTOL", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Prop-VTOL")
+		{
+			enableResearch("R-Struc-VTOLFactory", selectedPlayer);
+			enableResearch("R-Struc-VTOLPad", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-VTOLFactory")
+		{
+			enableResearch("R-Cyborg-Transport", selectedPlayer);
+			enableResearch("R-SuperTransport", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-VTOLPad")
+		{
+			enableResearch("R-Struc-VTOLPad-Upgrade01", selectedPlayer);
+		}
+	
+		// Engines
+		if (research.name == "R-Vehicle-Engine01")
+		{	
+			enableResearch("R-Vehicle-Engine02", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Engine02")
+		{	
+			enableResearch("R-Vehicle-Engine03", selectedPlayer);
+		}
+
+		if (research.name == "R-Vehicle-Engine04")
+		{	
+			enableResearch("R-Vehicle-Engine05", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Engine05")
+		{	
+			enableResearch("R-Vehicle-Engine06", selectedPlayer);
+		}
+
+		if (research.name == "R-Vehicle-Engine07")
+		{	
+			enableResearch("R-Vehicle-Engine08", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Engine08")
+		{	
+			enableResearch("R-Vehicle-Engine09", selectedPlayer);
+		}
+	
+		if (research.name == "R-Vehicle-Engine09")
+		{	
+			enableResearch("R-Vehicle-Engine10", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-VTOLPad-Upgrade01")
+		{
+			enableResearch("R-Struc-VTOLPad-Upgrade02", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-VTOLPad-Upgrade02")
+		{
+			enableResearch("R-Struc-VTOLPad-Upgrade03", selectedPlayer);
+		}
+
+		if (research.name == "R-Struc-VTOLPad-Upgrade04")
+		{
+			enableResearch("R-Struc-VTOLPad-Upgrade05", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-VTOLPad-Upgrade05")
+		{
+			enableResearch("R-Struc-VTOLPad-Upgrade06", selectedPlayer);
+		}
+	
+		// Repair & Systems -- FIXME: We REALLY should do this with Research Facilities instead of by itself.
+		if (research.name == "R-Sys-MobileRepairTurret01")
+		{
+			enableResearch("R-Sys-MobileRepairTurretHvy", selectedPlayer);
+		}
+	
+		if (research.name == "R-Sys-MobileRepairTurretHvy")
+		{
+			enableResearch("R-Struc-RepairFacility", selectedPlayer);
+			enableResearch("R-Sys-SpyTurret", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-RepairFacility")
+		{
+			enableResearch("R-Struc-RprFac-Upgrade01", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-RprFac-Upgrade01")
+		{
+			enableResearch("R-Struc-RprFac-Upgrade02", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-RprFac-Upgrade02")
+		{
+			enableResearch("R-Struc-RprFac-Upgrade03", selectedPlayer);
+		}
+
+		if (research.name == "R-Sys-MobileRepairTurret02")
+		{
+			enableResearch("R-Sys-MobileRepairTurretHvy2", selectedPlayer);
+		}
+	
+		if (research.name == "R-Sys-MobileRepairTurretHvy2")
+		{
+			enableResearch("R-Struc-RepairFacility2", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-RepairFacility2")
+		{
+			enableResearch("R-Struc-RprFac-Upgrade04", selectedPlayer);
+			enableResearch("R-Sys-Resistance-Circuits", selectedPlayer);
+			enableResearch("R-Sys-Autorepair-General", selectedPlayer);
+			enableResearch("R-Sys-Resistance-Upgrade01", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-RprFac-Upgrade04")
+		{
+			enableResearch("R-Struc-RprFac-Upgrade05", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-RprFac-Upgrade05")
+		{
+			enableResearch("R-Struc-RprFac-Upgrade06", selectedPlayer);
+		}
+
+		if (research.name == "R-Sys-MobileRepairTurret03")
+		{
+			enableResearch("R-Sys-MobileRepairTurretHvy3", selectedPlayer);
+		}
+	
+		if (research.name == "R-Sys-MobileRepairTurretHvy3")
+		{
+			enableResearch("R-Struc-RepairFacility3", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-RepairFacility3")
+		{
+			enableResearch("R-Struc-RprFac-Upgrade07", selectedPlayer);
+			enableResearch("R-Sys-Autorepair-Upgrade01", selectedPlayer);
+			enableResearch("R-Sys-Resistance-Upgrade02", selectedPlayer);
+			enableResearch("R-Sys-SpyTurret02", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-RprFac-Upgrade07")
+		{
+			enableResearch("R-Struc-RprFac-Upgrade08", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-RprFac-Upgrade08")
+		{
+			enableResearch("R-Struc-RprFac-Upgrade09", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-RprFac-Upgrade09")
+		{
+			enableResearch("R-Sys-MobileRepairTurret04", selectedPlayer);
+		}
+		
+		if (research.name == "R-Sys-MobileRepairTurret04")
+		{
+			enableResearch("R-Sys-MobileRepairTurretHvy4", selectedPlayer);
+		}
+	
+		if (research.name == "R-Sys-MobileRepairTurretHvy4")
+		{
+			enableResearch("R-Struc-RepairFacility4", selectedPlayer);
+		}
+	
+		if (research.name == "R-Struc-RepairFacility4")
+		{
+			enableResearch("R-Sys-Autorepair-Upgrade02", selectedPlayer);
+			enableResearch("R-Sys-Resistance-Upgrade03", selectedPlayer);
+			enableResearch("R-Sys-SpyTurret03", selectedPlayer);	
+		}
+	
+		if (research.name == "R-Sys-SpyTurret03")
+		{
+			enableResearch("R-Sys-SpyTurretNEXUS", selectedPlayer);
+			enableResearch("R-Defense-Super-NEXUS", selectedPlayer); // HAH!
+		}
+	}
+}

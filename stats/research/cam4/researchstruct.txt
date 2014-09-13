@@ -1,0 +1,2 @@
+Research ID,Structure ID,unused
+R-Defense-Sunburst,A0CommandCentre,0

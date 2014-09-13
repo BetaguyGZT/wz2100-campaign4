@@ -1,0 +1,3081 @@
+//Campaign script for cam4-1
+
+// General Values
+public		int			player;
+public		int			ScavBasePlayer;
+public		int			NexusPlayer;
+public		int			CoalitionPlayer;
+
+
+// Function Parameters
+private		int			TileCoords;
+
+// Base under attack. Nicked from cam1a.slo
+/* Base Under Attack Stuff */
+
+private		STRUCTURE	hitStruc;
+private		BASEOBJ		attackerObj;
+private		int		t;
+public		SOUND		attackSnd1;
+
+// Variables
+//{
+public	STRUCTURESTAT	P0Struct[16];
+public	BODY			P0CompBody[3];
+public	PROPULSION		P0CompProp[5];
+public	WEAPON			P0CompWeap[2];
+public	SENSOR			P0CompSensor;
+public	REPAIR			P0CompRepair;
+public	CONSTRUCT		P0CompConst;
+public	RESEARCHSTAT		P0Research[65];
+public	RESEARCHSTAT		P0ResEnable[7];
+public	RESEARCHSTAT		MetalsUpgrade;
+public	RESEARCHSTAT		SensorUpgrade;
+public	RESEARCHSTAT		LasUpgrade1;
+public	int	numTech;
+public	int	numStruct;
+public	int	numWeap;
+public	int	numEnable;
+public	int	numTech2;
+public	int	numStruct2;
+public	int	numWeap2;
+public	int	numEnable2;
+private		GROUP		NXGroup1;
+private	int	GotAchieve1;
+private	GROUP	PlayerGrp1;
+public		int	ObjBFlag;
+private	DROID	Wilkes;
+private	DROID	Jenks;
+private	DROID	NexusLink;
+private	STRUCTURE	TheFakeHQ;
+public	STRUCTURE	HQOne;
+public	STRUCTURE	Fac1;
+public	STRUCTURE	Pow1;
+public	STRUCTURE	Res2;
+public	STRUCTURE	Cyb1;
+public	STRUCTURE	Oil1;
+
+public		TEMPLATE		CommandTurret;
+private		DROID	Commander;
+public		TEMPLATE		TacSergeantGibbs;
+private		DROID	Gibbs;
+public		TEMPLATE	RailGun1, RailGun2, RailGun3, AssaultGun1, AssaultGun2, AssaultGun3, RepairTurret1, RepairTurret2;
+private		DROID	Rail1, Rail2, Rail3, Assault1, Assault2, Assault3, Repair1, Repair2;
+public		STRUCTURE	TransportTwo;
+public		GROUP		TransportGroup;
+
+// Scavenger VTOL Factory stuff
+private		STRUCTURESTAT	ScavVTOL;
+public			STRUCTURE		ScavVTOLFacA1, ScavVTOLFacA2, ScavVTOLFacB1, ScavVTOLFacB2, ScavVTOLFacB3, ScavVTOLFacB4, ScavVTOLFacC1;
+private		TEMPLATE		Chopper1, Chopper2, HeavyChopper;
+
+private			GROUP		ReconGroup;
+private			GROUP		ReconForce;
+private			GROUP		ReconForce2;
+private			GROUP		ReconForce3;
+private			GROUP		ReconForce4;
+private			GROUP		ReconForce5;
+private			GROUP		NexusGroupA;
+private			GROUP		NexusGroupB;
+public			STRUCTURE	CybFact1;
+public			STRUCTURE	CybFact2;
+public			STRUCTURE	Factory1;
+public			STRUCTURE	Factory2;
+private			GROUP		M2ScavAttackGrp;
+
+public		STRUCTURE		TransportOne;
+public		STRUCTURE		ResearchFacility;
+public		STRUCTURE		ObjUplink;
+public		STRUCTURESTAT		UplinkSensor;
+public		STRUCTURESTAT		FakeHQ;
+public		STRUCTURESTAT		HQ;
+public		STRUCTURESTAT		AssaultLaser;
+private		STRUCTURE		AssaultLaserHP1;
+private		STRUCTURE		AssaultLaserHP2;
+private		STRUCTURE		AssaultLaserHP3;
+private		STRUCTURE		AssaultLaserHP4;
+private		STRUCTURE		AssaultLaserHP5;
+private		STRUCTURE		AssaultLaserHP6;
+private		STRUCTURE		AssaultLaserHP7;
+private		STRUCTURE		AssaultLaserHP8;
+public		STRUCTURE		Research5;
+public		STRUCTURE		Research6;
+public		STRUCTURE		Factory;
+public		STRUCTURE		ScavFacM5;
+public		STRUCTURE		Research4, Research7, Research8, Research9,  Research10, Power1;
+
+public		TEMPLATE		RewardTemplate;
+public		TEMPLATE		ViperRail;
+public		TEMPLATE		ViperSpade;
+public		TEMPLATE		CobraCommand;
+public		TEMPLATE		NeedleGunner;
+public		TEMPLATE		AssaultGunner;
+public		TEMPLATE		ViperRepair;
+public		TEMPLATE		PythonHvLaser;
+public		TEMPLATE		PythonGauss;
+public		TEMPLATE		PythonAsltLaser;
+public		TEMPLATE		PythonTwAsltLaser;
+public		TEMPLATE		PRAssltTrooper;
+public		TEMPLATE		PRPulseTrooper;
+public		TEMPLATE		PRMissTrooper;
+public		TEMPLATE		PRMedic;
+public		TEMPLATE		PRCommander;
+public		TEMPLATE		PRGibbs;
+public		TEMPLATE		CybEng;
+public		TEMPLATE		CobraRepair;
+public		TEMPLATE		ViperAssault;
+public		TEMPLATE		NexusLink2;
+private		GROUP			AttackGroup1;
+private		GROUP			AttackGroup2;
+private		GROUP			AttackGroup3;
+private		GROUP			NXTask2;
+private		GROUP			NXTask3;
+private		GROUP			NXTask4;
+private		GROUP			NXGroupL;
+public		TEMPLATE		NXWyvernGauss;
+public		TEMPLATE		NXMissHover;
+public		TEMPLATE		NXFlashCyb;
+public		TEMPLATE		NXNeedleCyb;
+public		TEMPLATE		NXVengWSS;
+public		TEMPLATE		NXWyvernScourge;
+public		TEMPLATE		NXWyvernPulse;
+public		TEMPLATE		NXWyvernHeavy;
+public		TEMPLATE		SuperTrans;
+public		TEMPLATE		WilkesSuperAC;
+public		TEMPLATE		JenksSuperPulse;
+public		TEMPLATE		NXFlashHover;
+public		TEMPLATE		Constructor;
+public		TEMPLATE		NXScourgeHover;
+public		TEMPLATE		NXSensor;
+public		TEMPLATE		NXRepair;
+
+public			STRUCTURE		ScavFactoryIDA1;
+public			STRUCTURE		ScavFactoryIDA2;
+public			STRUCTURE		ScavFactoryIDA3;
+public			STRUCTURE		ScavFactoryIDA4;
+public			STRUCTURE		ScavFactoryIDB1;
+public			STRUCTURE		ScavFactoryIDB2;
+public			STRUCTURE		ScavFactoryIDB3;
+public			STRUCTURE		ScavFactoryIDC1;
+public			STRUCTURE		ScavFactoryIDC2;
+public			STRUCTURE		ScavFactoryIDC3;
+public			STRUCTURE		ScavFactoryIDC4;
+public			STRUCTURE		ScavFactoryIDD1;
+public			STRUCTURE		ScavFactoryIDD2;
+public			STRUCTURE		ScavFactoryIDD3;
+public			STRUCTURE		ScavFactoryIDD4;
+public			STRUCTURE		ScavFactoryIDD5;
+
+private	GROUP	ScavGroup1;
+private	GROUP	ScavGroupM1;
+private	GROUP	ScavGroupM2;
+private	GROUP	ScavGroupM3;
+private	GROUP	ScavGroup3;
+private	GROUP	M2NXAttack2;
+
+public	TEMPLATE		Trike;
+public	TEMPLATE		Bloke;
+public	TEMPLATE		BusCan;
+public	TEMPLATE		FireCan;
+public	TEMPLATE		ViperMGWheels;
+private	TEMPLATE	REWSuperGSPL;
+private	TEMPLATE	REWSuperAA;
+private	TEMPLATE	REWSuperPlasTK;
+
+public		int			ObjCFlag1;
+public		int			ObjCFlag2;
+public		int			ObjCFlag3;
+public		int			ObjCFlag4;
+public		int			ObjCFlag5;
+public		int			ObjCFlag6;
+
+public		int			ObjEFlag1;
+public		int			ObjEFlag2;
+public		int			ObjEFlag3;
+public		int			ObjEFlag4;
+public		int			ObjEFlag5;
+
+public		int			ObjFFlag1;
+public		int			ObjFFlag2;
+public		int			ObjFFlag3;
+public		int			ObjFFlag4;
+public		int			ObjFFlag5;
+public		int			ObjFFlag6;
+private		GROUP		RescueTeam;
+private		GROUP		M2NXAttack1;
+//}
+// Win/lose sounds and messages
+public		INTMESSAGE	endMsg, winMsg;
+public		SOUND		wonSnd, lostSnd, ObjSnd, NexusLaugh, LasStkSnd, rewardSnd, ArtifactSnd1, ArtifactSnd2, NexusLaugh1, NexusLaugh2, NexusLaugh3, NexusDefAbsrbd, NexusStrAbsrbd, NexusUnitAbsrbd, EnemyDetSnd, AreaDoneSnd;
+public		INTMESSAGE	Obj1Msg, Obj2Msg, Obj3Msg, Obj3BMsg, Obj4Msg, Obj4BMsg, Obj5Msg, ObjB9DMsg,  ObjB92Msg, ObjB9CMsg, EndMsg, WinMsg, ObjC7BMsg;
+public		SOUND		brief1, brief2, brief3, brief4, brief5, brief6, brief7, brief8, brief9, brief10, trans_fried;
+
+// INTMESSAGES
+//{
+//Objective Markers / Messages - A
+public		SOUND		RetreatSnd;
+public		INTMESSAGE	RetreatMsg;
+public		SOUND		ScavBaseSnd;
+public		INTMESSAGE	ScavBaseMsg;
+public		INTMESSAGE	ObjA1Msg;
+public		INTMESSAGE	ObjA2Msg;
+public		INTMESSAGE	ObjA3Msg;
+public		INTMESSAGE	ObjA3BMsg;
+public		INTMESSAGE	ObjA4Msg;
+
+//Objective Markers / Messages - B
+public		INTMESSAGE	ObjB1Msg;
+public		INTMESSAGE	ObjB2Msg;
+public		INTMESSAGE	ObjB3Msg;
+public		INTMESSAGE	ObjB4Msg;
+public		INTMESSAGE	ObjB5Msg;
+public		INTMESSAGE	ObjB6Msg;
+public		INTMESSAGE	ObjB7Msg;
+public		INTMESSAGE	ObjB8Msg;
+public		INTMESSAGE	ObjB9Msg;
+
+//Objective Markers / Messages - C
+public		INTMESSAGE	ObjC1Msg;
+public		INTMESSAGE	ObjC2Msg; 
+public		INTMESSAGE	ObjC3Msg; 
+public		INTMESSAGE	ObjC4Msg; 
+public		INTMESSAGE	ObjC5Msg; 
+public		INTMESSAGE	ObjC6Msg;
+public		INTMESSAGE	ObjC7Msg;
+public		INTMESSAGE	ObjC8Msg;
+public		INTMESSAGE	ObjC8StartMsg;
+public		INTMESSAGE	ObjC9Msg;
+
+//Objective Markers / Messages
+public		INTMESSAGE	ObjD1Msg; 
+public		INTMESSAGE	ObjD2Msg; 
+public		INTMESSAGE	ObjD3Msg; 
+public		INTMESSAGE	ObjD4Msg;
+public		INTMESSAGE	ObjD5Msg;
+public		INTMESSAGE	ObjD6Msg;
+public		INTMESSAGE	ObjD7Msg;
+public		INTMESSAGE	ObjD8Msg;
+public		INTMESSAGE	ObjD9Msg;
+public		INTMESSAGE	ObjD10Msg;
+public		INTMESSAGE	ObjD11Msg;
+public		INTMESSAGE	ObjD12Msg;
+public		INTMESSAGE	ObjD13Msg;
+public		INTMESSAGE	ObjD14Msg;
+public		INTMESSAGE	ObjD15Msg;
+
+//Objective Markers / Messages - E
+public		INTMESSAGE	ObjE1Msg;		
+//}
+// Mission Timer
+private		int			State;
+
+// Triggers
+trigger ConditionsTrigger(every, 100);
+trigger RetreatMsgTrig(wait,10);
+trigger DoNow(wait,10);
+trigger team2Trigger(wait, 4200);
+trigger TimeUp(CALL_MISSION_TIME);
+trigger SpawnTrigger(every, 1200);
+trigger AllOutAttackTrigger(every, 7400); //12 Minutes
+trigger BuildStuffTrigger(every, 1200);
+trigger	scavsBuildTrigger(every, 900);
+trigger	ScavsAttackTrigger(every, 600);
+trigger	ScavsAttackTriggerM1(every, 840);
+trigger TransportOneDead(TransportOne == NULLOBJECT, 25);
+trigger SpawnOutTrig(wait, 300);
+trigger	PatrolTimer(every, 600);
+trigger	PatrolTimer2(every, 500);
+trigger	TimerCheck(CALL_MISSION_TIME);
+trigger SeenTrigger(every, 10);
+
+// Functions
+function int ToWorld(int TileCoords);
+
+// Events
+//{
+event GameInit;
+event LoseEvent;
+event WinEvent;
+event CheckConditions;
+event DescisionTime;
+event DefendTransportOne;
+event Research7Event;
+event Research8Event;
+event Research9Event;
+event Research10Event;
+event Power1Event;
+event PrototypeOne;
+event Objective1;
+event Objective2;
+event Objective3;
+event GoToNorthPass;
+event TransportOneDestroyed;
+event MissionB;
+event KillAABaseEarly;
+event ObjectiveB1;
+event PrototypeTwo;
+event ObjectiveB2;
+event ObjectiveB3;
+event ObjectiveB3B;
+event ObjectiveB4;
+event ObjectiveB5;
+event ObjectiveB6;
+event SaveTransportTwo;
+event BonusMission1BSetup;
+event BonusMission1;
+event BonusMission1B;
+event MissionC;
+event PlayerEntersAreaC;
+event ObjectiveC1;
+event ObjectiveC2;
+event ObjectiveC3;
+event ObjectiveC4;
+event ObjectiveC6;
+event GoMeetNode;
+event MeetNode;
+event MissionD;
+event PlayerEntersAreaD;
+event ObjectiveD1;
+event ObjectiveD2;
+event ObjectiveD3;
+event ObjectiveD4;
+event ObjectiveD5;
+event ObjectiveD6;
+event ObjectiveD7;
+event ObjectiveD8;
+event ObjectiveD9;
+event ObjectiveD10;
+event ObjectiveD11;
+event NexusBaseBegin;
+event NexusForwardBase;
+event ExplorationReward1;
+event ExplorationReward2;
+event ExplorationReward3;
+event RescueTeamArrives;
+event NewConditions1;
+event NewConditions3;
+event DoAllOutAttack;
+event	ScavsBuildStuffIDA1;
+event	ScavsBuildStuffIDA2;
+event	ScavsBuildStuffIDA3;
+event	ScavsBuildStuffIDB1;
+event	ScavsBuildStuffIDB2;
+event	ScavsBuildStuffIDB3;
+event	ScavsBuildStuffIDC1;
+event	ScavsBuildStuffIDC2;
+event	ScavsBuildStuffIDC3;
+event	ScavsBuildStuffIDC4;
+event	ScavsBuildStuffIDD1;
+event	ScavsBuildStuffIDD2;
+event	ScavsBuildStuffIDD3;
+event	ScavsBuildStuffIDD4;
+event	ScavsBuildStuffIDD5;
+event 	StartScavsAttackM1;
+event 	ScavsAttackM1;
+event	ScavsAttackM2;
+event	WhenScavsAttack;
+event	WhenScavsAttack2; // Electric boogaloo!
+event 	AreaDChecks;
+event	playerHasEnteredAreaB;
+event 	playerHasEnteredAreaC;
+event 	playerHasEnteredAreaD;
+event 	NexusSpawnsInNorth;
+event 	NexusSpawnsInSouth;
+event 	NexusGoesAfterPlayer;
+event 	NexusAttacksStuff;
+event 	NexusBuildsStuff1;
+event 	NexusBuildsStuff2;
+event 	NexusBuildsStuff3;
+event 	NexusBuildsStuff4;
+event	NexusInvadesWest;
+event	NexusInvadesEast;
+event	M2ScavAttack1;
+event 	M2Sub1;
+event	M2Sub2;
+event 	M2Sub3;
+event 	MeetNodeSetup;
+event	GoNorth;
+event	M3ThreadBStart;
+event ScavsBuildChoppersA1;
+event ScavsBuildChoppersA2;
+event ScavsBuildChoppersB1;
+event ScavsBuildChoppersB2;
+event ScavsBuildChoppersB3;
+event ScavsBuildChoppersB4;
+event ScavsBuildChoppersC1;
+event	M3ThreadB;
+event NexusSpawnIn;
+event	CheckForces;
+event NexusGoesPostal;
+event ReturnHome;
+event WhosThis;
+event	RescueTeamArrives;
+event M1DroidCheckArea;
+event M1DroidCheckArea2;
+event M1DroidCheckArea3;
+//event CheckNXVisibility;
+//}
+
+// Initalize mission
+event GameInit(CALL_GAMEINIT)
+{
+	initAllNoGoAreas();
+	setScrollParams(103, 50, 219, 132);
+	createAlliance(ScavBasePlayer, NexusPlayer);
+	createAlliance(CoalitionPlayer, NexusPlayer); // For now ...
+	createAlliance(CoalitionPlayer, ScavBasePlayer); // For now ...
+	forceDamageObject(TransportOne, 50);
+	centreViewPos(TransportOne.x + 384, TransportOne.y);
+	setPowerLevel(200, player);
+	setPowerLevel(5000, ScavBasePlayer);
+	setPowerLevel(50000, NexusPlayer);
+	setAssemblyPoint(ScavFactoryIDA1, 23233, 12186);
+	setAssemblyPoint(ScavFactoryIDA2, 18364, 11964);
+	setAssemblyPoint(ScavFactoryIDA3, 17971, 9885);
+	setAssemblyPoint(ScavFactoryIDA4, 25096, 10553);
+	setAssemblyPoint(ScavVTOLFacA1, 22919, 14125);
+	setAssemblyPoint(ScavVTOLFacA2, 18964, 11793);
+	pause(40);
+	showConsoleText(_("PROJECT COMPUTER: MISSION FILE: DRF-701-ALPHA. TIME INDEX: Two weeks ago. LOCATION: Southern Alaska Coast."), player);
+	pause(90);
+	showConsoleText(_("PROJECT COMPUTER: BEGIN INTERACTIVE PLAYBACK OF TEAM ONE MISSION FILE."), player);
+	pause(140);
+	showConsoleText(_("Chief Watts: ... Oww ... ugh ... bloody hard landing. Someone get the lift open ... I'll try to get local Communications back on-line."), player);
+	pause(90);
+	showConsoleText(_("Chief Watts: There we go. Begin offloading everyone. Tactical Sergeant Gibbs, UHF comm check."), player);
+	pause(90);
+	Gibbs = addDroid(TacSergeantGibbs, 20609, 13102, player);
+	setDroidKills(Gibbs, 64);
+	orderDroidLoc(Gibbs, DORDER_MOVE, ToWorld(159), ToWorld(99));
+	showConsoleText(_("Sgt.Gibbs: UHF comm check confirmed. Signal is decimal-five. All units, exit the Transport and run a full diagnostic on your gear."), player);
+	pause(70);
+	Commander = addDroid(CommandTurret, 20609, 13102, player);
+	setDroidKills(Commander, 64);
+	orderDroidLoc(Commander, DORDER_MOVE, ToWorld(164), ToWorld(99));
+	pause(30);
+	Rail1 = addDroid(RailGun1, 20609, 13102, player);
+	orderDroidLoc(Rail1, DORDER_MOVE, ToWorld(163), ToWorld(99));
+	pause(30);
+	Rail2 = addDroid(RailGun2, 20609, 13102, player);
+	orderDroidLoc(Rail2, DORDER_MOVE, ToWorld(162), ToWorld(99));
+	pause(30);
+	Rail3 = addDroid(RailGun3, 20609, 13102, player);
+	orderDroidLoc(Rail3, DORDER_MOVE, ToWorld(161), ToWorld(99));
+	pause(30);
+	Assault1 = addDroid(AssaultGun1, 20609, 13102, player);
+	orderDroidLoc(Assault1, DORDER_MOVE, ToWorld(164), ToWorld(99));
+	pause(30);
+	Assault2 = addDroid(AssaultGun2, 20609, 13102, player);
+	orderDroidLoc(Assault2, DORDER_MOVE, ToWorld(163), ToWorld(100));
+	pause(30);
+	Assault3 = addDroid(AssaultGun3, 20609, 13102, player);
+	orderDroidLoc(Assault3, DORDER_MOVE, ToWorld(162), ToWorld(100));
+	pause(30);
+	Repair1 = addDroid(RepairTurret1, 20609, 13102, player);
+	orderDroidLoc(Repair1, DORDER_MOVE, ToWorld(161), ToWorld(100));
+	pause(30);
+	Repair2 = addDroid(RepairTurret2, 20609, 13102, player);
+	orderDroidLoc(Repair2, DORDER_MOVE, ToWorld(160), ToWorld(100));
+	pause(30);
+	showConsoleText(_("Chief Watts: Sarge, be advised that our Construction equipment is not usable. The lower Hangar Bay was crushed upon impact with the ground."), player);
+	pause(70);
+	showConsoleText(_("Sgt.Gibbs: Acknowledged, Chief Watts. Transport One Personnel, perform a full checkout on the Transport's systems. Let's find out if it's still flyable."), player);
+	pause(70);
+	showConsoleText(_("Sgt.Gibbs: Okay, Team One. Briefing Commences. Transport Two and ourselves have been fired upon and brought down by an unknown hostile force operating in the area."), player);
+	pause(70);
+	showConsoleText(_("Sgt.Gibbs: Preliminary sensor data shows several Scavenger bases and moderate population density throughout this region."), player);
+	pause(90);
+	showConsoleText(_("Sgt.Gibbs: Our first order of business is to secure the immediate area. It is likely that the locals will attempt to salvage whatever they can from our Transport."), player);
+	pause(70);
+	showConsoleText(_("Sgt.Gibbs: What this means is that they are going to fight us for it. We can either stand our ground, or retreat and live to fight another day."), player);
+	pause(80);
+	showConsoleText(_("Sgt.Gibbs: I'm placing a marker on the tactical display to the immediate north. That will be our retreat point. The timer is how long I think we have until they decide to attack us."), player);
+	pause(20);
+	setMissionTime(300);
+	addMessage(Obj1Msg, PROX_MSG, player, false);
+	setEventTrigger(PrototypeOne, ConditionsTrigger);
+	setEventTrigger(Research10Event, ConditionsTrigger);
+	setEventTrigger(CheckConditions, ConditionsTrigger);
+	setEventTrigger(StartScavsAttackM1, ConditionsTrigger);
+	setEventTrigger(ScavsBuildChoppersA1, BuildStuffTrigger);
+	setEventTrigger(ScavsBuildChoppersA2, BuildStuffTrigger);
+	setEventTrigger(WhosThis, ConditionsTrigger);
+	setEventTrigger(GameInit, inactive);
+}
+
+event LoseEvent(inactive)
+{
+	setEventTrigger(CheckConditions, inactive);
+	gameOverMessage(endMsg, MISS_MSG, 0, FALSE);
+	setEventTrigger(LoseEvent, inactive);
+}
+
+event WinEvent(inactive)
+{
+	setEventTrigger(CheckConditions, inactive);
+	flushConsoleMessages();
+	playSound(wonSnd,0);
+	gameOverMessage(winMsg, MISS_MSG, 0, TRUE);
+	setEventTrigger(WinEvent, inactive);
+}
+
+event CheckConditions(inactive)
+{
+	if (Gibbs == NULLOBJECT)
+	{
+		showConsoleText(_("** SGT. GIBBS HAS BEEN DESTROYED! (YOU MUST PROTECT SGT. GIBBS !!!) **"), player);
+		pause(30);
+		setEventTrigger(LoseEvent, DoNow);
+	}
+	if (Commander == NULLOBJECT)
+	{
+		showConsoleText(_("** COMMANDER HAS BEEN DESTROYED! (YOU MUST PROTECT THE COMMANDER !!!) **"), player);
+		pause(30);
+		setEventTrigger(LoseEvent, DoNow);
+	}
+	
+}
+
+event DescisionTime(CALL_MISSION_TIME)
+{
+	if(Gibbs.y <= 11265)
+	{
+		removeMessage(Obj1Msg, PROX_MSG, player);
+		showConsoleText(_("Sgt.Gibbs: Everyone stay cool and lay low. This will be over soon."), player);
+		setMissionTime(-1);
+		addDroid(NXFlashHover, 23353, 12479, NexusPlayer);
+		addDroid(NXFlashHover, 23553, 12479, NexusPlayer);
+		addDroid(NXFlashHover, 23753, 12479, NexusPlayer);
+		addDroid(NXMissHover, 24653, 12950, NexusPlayer);
+		addDroid(NXMissHover, 24853, 13150, NexusPlayer);
+		addDroid(NXMissHover, 25053, 13350, NexusPlayer);
+		groupAddArea(NXGroup1, NexusPlayer, 22614, 11796, 25100, 13500);
+		orderGroupObj(NXGroup1, DORDER_ATTACK, TransportOne);
+		pause(30);
+		centreViewPos(TransportOne.x+512, TransportOne.y);
+		setEventTrigger(DefendTransportOne, ConditionsTrigger);
+		setEventTrigger(DescisionTime, inactive);
+	}
+	else
+	{
+		// This entire section is going to get an update in a BIG way ... SOON. - Goth.
+		showConsoleText(_("Chief Watts: Team One, new group of signals incoming from the east .. multiple signatures, looks like .. Wyvern-Class?! .. arrival in thirty seconds .. MARK!"), player);
+		setMissionTime(-1);
+		removeMessage(Obj1Msg, PROX_MSG, player);
+		addDroid(NXWyvernPulse, 23353, 12479, NexusPlayer);
+		addDroid(NXWyvernScourge, 23553, 12479, NexusPlayer);
+		addDroid(NXWyvernPulse, 23753, 12479, NexusPlayer);
+		addDroid(NXWyvernScourge, 24653, 12950, NexusPlayer);
+		addDroid(NXWyvernPulse, 24853, 13150, NexusPlayer);
+		addDroid(NXWyvernScourge, 25053, 13350, NexusPlayer);
+		groupAddArea(NXGroup1, NexusPlayer, 22614, 11796, 25100, 13500);
+		orderGroupObj(NXGroup1, DORDER_ATTACK, TransportOne);
+		setEventTrigger(DefendTransportOne, ConditionsTrigger);
+		setEventTrigger(DescisionTime, inactive);
+	}
+}
+
+event DefendTransportOne(inactive) // this should account for the outcome PROPERLY now.
+{
+	if(droidInArea(NexusPlayer, 20096, 12032, 24576, 13824) == TRUE)
+	{
+		if(TransportOne == NULLOBJECT)
+		{
+			showConsoleText(_("Sgt.Gibbs: Sergeant Gibbs to Sergeant Wilkes - Respond please."), player);
+			orderGroupLoc(NXGroup1, DORDER_MOVE, Research10.x, Research10.y+256);
+			pause(60);
+			showConsoleText(_("Sgt.Wilkes: Sergeant Wilkes here. Glad to hear from you, Sergeant Gibbs. I assume your Transport was brought down as well?"), player);
+			pause(80);
+			showConsoleText(_("Sgt.Gibbs: That's affirm. Our location is grid one-six-three by one-zero-one. The locals are making life interesting for us here. Our Transport has been destroyed."), player);
+			pause(90);
+			showConsoleText(_("Sgt.Wilkes: We are currently at grid two-three-three by zero-one-five. Our Transport is disabled but serviceable. We've got Nexus hardware nearby."), player);
+			pause(90);
+			showConsoleText(_("Sgt.Gibbs: That's who attacked our Transport. It's a safe bet that's who shot both of us down."), player);
+			pause(60);
+			showConsoleText(_("Sgt.Wilkes: I agree. I suggest we rendevous once your Team is done there. Our Lift is damaged and we can't deploy. Repairs are underway."), player);
+			pause(70);
+			showConsoleText(_("Sgt.Gibbs: Acknowleged. We'll run-and-gun our way into your 'Op Area'. I suspect that we'll get the attention off of you folks."), player);
+			pause(80);
+			showConsoleText(_("Sgt.Wilkes: Very well, Sergeant Gibbs. I'm setting a thirty-five minute rendevous timer. Wilkes out."), player);
+			setMissionTime(21000);
+			pause(60);
+			showConsoleText(_("Sgt.Gibbs: We should get moving. I'm placing markers on everyone's Tactical Displays. We'll perform a clockwise sweep of the area starting at the six o'clock position."), player);
+			pause(70);
+			showConsoleText(_("Sgt.Gibbs:  You should all be seeing Objective One on the map now. Be careful, people. The locals already know we're here."), player);
+			addMessage(Obj3Msg, PROX_MSG, player, false);
+			addMessage(Obj3BMsg, PROX_MSG, player, false);
+			playSound(ObjSnd, player);
+			setEventTrigger(Objective2, ConditionsTrigger);
+			setEventTrigger(DefendTransportOne, inactive);
+		}
+	}
+	else
+	{
+		setMissionTime(-1);
+		showConsoleText(_("Sgt.Gibbs: NEXUS. I should have known ..."), player);
+		pause(70);
+		showConsoleText(_("Chief Watts: Sergeant Gibbs, we've gotten the Auto-Repair system working again. You folks should have an easier time of it now."), player);
+		completeResearch(P0Research[62], player);
+		completeResearch(P0Research[63], player);
+		completeResearch(P0Research[64], player);
+		completeResearch(P0Research[40], player);
+		setEventTrigger(M1DroidCheckArea, ConditionsTrigger); // Starting these checks now since we tend to jump ahead .. - Goth
+		setEventTrigger(M1DroidCheckArea2, ConditionsTrigger);
+		setEventTrigger(M1DroidCheckArea3, ConditionsTrigger);
+		pause(70);
+		showConsoleText(_("Sgt.Gibbs: Nice going, Chief. Any luck getting the Sat-Comm system up? We're in way over our heads here."), player);
+		pause(70);
+		showConsoleText(_("Chief Watts: Negative, Sarge. There's some kind of active jamming in the area. It's not messing with Long-Range Sensors, just Comms."), player);
+		pause(70);
+		showConsoleText(_("Sgt.Gibbs: Long-Range Sensors are up again too? I'll take it. Anything on the scope we should be aware of?"), player);
+		pause(70);
+		showConsoleText(_("Chief Watts: Um ... uh-oh. We've got emission spikes all over the area. My guess is the locals are powering up their gear."), player);
+		pause(70);
+		showConsoleText(_("Sgt.Gibbs: That probably isn't good. How many readings?"), player);
+		pause(50);
+		showConsoleText(_("Chief Watts: Just short of eighty signatures -- about a dozen aircraft, and sixty ground vehicles."), player);
+		pause(70);
+		showConsoleText(_("Sgt.Gibbs: This gets better and better ... any ideas on how we deal with it?"), player);
+		pause(50);
+		showConsoleText(_("Chief Watts: We've got some pre-mixed Hardcrete .. enough to build four Hardpoints, and some Assault Lasers. That's the best we can do."), player);
+		pause(50);
+		showConsoleText(_("Sgt.Gibbs: Better than nothing, Chief. Make it happen."), player);
+		pause(50);
+		AssaultLaserHP1 = addStructure(AssaultLaser, player, ToWorld(159), ToWorld(99));
+		pause(30);
+		AssaultLaserHP2 = addStructure(AssaultLaser, player, ToWorld(162), ToWorld(102));
+		pause(30);
+		AssaultLaserHP3 = addStructure(AssaultLaser, player, ToWorld(162), ToWorld(105));
+		pause(30);
+		AssaultLaserHP4 = addStructure(AssaultLaser, player, ToWorld(159), ToWorld(107));
+		pause(30);
+		showConsoleText(_("Chief Watts: There you go, Sergeant Gibbs. Four servings of cold revenge."), player);
+		pause(60);
+		showConsoleText(_("Sgt.Gibbs: They'll have to do. All Units -- prepare to repel!"), player);
+		pause(60);
+		showConsoleText(_("Sgt.Gibbs: Here they come! ALL UNITS, LIGHT 'EM UP!"), player);
+		showConsoleText(_("*** DEFEND THE TRANSPORT FOR 45 SECONDS! ***"), player);
+		playSound(ObjSnd, player);
+		setMissionTime(450);
+		groupAddArea(ScavGroup3, ScavBasePlayer, 16384, 8438, 26366, 17022);
+		orderGroupLoc(ScavGroup3, DORDER_MOVE, TransportOne.x + 256, TransportOne.y);
+		pause(450);
+		if (TransportOne == NULLOBJECT)
+		{
+			showConsoleText(_("Sgt.Gibbs: Sergeant Gibbs to Sergeant Wilkes - Respond please."), player);
+			setMissionTime(-1);
+			pause(60);
+			showConsoleText(_("Sgt.Wilkes: Sergeant Wilkes here. Glad to hear from you, Sergeant Gibbs. I assume your Transport was brought down as well?"), player);
+			pause(80);
+			showConsoleText(_("Sgt.Gibbs: That's affirm. Our location is grid one-six-three by one-zero-one. The locals are making life interesting for us here. Our Transport has been destroyed."), player);
+			pause(90);
+			showConsoleText(_("Sgt.Wilkes: We are currently at grid two-three-three by zero-one-five. Our Transport is disabled but serviceable. We've got Nexus hardware nearby."), player);
+			pause(90);
+			showConsoleText(_("Sgt.Gibbs: That's who attacked our Transport. It's a safe bet that's who shot both of us down."), player);
+			pause(60);
+			showConsoleText(_("Sgt.Wilkes: I agree. I suggest we rendezvous once your Team is done there. Our Lift is damaged and we can't deploy. Repairs are underway."), player);
+			pause(70);
+			showConsoleText(_("Sgt.Gibbs: Acknowledged. We'll run-and-gun our way into your Op Zone. I suspect that we'll get the attention off of you folks."), player);
+			pause(80);
+			showConsoleText(_("Sgt.Wilkes: Very well, Sergeant Gibbs. I'm setting a thirty-five minute rendezvous timer. Good hunting, Team One."), player);
+			setMissionTime(21000);
+			pause(60);
+			showConsoleText(_("Sgt.Gibbs: We should get moving. I'm placing markers on everyone's Tactical Displays. We'll perform a clockwise sweep of the area starting at the six o'clock position."), player);
+			showConsoleText(_("Sgt.Gibbs:  You should all be seeing Objective One on the map now. Be careful, people. The locals already know we're here."), player);
+			addMessage(Obj3Msg, PROX_MSG, player, false);
+			addMessage(Obj3BMsg, PROX_MSG, player, false);
+			playSound(ObjSnd, player);
+			setEventTrigger(Objective2, ConditionsTrigger);
+			// Add new NEXUS attack events here!
+			setEventTrigger(DefendTransportOne, inactive);
+		}
+		else
+		{
+			showConsoleText(_("Sgt.Gibbs: That was fun ... and yes, that was sarcasm. We can't keep doing this."), player);
+			setMissionTime(-1);
+			pause(70);
+			showConsoleText(_("Chief Watts: We might have to take the fight to THEM, Sarge. Diagnostics came back on the Transport. Engines are okay but the Dorsal Control Surfaces are Condition-Zero."), player);
+			pause(70);
+			showConsoleText(_("Sgt.Gibbs: So we could lift off, but wouldn't be able to steer?"), player);
+			pause(70);
+			showConsoleText(_("Chief Watts: We could steer, but maintaining altitude and landing in one piece would be the problem. We'd probably crash more violently than this time."), player);
+			pause(80);
+			showConsoleText(_("Sgt.Gibbs: And with the lower bay already crushed, there's nothing to soften the blow of another landing like that?"), player);
+			pause(70);
+			showConsoleText(_("Chief Watts: The Transport would not sustain another blow like that, and we'd all be stains on the floor panels."), player);
+			pause(80);
+			showConsoleText(_("Sgt.Gibbs: (sigh) So it's too big of a risk. Understood. Okay people, listen up. We're going to perform a sweep-and-clear of the area."), player);
+			pause(70);
+			showConsoleText(_("Sgt.Gibbs: We'll proceed in a clockwise arc starting at the six-o'clock position. I'm adding markers to your tactical displays."), player);
+			pause(80);
+			showConsoleText(_("Sgt.Gibbs: When we're finished, we'll attempt to contact Team Two. The sooner we finish up, the better. No telling what kind of shape they're in."), player);
+			pause(80);
+			addMessage(Obj3Msg, PROX_MSG, player, false);
+			addMessage(Obj3BMsg, PROX_MSG, player, false);
+			playSound(ObjSnd, player);
+			setEventTrigger(Objective2, ConditionsTrigger);
+			setEventTrigger(DefendTransportOne, inactive);
+		}
+	}
+}
+
+event Objective1(inactive)
+{
+	if(structButNoWallsInArea(ScavBasePlayer, 23424, 8960, 26368, 11520) == false)
+	{
+		killStructsInArea(ScavBasePlayer, REF_WALL, 23424, 8960, 26368, 11520, true, true);
+		killStructsInArea(ScavBasePlayer, REF_WALL, 15768, 8848, 27136, 16256, true, true);
+		pause(20);
+		playSound(AreaDoneSnd, player);
+		removeMessage(Obj2Msg, PROX_MSG, player);
+		createAlliance(CoalitionPlayer, player); // NOW we do this. - Goth
+		breakAlliance(CoalitionPlayer, NexusPlayer);
+		breakAlliance(CoalitionPlayer, ScavBasePlayer);
+		if (TransportOne != NULLOBJECT)
+		{
+			showConsoleText(_("Sgt.Gibbs: Team One to Team Two. Sergeant Wilkes, do you copy?"), player);
+			pause(80);
+			showConsoleText(_("Sgt.Wilkes: Team One, we are receiving you. Signal is decimal-two. Good to hear from you folks. We thought we were the only ones here."), player);
+			pause(90);
+			showConsoleText(_("Sgt.Gibbs: We plan to rendezvous with you shortly. We've performed a sweep-and-clear of our OP Zone. What's your status?"), player);
+			pause(80);
+			showConsoleText(_("Sgt.Wilkes: We're in bad shape. Our lift is damaged and we are unable to offload at this time. Repairs are underway. We're also seeing medium- and heavy-bodied targets outside of our Transport."), player);
+			pause(80);
+			showConsoleText(_("Sgt.Gibbs: Acknowledged. We'll be there as soon as we can. Keep your heads down. Gibbs out."), player);
+			pause(80);
+			showConsoleText(_("Sgt.Gibbs: Alright people. Let's head to Team Two's Op Area and see how we can help them."), player);
+			setMissionTime(21000);
+			addMessage(Obj5Msg, PROX_MSG, player, false);
+			setEventTrigger(GoToNorthPass, ConditionsTrigger);
+			pause(30);
+			playSound(ObjSnd, player);
+			setEventTrigger(Objective1, inactive);
+		}
+		else
+		{
+			showConsoleText(_("Sgt.Gibbs: Alright people. Let's head to Team Two's Op Area. Hopefully they're in better shape than we are."), player);
+			removeMessage(Obj2Msg, PROX_MSG, player);
+			addMessage(Obj5Msg, PROX_MSG, player, false);
+			setEventTrigger(GoToNorthPass, ConditionsTrigger);
+			pause(30);
+			playSound(ObjSnd, player);
+			setEventTrigger(Objective1, inactive);
+		}
+	}
+}
+
+event Objective2(inactive) // This is first now.
+{
+	if(structButNoWallsInArea(ScavBasePlayer, 17714, 13767, 23202, 16210) == false)
+	{
+		killStructsInArea(ScavBasePlayer, REF_WALL, 16626, 13767, 23202, 16210, true, true);
+		killStructsInArea(ScavBasePlayer, REF_WALL, 21043, 12734, 23900, 15062, true, true);
+		playSound(ObjSnd, player);
+		removeMessage(Obj3Msg, PROX_MSG, player);
+		removeMessage(Obj3BMsg, PROX_MSG, player);
+		addMessage(Obj4Msg, PROX_MSG, player, false);
+		addMessage(Obj4BMsg, PROX_MSG, player, false);
+		setEventTrigger(Objective3, ConditionsTrigger);
+		setEventTrigger(Objective2, inactive);
+	}
+}
+
+// New NEXUS attack events in M1 .. so that NEXUS actually does stuff now. Sheesh. - Goth
+// Remember that we can spawn MORE units in if the attack strengths aren't strong enough. :D
+event M1DroidCheckArea(inactive) // This one we trigger when the player enters the area of the first Scavvie base.
+{
+	if(droidInArea(player, 21376, 14080, 21760, 14976) == true)
+	{
+		groupAddArea(NXGroup1, NexusPlayer, 16768, 13824, 19968, 16896);
+		orderGroupLoc(NXGroup1, DORDER_MOVE, Commander.x, Commander.y);
+		pause(150); // Wait 15 seconds
+		orderGroupLoc(NXGroup1, DORDER_MOVE, Commander.x, Commander.y); // Update our location again
+		setEventTrigger(M1DroidCheckArea, inactive);
+	}
+}
+
+event M1DroidCheckArea2(inactive) // This one we'll trigger when the player kills the RESEARCH10 Structure.
+{
+	if(Research10 == NULLOBJECT)
+	{
+		groupAddArea(NXGroup1, NexusPlayer, 16768, 9088, 19456, 13696);
+		orderGroupLoc(NXGroup1, DORDER_MOVE, Commander.x, Commander.y);
+		pause(150); // Wait 15 seconds
+		orderGroupLoc(NXGroup1, DORDER_MOVE, Commander.x, Commander.y); // Update our location again
+		setEventTrigger(M1DroidCheckArea2, inactive);
+	}
+}
+
+event M1DroidCheckArea3(inactive) // This one we'll trigger when the player enters the area south of that fourth large Scav base.
+{
+	if(droidInArea(player, 24576, 11776, 25344, 13440) == true)
+	{
+		groupAddArea(NXGroup1, NexusPlayer, 23552, 8960, 26496, 14592);
+		orderGroupLoc(NXGroup1, DORDER_MOVE, Commander.x, Commander.y);
+		pause(150); // Wait 15 seconds
+		orderGroupLoc(NXGroup1, DORDER_MOVE, Commander.x, Commander.y); // Update our location again
+		setEventTrigger(M1DroidCheckArea3, inactive);
+	}
+}
+
+event Objective3(inactive)
+{
+	if(structButNoWallsInArea(ScavBasePlayer, 16690, 8676, 20911, 13853) == false)
+	{
+		killStructsInArea(ScavBasePlayer, REF_WALL, 16690, 8676, 20911, 13853, true, true);
+		playSound(ObjSnd, player);
+		removeMessage(Obj4Msg, PROX_MSG, player);
+		removeMessage(Obj4BMsg, PROX_MSG, player);
+		addMessage(Obj2Msg, PROX_MSG, player, false);
+		setEventTrigger(Objective1, ConditionsTrigger);
+		setEventTrigger(Objective3, inactive);
+	}
+}
+
+event GoToNorthPass(inactive)
+{
+	if(Gibbs.x <= 19836)
+	{
+		if(Gibbs.y <= 8187)
+		{
+			removeMessage(Obj5Msg, PROX_MSG, player);
+			setScrollParams(103, 0, 250, 132);
+			showConsoleText(_("Sgt.Gibbs: Alright everyone. There is a large Complex between us and Team Two. Let's take it down."), player);
+			setAssemblyPoint(ScavFactoryIDB1, 22330, 5430);
+			setAssemblyPoint(ScavFactoryIDB3, 21210, 2415);
+			setAssemblyPoint(ScavFactoryIDB2, 22375, 1595);
+			setAssemblyPoint(ScavFactoryIDC4, 28876, 12310); // AA Factory, moved to Mission E.
+			setAssemblyPoint(ScavVTOLFacB1, 15726, 10502);
+			setEventTrigger(ScavsBuildChoppersB1, BuildStuffTrigger);
+			setAssemblyPoint(ScavVTOLFacB2, 18885, 5089);
+			setEventTrigger(ScavsBuildChoppersB2, BuildStuffTrigger);
+			setAssemblyPoint(ScavVTOLFacB3, 23810, 1153);
+			setEventTrigger(ScavsBuildChoppersB3, BuildStuffTrigger);
+			setAssemblyPoint(ScavVTOLFacB4, 20356, 2165);
+			setEventTrigger(ScavsBuildChoppersB4, BuildStuffTrigger);
+			setEventTrigger(MissionB, ConditionsTrigger);
+			setEventTrigger(playerHasEnteredAreaB, ConditionsTrigger);
+			setEventTrigger(Power1Event, ConditionsTrigger);
+			setEventTrigger(M2ScavAttack1, DoNow);
+			setEventTrigger(M2Sub1, ConditionsTrigger);
+			setEventTrigger(M2Sub2, ConditionsTrigger);
+			setEventTrigger(M2Sub3, ConditionsTrigger);
+			setEventTrigger(GoToNorthPass, inactive);
+		}
+	}
+}
+
+event M2Sub1(inactive)
+{
+	if(structButNoWallsInArea(ScavBasePlayer, 15616, 6912, 18688, 8064) == false)
+	{
+		if(structButNoWallsInArea(ScavBasePlayer, 14720, 8064, 16768, 10880) == false)
+		{
+			killStructsInArea(ScavBasePlayer, REF_WALL, 15616, 6912, 18688, 8064, true, true);
+			killStructsInArea(ScavBasePlayer, REF_WALL, 14720, 8064, 16768, 10880, true, true);
+			killStructsInArea(ScavBasePlayer, REF_WALL, 17024, 7936, 16688, 8576, true, true);
+			setEventTrigger(M2Sub1, inactive);
+		}
+	}
+}
+
+event M2Sub2(inactive)
+{
+	if(structButNoWallsInArea(ScavBasePlayer, 25088, 3328, 27392, 6144) == false)
+	{
+
+		killStructsInArea(ScavBasePlayer, REF_WALL, 25088, 3328, 27392, 6144, true, true);
+		setEventTrigger(M2Sub2, inactive);
+	}
+}
+
+event M2Sub3(inactive)
+{
+	if(structButNoWallsInArea(ScavBasePlayer, 25856, 1024, 27392, 2432) == false)
+	{
+
+		killStructsInArea(ScavBasePlayer, REF_WALL, 25856, 1024, 27392, 2432, true, true);
+		setEventTrigger(M2Sub3, inactive);
+	}
+}
+
+event PrototypeOne(inactive)
+{
+	if(Research5 == NULLOBJECT)
+	{
+		setEventTrigger(PrototypeOne, inactive);
+	}
+}
+
+event Research7Event(inactive)
+{
+	if(Research7 == NULLOBJECT)
+	{
+		setEventTrigger(Research7Event, inactive);
+	}
+}
+
+event Research8Event(inactive)
+{
+	if(Research8 == NULLOBJECT)
+	{
+		setEventTrigger(Research8Event, inactive);
+	}
+}
+
+event Research9Event(inactive)
+{
+	if(Research9 == NULLOBJECT)
+	{
+		setEventTrigger(Research9Event, inactive);
+	}
+}
+
+event Research10Event(inactive)
+{
+	if(Research10 == NULLOBJECT)
+	{
+		setEventTrigger(Research10Event, inactive);
+	}
+}
+
+event Power1Event(inactive)
+{
+	if(Power1 == NULLOBJECT)
+	{
+		setEventTrigger(Power1Event, inactive);
+	}
+}
+
+event TransportOneDestroyed(inactive)
+{
+	if(TransportOne == NULLOBJECT)
+	{
+		showConsoleText(_("Sgt. Gibbs: What the- ?! That's great. The Scavengers have destroyed our Transport. We had better make sure we defend Transport Two! Otherwise we're stuck here."), player);
+		setEventTrigger(TransportOneDestroyed, inactive);
+	}
+}
+
+// NEW EVENT "Who's This?" (When we first see the Coalition Base at the end of M1)
+event WhosThis(inactive)
+{
+	if (Commander.x >= 25984) // Top-left corner of the imaginary box ...
+	{
+		if (Commander.y >= 8320) // Top-right corner of area
+		{
+			if (Commander.x <= 27520) // Bottom-right corner of the imaginary box ...
+			{
+				if (Commander.y <= 9600)
+				{
+					showConsoleText(_("Sgt.Gibbs: Looks like there's another force operating in the area. They haven't fired upon us, but they haven't contacted us either. Recommend we leave them alone, Commander."), player);
+					setEventTrigger(WhosThis, inactive);
+				}
+			}
+		}
+	}
+}
+
+// The Switchover
+event KillAABaseEarly(inactive)
+{
+	if (structButNoWallsInArea(ScavBasePlayer, 27904, 9472, 31999, 15242) == false)
+	{
+		killStructsInArea(ScavBasePlayer, REF_WALL, 27904, 9472, 31999, 15242, true, true);
+		removeMessage(ObjC5Msg, PROX_MSG, player);
+		pause(40);
+		showConsoleText(_("Sgt.Gibbs: ECM Towers. No wonder we didn't see anything on our previous overflight."), player);
+		pause(60);
+		showConsoleText(_("Sgt.Wilkes: That's a piece of technology we could use. Everyone -- commit your battle and data logs to hard-copies and laser storage. NOW."), player);
+		pause(60);
+		showConsoleText(_("Sgt.Gibbs: Roger that. Teams One and Two, proceed as Sergeant Wilkes has instructed. Everyone secure your data cores."), player);
+		pause(60);
+		showConsoleText(_("Sgt.Wilkes: Backups complete. Sergeant Gibbs, I am transmitting a wide-band upload to Transports One AND Two at this time. We can NOT lose this data."), player);
+		pause(70);
+		showConsoleText(_("Sgt.Gibbs: Agreed, Sergeant Wilkes. This entire operation has useful data, not just concerning the ECM's."), player);
+		pause(60);
+		showConsoleText(_("Sgt.Wilkes: AND, we know where NEXUS tucked tail and ran to. Problem is, I think we're stuck here for the moment."), player);
+		pause(70);
+		playSound(trans_fried, player);
+		showConsoleText(_("Sgt.Gibbs: The jamming signal is a problem, but I don't think we're ... hey, what is that noise ... ?"), player);
+		pause(60);
+		showConsoleText(_("Sgt.Wilkes: Sounds like ... erm ... whoa, feeling dizzy ... what the?! **STATIC**"), player);
+		pause(40);
+		setEventTrigger(CheckConditions, inactive);
+		playSound(NexusLaugh3, player);
+		vanishUnit(Commander);
+		takeOverDroidsInArea(player, NexusPlayer, 1, 1, 31872, 31872);
+		killStructsInArea(player, REF_DEFENSE, 1, 1, 31872, 31872, false, false);
+		destroyStructure(TransportOne);
+		destroyStructure(TransportTwo);
+		groupAddArea(M2NXAttack2, NexusPlayer, 1, 9472, 31999, 15242);
+		pause(30);
+		orderGroupLoc(M2NXAttack2, DORDER_MOVE, 28792, 16883);
+		pause(90);
+		//setGroupSecondary(M2NXAttack2, DSO_ATTACK_LEVEL, DSS_ALEV_NEVER); // This was the cause of the lag/crash.
+		showConsoleText(_("PROJECT COMPUTER: MISSION RECORDING DRF-701-ALPHA -- END OF FILE. PLAYBACK TERMINATED."), player);
+		pause(90);
+		showConsoleText(_("Coalition Representative: This was the last record of what happened to your people two weeks ago, Commander Mallory. We repaired Transport Two, and reverse-plotted a course for Omega Base using the autopilot."), player);
+		pause(90);
+		showConsoleText(_("Commander Mallory: Thank you for bringing this information to us, Councilor."), player);
+		pause(90);
+		showConsoleText(_("Coalition Representative: The Coalition has directed me to request your assistance. We understand that your group and NEXUS has a ... storied .. history."), player);
+		pause(80);
+		showConsoleText(_("Commander Mallory: Indeed. We have strict directives concerning NEXUS and Dr. Reed. He is wanted for Genocide and Crimes Against Humanity."), player);
+		pause(90);
+		showConsoleText(_("Coalition Representative: May I take that as a 'yes', Commander Mallory?"), player);
+		pause(80);
+		showConsoleText(_("Commander Mallory: Of course. We will dispatch a Team to your sector immediately, Councilor ... one suited to a task like this, with an experienced leader."), player);
+		pause(140);
+		showConsoleText(_("(One week later ... )"), player);
+		pause(40);
+		addMessage(ObjC7BMsg, PROX_MSG, player, false);
+		setEventTrigger(RescueTeamArrives, DoNow);
+		takeOverStructsInArea(CoalitionPlayer, player, 28672, 8960, 28928, 9088);
+		setEventTrigger(M3ThreadBStart, ConditionsTrigger);
+		setEventTrigger(PlayerEntersAreaC, ConditionsTrigger);
+		setEventTrigger(KillAABaseEarly, inactive);
+	}
+}
+
+event MissionB(inactive)
+{
+	setEventTrigger(ObjectiveB1, ConditionsTrigger);
+	setEventTrigger(BonusMission1, ConditionsTrigger);
+	setEventTrigger(TransportOneDestroyed, inactive);
+	addMessage(ObjB1Msg, PROX_MSG, player, false);
+	setEventTrigger(MissionB, inactive);
+}
+
+
+event ObjectiveB1(inactive)
+{
+	if (Gibbs.x <= 19097)
+	{
+		if (Gibbs.y <= 5151)
+		{
+			showConsoleText(_("Sgt.Gibbs: Gibbs to Team Two, respond please."), player);
+			pause(40);
+			showConsoleText(_("-- Sergeant Wilkes here. --"), player);
+			pause(40);
+			showConsoleText(_("Sgt.Gibbs: Sergeant, we've kicked a hornet's nest over here. What's your status?"), player);
+			pause(60);
+			showConsoleText(_("-- We're seeing increased traffic outside our Transport. Be advised they look like they're preparing to move. --"), player);
+			pause(60);
+			showConsoleText(_("Sgt.Gibbs: Acknowledged. Status of Transport lift repairs?"), player);
+			pause(60);
+			showConsoleText(_("Sgt.Wilkes: Almost completed. We should be able to disembark by the time your Team reaches us."), player);
+			pause(60);
+			showConsoleText(_("Sgt.Gibbs: Very well. We're going to kick the nest some more. Team One out."), player);
+			addMessage(ObjB2Msg, PROX_MSG, player, false);
+			removeMessage(ObjB1Msg, PROX_MSG, player);
+			// Trigger a NEXUS interception attack from the base here!
+			groupAddArea(M2NXAttack1, NexusPlayer, 20608, 4096, 23552, 6912);
+			orderGroupLoc(M2NXAttack1, DORDER_MOVE, Gibbs.x, Gibbs.y);
+			setEventTrigger(ObjectiveB2, ConditionsTrigger);
+			setEventTrigger(PrototypeTwo, ConditionsTrigger);
+			setEventTrigger(ObjectiveB1, inactive);
+		}
+	}
+}
+
+event PrototypeTwo(inactive)
+{
+	if(Research4 == NULLOBJECT)
+	{
+		addDroid(NexusLink2, Gibbs.x + 128, Gibbs.y + 128, player);
+		showConsoleText(_("Sgt.Gibbs: A NEXUSLink?! What the heck is THAT doing here?"), player);
+		completeResearch(P0Research[62], player);
+		completeResearch(P0Research[63], player);
+		completeResearch(P0Research[64], player);
+		playSound(rewardSnd, player);
+		setEventTrigger(PrototypeTwo, inactive);
+	}
+}
+
+event ObjectiveB2(inactive)
+{
+	if (structButNoWallsInArea(ScavBasePlayer, ToWorld(164), ToWorld(30), ToWorld(189), ToWorld(51)) == false)
+	{
+		addMessage(ObjB3Msg, PROX_MSG, player, false);
+		addMessage(ObjB9Msg, PROX_MSG, player, false);
+		killStructsInArea(ScavBasePlayer, REF_WALL, ToWorld(134), ToWorld(26), ToWorld(189), ToWorld(58), true, true);
+		removeMessage(ObjB2Msg, PROX_MSG, player);
+		playSoundPos(ObjSnd, player, ToWorld(182), ToWorld(10), 0);
+		setEventTrigger(BonusMission1, inactive); // Gotta make SURE that's turned off. Argh!
+		showConsoleText(_("Sgt.Gibbs: Looks like two directions to go. The first is to the north. The second leads to the east, and Team Two."), player);
+		pause(50);
+		showConsoleText(_("-- Wilkes to Gibbs. Things are looking a little dodgy outside the Transport. ETA on your arrival? --"), player);
+		pause(50);
+		showConsoleText(_("Sgt.Gibbs: Standby, Team Two. We're figuring out the next move. By the way, Sergeant Wilkes .. we discovered a NEXUSLink in that last base and appropriated it."), player);
+		pause(70);
+		showConsoleText(_("-- A NEXUSLink?! What the heck was THAT doing there? --"), player);
+		pause(70);
+		showConsoleText(_("Sgt.Gibbs: No idea. We found that in a Research Facility. Looks like some sort of Prototype."), player);
+		pause(70);
+		showConsoleText(_("-- What's that old saying ...? 'Finders, keepers'? --"), player);
+		pause(70);
+		showConsoleText(_("Sgt.Gibbs: Absolutely! The time-honoured tradition by which our beloved Project was founded upon! Okay, Team One -- let's get back to work."), player);
+		pause(70);
+		setEventTrigger(ObjectiveB3B, ConditionsTrigger);
+		setEventTrigger(GoNorth, ConditionsTrigger);
+		setEventTrigger(ObjectiveB2, inactive);
+	}
+}
+
+event GoNorth(inactive)
+{
+	if (Gibbs.x <= 21382)
+	{
+		if (Gibbs.y <= 3203)
+		{
+			setEventTrigger(BonusMission1, inactive);
+			setEventTrigger(ObjectiveB3B, inactive); // Turn off those events since we don't qualify to do them now.
+			showConsoleText(_("Sgt.Wilkes: OH NO!  Our Transport is being fired upon! The lift is jammed again and we can't ... *static* ......"), player);
+			pause(40);
+			destroyStructure(TransportTwo);
+			pause(20);
+			showConsoleText(_("Sgt.Gibbs: Sergeant Wilkes? Team Two, respond please ...."), player);
+			pause(50);
+			showConsoleText(_("Sgt.Gibbs: They deserved better than this."), player);
+			removeMessage(ObjB9Msg, PROX_MSG, player);
+			setEventTrigger(ObjectiveB3, ConditionsTrigger);
+			setEventTrigger(GoNorth, inactive);
+		}
+	}
+}
+
+event ObjectiveB3(inactive)
+{
+	if (structButNoWallsInArea(ScavBasePlayer, ToWorld(166), ToWorld(1), ToWorld(188), ToWorld(24)) == false)
+	{
+		removeMessage(ObjB3Msg, PROX_MSG, player);
+		killStructsInArea(ScavBasePlayer, REF_WALL, ToWorld(166), ToWorld(1), ToWorld(188), ToWorld(24), true, true);
+		addMessage(ObjB4Msg, PROX_MSG, player, false);
+		playSoundPos(ObjSnd, player, ToWorld(140), ToWorld(10), 0);
+		setEventTrigger(ObjectiveB4, ConditionsTrigger);
+		setEventTrigger(ObjectiveB3, inactive);
+	}
+}
+
+event ObjectiveB3B(inactive)
+{
+	if (droidInArea(player, ToWorld(195), ToWorld(50), ToWorld(200), ToWorld(55)) == true)
+	{
+		showConsoleText(_("Sgt.Gibbs: Sergeant Wilkes, we'll be there shortly. There's a single base ahead of us, and two more on our nine-o'clock leading up to your Transport. ETA: Twelve minutes, mark."), player);
+		setEventTrigger(BonusMission1, ConditionsTrigger);
+		setMissionTime(7200);
+		addMessage(ObjB92Msg, PROX_MSG, player, false);
+		pause(70);
+		showConsoleText(_("-- Roger that, Team One. Our Technicians have almost repaired the lift. Signal us when you're in position. --"), player);
+		GotAchieve1 = GotAchieve1 + 1;
+		removeMessage(ObjB3Msg, PROX_MSG, player);
+		setEventTrigger(ObjectiveB3, inactive);
+		setEventTrigger(GoNorth, inactive);
+		setEventTrigger(BonusMission1, ConditionsTrigger);
+		setEventTrigger(ObjectiveB5, inactive);
+		setEventTrigger(ObjectiveB4, inactive); // Gotta make sure this stuff is off.
+		setEventTrigger(ObjectiveB3B, inactive);
+	}
+}
+
+event ObjectiveB4(inactive)
+{
+	if (structButNoWallsInArea(ScavBasePlayer, ToWorld(127), ToWorld(1), ToWorld(165), ToWorld(27)) == false)
+	{
+		removeMessage(ObjB4Msg, PROX_MSG, player);	
+		killStructsInArea(ScavBasePlayer, REF_WALL, ToWorld(127), ToWorld(1), ToWorld(165), ToWorld(27), true, true);
+		showConsoleText(_("Sgt.Gibbs: Okay everyone. Time to get some payback. Proceed to Transport Two's crash location."), player);
+		addMessage(ObjB92Msg, PROX_MSG, player, false);
+		removeMessage(ObjB4Msg, PROX_MSG, player);
+		setEventTrigger(ObjectiveB3, inactive);
+		setEventTrigger(GoNorth, inactive);
+		setEventTrigger(BonusMission1, ConditionsTrigger);
+		setEventTrigger(KillAABaseEarly, ConditionsTrigger);
+		setEventTrigger(ObjectiveB5, inactive);
+		setEventTrigger(ObjectiveB4, inactive); // Gotta make sure this stuff is off.
+	}
+}
+
+event ObjectiveB5(inactive)
+{
+	if (numDroidsInArea(player, 18559, 4975, 19350, 6126) > 4)
+	{
+		showConsoleText(_("Sgt.Gibbs: Let's wait for everyone to get here, then proceed south. There are some sensor echoes that I want to take a closer look at."), player);
+		addMessage(ObjB6Msg, PROX_MSG, player, false);
+		removeMessage(ObjB5Msg, PROX_MSG, player);
+		pause(700);
+		addDroid(NXVengWSS, 22203, 12469, NexusPlayer);
+		addDroid(NXRepair, 22203, 12597, NexusPlayer);
+		addDroid(NXWyvernHeavy, 22203, 12725, NexusPlayer);
+		groupAddArea(NXTask3, NexusPlayer, 21743, 12046, 22973, 13600);
+		if(TransportOne == NULLOBJECT)
+		{
+			orderGroupLoc(NXTask3, DORDER_MOVE, Jenks.x, Jenks.y);
+			setEventTrigger(ObjectiveB6, ConditionsTrigger);
+			setEventTrigger(ObjectiveB5, inactive);
+		}
+		else
+		{
+			orderGroupObj(NXTask3, DORDER_ATTACK, TransportOne);
+			pause(40);
+			showConsoleText(_("Sgt.Gibbs: Nexus is attacking the Transport again! ALL UNITS -- PROTECT TRANSPORT ONE!"), player);
+			setEventTrigger(ObjectiveB6, ConditionsTrigger);
+			addMessage(ObjB6Msg, PROX_MSG, player, true);
+			setEventTrigger(ObjectiveB5, inactive);
+		}
+	}
+}
+
+event ObjectiveB6(inactive)
+{
+	if (numDroidsInArea(NexusPlayer, 16737, 8651, 27959, 15383) < 1)
+	{
+		removeMessage(ObjB6Msg, PROX_MSG, player);
+		pause(20);
+		playSound(AreaDoneSnd, player);
+		setEventTrigger(M3ThreadBStart, ConditionsTrigger);
+		setEventTrigger(ObjectiveB6, inactive);
+	}
+}
+
+event M3ThreadBStart(inactive) // Going to use a 4-coordinate check here.
+{
+	if (Jenks.x >= 26618) // Top-left corner of the imaginary box ...
+	{
+		if (Jenks.y >= 6758)
+		{
+			if (Jenks.x <= 29069) // Bottom-right corner of the imaginary box ...
+			{
+				if (Jenks.y <= 8666)
+				{
+					removeMessage(ObjC7BMsg, PROX_MSG, player);
+					setEventTrigger(M3ThreadB, DoNow);
+					setEventTrigger(M3ThreadBStart, inactive);
+				}
+			}
+		}
+	}
+}
+
+event BonusMission1(inactive)
+{
+	if (Gibbs.x >= (ToWorld(221)))
+	{
+		if (Gibbs.y <= (ToWorld(24)))
+		{
+			showConsoleText(_("Sgt.Gibbs: Transport Two, this is Team One. We have established visual contact and will arrive at your location in ten seconds."), player);
+			setMissionTime(-1);
+			pause(60);
+			removeMessage(ObjB9Msg, PROX_MSG, player);
+			// New event - Transport 2 defence!
+			// New and improved Transport Two attack event! Now with 100% more NEXUS!
+			showConsoleText(_("Sgt.Wilkes: Team One, be advised that we need two minutes. We're replacing blown motor fuses in the lift control."), player);
+			pause(70);
+			showConsoleText(_("Sgt.Gibbs: Understood, Team Two. Take all the time you need. We've got things handled out here."), player);
+			pause(70);
+			playSound(NexusLaugh1, player);
+			addDroid(NXWyvernGauss, 31556, 2626, NexusPlayer);
+			addDroid(NXWyvernGauss, 31556, 2626, NexusPlayer);
+			addDroid(NXWyvernGauss, 31556, 2626, NexusPlayer);
+			addDroid(NXNeedleCyb, 31556, 2626, NexusPlayer);
+			addDroid(NXNeedleCyb, 31556, 2626, NexusPlayer);
+			addDroid(NXNeedleCyb, 31556, 2626, NexusPlayer);
+			addDroid(NXWyvernPulse, 31556, 2626, NexusPlayer);
+			addDroid(NXWyvernPulse, 31556, 2626, NexusPlayer);
+			addDroid(NXWyvernPulse, 31556, 2626, NexusPlayer);
+			addDroid(NXVengWSS, 27192, 3127, NexusPlayer);
+			addDroid(NXWyvernGauss, 27192, 3127, NexusPlayer);
+			addDroid(NXWyvernGauss, 27192, 3127, NexusPlayer);
+			addDroid(NXWyvernGauss, 27192, 3127, NexusPlayer);
+			addDroid(NXNeedleCyb, 27192, 3127, NexusPlayer);
+			addDroid(NXNeedleCyb, 27192, 3127, NexusPlayer);
+			addDroid(NXNeedleCyb, 27192, 3127, NexusPlayer);
+			addDroid(NXWyvernPulse, 27192, 3127, NexusPlayer);
+			addDroid(NXWyvernPulse, 27192, 3127, NexusPlayer);
+			addDroid(NXWyvernPulse, 27192, 3127, NexusPlayer);
+			groupAddArea(NXTask4, NexusPlayer, 25600, 0, 31999, 6784);
+			orderGroupObj(NXTask4, DORDER_ATTACK, TransportTwo);
+			showConsoleText(_("Sgt.Gibbs: Um .. Uh-oh. ALL UNITS -- WEAPONS HOT!"), player);
+			setMissionTime(1200);
+			showConsoleText(_("*** NEW OBJECTIVE -- DEFEND TRANSPORT TWO FOR TWO MINUTES! ***"), player);
+			pause(1200);
+			if (TransportTwo != NULLOBJECT)
+			{
+				setMissionTime(-1);
+				removeMessage(ObjB92Msg, PROX_MSG, player);
+				addDroid(PythonGauss, 29761, 1731, player);
+				addDroid(ViperRepair, 29761, 1731, player);
+				Wilkes = addDroid(WilkesSuperAC, 29761, 1731, player);
+				setDroidKills(Wilkes, 32);
+				addDroid(PythonGauss, 29761, 1731, player);
+				addDroid(PythonGauss, 29761, 1731, player);
+				addDroid(PythonHvLaser, 29761, 1731, player);
+				addDroid(PythonHvLaser, 29761, 1731, player);
+				addDroid(PythonHvLaser, 29761, 1731, player);
+				addDroid(PythonHvLaser, 29761, 1731, player);
+				addDroid(PythonGauss, 29761, 1731, player);
+				groupAddArea(PlayerGrp1, player, 28313, 1709, 30672, 3208);
+				orderGroupLoc(PlayerGrp1, DORDER_MOVE, Gibbs.x, Gibbs.y);
+				playSound(rewardSnd, player);
+				completeResearch(P0Research[62], player);
+				completeResearch(P0Research[63], player);
+				completeResearch(P0Research[64], player);
+				showConsoleText(_("Sergeant Gibbs: Transport Two appears to be secure for now. Sergeant Wilkes, have your people fortify the area with Assault Lasers."), player);
+				pause(50);
+				showConsoleText(_("Sergeant Wilkes: Roger that. Transport Two personnel -- you heard Sergeant Gibbs -- get to it!"), player);
+				pause(50);
+				AssaultLaserHP5 = addStructure(AssaultLaser, player, ToWorld(230), ToWorld(15));
+				pause(30);
+				AssaultLaserHP6 = addStructure(AssaultLaser, player, ToWorld(232), ToWorld(16));
+				pause(30);
+				AssaultLaserHP7 = addStructure(AssaultLaser, player, ToWorld(235), ToWorld(16));
+				pause(30);
+				AssaultLaserHP8 = addStructure(AssaultLaser, player, ToWorld(237), ToWorld(14));
+				pause(30);
+				setEventTrigger(BonusMission1BSetup, ConditionsTrigger);
+				setEventTrigger(ObjectiveB3B, inactive);
+				setEventTrigger(BonusMission1, inactive);
+			}
+			else
+			{
+				setMissionTime(-1);
+				removeMessage(ObjB92Msg, PROX_MSG, player);
+				showConsoleText(_("Sgt.Gibbs: This just gets better and better ... *sigh* ... let's make sure they didn't die in vain."), player);
+				setEventTrigger(BonusMission1BSetup, ConditionsTrigger);
+				setEventTrigger(ObjectiveB3B, inactive);
+				setEventTrigger(BonusMission1, inactive);	
+			}
+		}
+	}
+}
+
+event BonusMission1BSetup(inactive)
+{
+	if (Gibbs.x >= (ToWorld(209)))
+	{
+		if (Gibbs.y >= (ToWorld(20)))
+		{
+			removeMessage(ObjB9Msg, PROX_MSG, player);
+			removeMessage(ObjB92Msg, PROX_MSG, player);
+			addMessage(ObjB8Msg, PROX_MSG, player, false);
+			playSound(ObjSnd, player);
+			setEventTrigger(BonusMission1B, ConditionsTrigger);
+			setEventTrigger(SaveTransportTwo, ConditionsTrigger);
+			setEventTrigger(BonusMission1BSetup, inactive);
+		}
+	}
+}
+
+event SaveTransportTwo(inactive)
+{
+	if (droidInArea(NexusPlayer, ToWorld(216), ToWorld(8), ToWorld(248), ToWorld(28)) == false)
+	{
+		if (TransportTwo != NULLOBJECT)
+		{
+			setEventTrigger(SaveTransportTwo, inactive);
+		}
+	}
+}
+
+event BonusMission1B(inactive)
+{
+	if (structButNoWallsInArea(NexusPlayer, ToWorld(224), ToWorld(22), ToWorld(249), ToWorld(55)) == false)
+	{
+		removeMessage(ObjB8Msg, PROX_MSG, player);	
+		killStructsInArea(NexusPlayer, REF_WALL, ToWorld(224), ToWorld(22), ToWorld(249), ToWorld(55), true, true);
+		if (TransportTwo != NULLOBJECT)
+		{
+			showConsoleText(_("Sgt.Gibbs: Nice job, people. We got who we came up here for."), player);
+			if (Wilkes != NULLOBJECT)
+			{
+				pause(60);
+				showConsoleText(_("Sgt.Wilkes: Nicely done, Team One. Looks like we've left them with one enormous repair bill."), player);
+				pause(60);
+				showConsoleText(_("Sgt.Gibbs: Looks like that makes us even. Now let's run the tally up even further. The base to the south is where the AA fire that started this whole mess came from."), player);
+				pause(60);
+				showConsoleText(_("Sgt.Wilkes: Time to tear it down?"), player);
+				pause(60);
+				showConsoleText(_("Sgt.Gibbs: Time to tear it down, Sergeant. All Units -- Proceed south with extreme prejudice."), player);
+				pause(60);
+			}
+		}
+		else
+		{
+			showConsoleText(_("Sgt.Gibbs: Alright, people, settle down. Those Scavenger Bases to the Northwest can stay as they are. We should head south and deal with the base that shot us down."), player);
+		}
+		addMessage(ObjC5Msg, PROX_MSG, player, false);
+		setEventTrigger(KillAABaseEarly, ConditionsTrigger);
+		setEventTrigger(BonusMission1B, inactive);
+	}
+}
+
+// M3
+
+event PlayerEntersAreaC(inactive)
+{
+	if (Jenks.x >= (ToWorld(145)))
+	{
+		if (Jenks.y >= (ToWorld(122)))
+		{
+			setScrollParams(103, 0, 250, 250);
+			setEventTrigger(playerHasEnteredAreaC, ConditionsTrigger);
+			orderGroupLoc(M2NXAttack2, DORDER_MOVE, Fac1.x + 256, Fac1.y); // Move them where they need to be
+			setAssemblyPoint(ScavFactoryIDC1, 17478, 19247);  // West Factory
+			setAssemblyPoint(ScavFactoryIDC2, 20867, 22715);  // South Factory
+			setAssemblyPoint(ScavFactoryIDC3, 24343, 17169);  // South-East Factory
+			setAssemblyPoint(ScavVTOLFacC1, 29244, 18042);
+			setEventTrigger(ScavsBuildChoppersC1, BuildStuffTrigger);
+			removeMessage(ObjB7Msg, PROX_MSG, player);
+			setEventTrigger(MissionC, DoNow);
+			setEventTrigger(PlayerEntersAreaC, inactive);
+		}
+	}
+}
+
+event MissionC(inactive)
+{
+	 // Expand to M3 area
+	setMissionTime(72000);
+	addMessage(ObjC1Msg, PROX_MSG, player, false);
+	playSoundPos(ScavBaseSnd, player, ToWorld(138), ToWorld(152), 0);
+	addMessage(ObjC2Msg, PROX_MSG, player, false);
+	addMessage(ObjC3Msg, PROX_MSG, player, false);
+	addMessage(ObjC4Msg, PROX_MSG, player, false);
+	addMessage(ObjC6Msg, PROX_MSG, player, false);
+	setEventTrigger(ObjectiveC1, ConditionsTrigger);
+	setEventTrigger(ObjectiveC2, ConditionsTrigger);
+	setEventTrigger(ObjectiveC3, ConditionsTrigger);
+	setEventTrigger(ObjectiveC4, ConditionsTrigger);
+	setEventTrigger(ObjectiveC6, ConditionsTrigger);
+	setEventTrigger(MissionC, inactive);
+}
+
+event ObjectiveC1(inactive) // West Base
+{
+	if (structButNoWallsInArea(ScavBasePlayer, ToWorld(130), ToWorld(138), ToWorld(156), ToWorld(170)) == false)
+	{
+		removeMessage(ObjC1Msg, PROX_MSG, player);
+		killStructsInArea(ScavBasePlayer, REF_WALL, ToWorld(130), ToWorld(138), ToWorld(156), ToWorld(170), true, true);
+		ObjCFlag1 = ObjCFlag1 + 1;
+		showConsoleText(_("Sgt.Jenks: Objective One cleared. Stay frosty, people. Advance with caution."), player);
+		setEventTrigger(ObjectiveC1, inactive);
+	}
+}
+
+event ObjectiveC2(inactive) // South-west base
+{
+	if (structButNoWallsInArea(ScavBasePlayer, ToWorld(163 - 12), ToWorld(176 - 12), ToWorld(163 + 12), ToWorld(176 + 12)) == false)
+	{
+		removeMessage(ObjC2Msg, PROX_MSG, player);
+		killStructsInArea(ScavBasePlayer, REF_WALL, ToWorld(163 - 12), ToWorld(176 - 12), ToWorld(163 + 12), ToWorld(176 + 12), true, true);
+		ObjCFlag2 = ObjCFlag2 + 1;
+		showConsoleText(_("Sgt.Jenks: Objective Two cleared. Mind the Plasma Cannons -- those things pack a wallop."), player);
+		setEventTrigger(ObjectiveC2, inactive);
+	}
+}
+
+event ObjectiveC3(inactive) // North-west base - fixed!
+{
+	if (structButNoWallsInArea(ScavBasePlayer, 21632, 16640, 24960, 19328) == false)
+	{
+		removeMessage(ObjC3Msg, PROX_MSG, player);
+		killStructsInArea(ScavBasePlayer, REF_WALL, ToWorld(182 - 8), ToWorld(141 - 8), ToWorld(182 + 8), ToWorld(141 + 8), true, true);
+		ObjCFlag3 = ObjCFlag3 + 1;
+		showConsoleText(_("Sgt.Jenks: Objective Three cleared. These guys are sure putting up a fight. Next objective ahead, people."), player);
+		setEventTrigger(ObjectiveC3, inactive);
+	}
+}
+
+event ObjectiveC4(inactive) // Research Base
+{
+	if (structButNoWallsInArea(ScavBasePlayer, ToWorld(199 - 8), ToWorld(157 - 8), ToWorld(199 + 8), ToWorld(157 + 12)) == false)
+	{
+		removeMessage(ObjC4Msg, PROX_MSG, player);
+		killStructsInArea(ScavBasePlayer, REF_WALL, ToWorld(199 - 8), ToWorld(157 - 8), ToWorld(199 + 8), ToWorld(157 + 12), true, true);
+		NexusLink = addDroid(RewardTemplate, 25472, 20096, player);
+		showConsoleText(_("Sgt.Jenks: Objective Four cleared. Jenks to Delta Base -- There was a NEXUSLink at this location. Corporal Higgins - I want you to drive it. Make SURE you disable the downlink."), player);
+		pause(50);
+		showConsoleText(_("Cpl.Higgins: Roger that, Sergeant. Looks like the controls are standard for Vengeance Class. The downlink to NEXUS Prime is being terminated .. *now*."), player);
+		pause(60);
+		showConsoleText(_("Sgt.Jenks: Very well, Corporal. All units, the time has come to get Team One back. Rendezvous at the next marker."), player);
+		ObjCFlag4 = ObjCFlag4 + 1;
+		setEventTrigger(ObjectiveC4, inactive);
+	}
+}
+
+event ObjectiveC6(inactive) // Base near Node
+{
+	if (structButNoWallsInArea(ScavBasePlayer, ToWorld(199), ToWorld(167), ToWorld(213), ToWorld(178)) == false)
+	{
+		removeMessage(ObjC6Msg, PROX_MSG, player);
+		ObjCFlag6 = ObjCFlag6 + 1;
+		showConsoleText(_("Sgt.Jenks: Getting some transponder signals from the southeast. That must be Team One. We'll avoid that area for now. Proceed on course."), player);
+		setEventTrigger(ObjectiveC6, inactive);
+	}
+}
+
+event GoMeetNode(ConditionsTrigger)
+{
+	if (ObjCFlag1 + ObjCFlag2 + ObjCFlag3 + ObjCFlag4 + ObjCFlag6 == 5)
+	{
+		setEventTrigger(MeetNodeSetup, ConditionsTrigger);
+		addMessage(ObjC8StartMsg, PROX_MSG, player, false);
+		setEventTrigger(GoMeetNode, inactive);
+	}
+}
+
+event MeetNodeSetup(inactive)
+{
+	if (Jenks.x >=  30728)
+	{
+		if (Jenks.y >= 19086)
+		{
+			showConsoleText(_("Sgt.Jenks: Corporal Higgins -- head in there and use the NEXUSLink on them.  Don't get too close ... Everyone else -- MAINTAIN POSITION AND HOLD FIRE. WEAPONS COLD!"), player);
+			addMessage(ObjC7Msg, PROX_MSG, player, false);
+			removeMessage(ObjC8StartMsg, PROX_MSG, player);
+			setEventTrigger(MeetNode, ConditionsTrigger);
+			Commander = addDroid(CommandTurret, Gibbs.x + 128, Gibbs.y + 128, NexusPlayer); // Gotta do it this way since Command Turrets don't respond to DORDER *anything*.
+			setDroidKills(Commander, 64);
+			setEventTrigger(MeetNodeSetup, inactive);
+		}
+	}
+}
+
+event MeetNode(inactive)
+{
+	if (NexusLink.x >=  28800)
+	{
+		if (NexusLink.y >= 21044)
+		{
+			showConsoleText(_("Sgt.Jenks: Okay Corporal. Set mode to wide-area saturation on the NEXUSLink and fire."), player);
+			playSound(trans_fried, player);
+			if(Gibbs == NULLOBJECT) // Make sure he's actually alive first -- wouldn't BELIEVE the amount of problems him being dead caused ...
+			{
+				Gibbs = addDroid(TacSergeantGibbs, 30577, 22785, NexusPlayer);
+			}
+			if(Wilkes == NULLOBJECT) // Make sure she's alive too ... HER being dead screws up the dialogue.
+			{
+				Wilkes = addDroid(WilkesSuperAC, Gibbs.x + 128, Gibbs.y + 128, NexusPlayer);
+			}
+			pause(70);
+			takeOverDroidsInArea(NexusPlayer, player, 28800, 13440, 31999, 24192);
+			playSound(AreaDoneSnd, player);
+			showConsoleText(_("Sgt.Gibbs: Wait, what?! Where am I? Team One, Team Two -- sound off!"), player);
+			pause(60);
+			showConsoleText(_("Sgt.Wilkes: What the .... last thing I remember is the NEXUSLink we found firing on us ..."), player);
+			pause(70);
+			showConsoleText(_("Sgt.Jenks: Okay Corporal, that's enough. Good job. Sergeant Gibbs, Sergeant Wilkes -- glad to see you folks back on OUR side."), player);
+			pause(80);
+			showConsoleText(_("Sgt.Gibbs: Sergeant Jenks?! What the blazes? What do you mean, 'back on our side'?! Last thing I remember is our NEXUSLink turning on us."), player);
+			pause(40);
+			showConsoleText(_("Sgt.Jenks: That was three weeks ago, Sergeant Gibbs. Your Team got assimilated by NEXUS -- including YOURSELVES. We're still studying the technology he used on you."), player);
+			pause(80);
+			showConsoleText(_("Sgt.Wilkes: Oh no ... did we ... are we responsible for any casualties?"), player);
+			pause(70);
+			showConsoleText(_("Sgt.Jenks: Other than scaring the blazes out of our new allies in the region, that's a negative. You folks pretty much got put on the shelf like trophies."), player);
+			pause(80);
+			showConsoleText(_("Sgt.Gibbs: I don't remember a damned thing. Three weeks, you say?"), player);
+			pause(60);
+			showConsoleText(_("Sgt.Jenks: That's affirm. Three weeks, two days, seven hours and change."), player);
+			pause(80);
+			showConsoleText(_("Sgt.Gibbs: I don't think that ..."), player);
+			pause(60);
+			showConsoleText(_("Sgt.Jenks: I understand the confusion, Team One. Fow now, Team Three has the lead. All Units, return to Delta Base for a shower, a hot meal, and debriefing."), player);
+			removeMessage(ObjC7Msg, PROX_MSG, player);
+			addMessage(ObjC7BMsg, PROX_MSG, player, false);
+			setEventTrigger(ReturnHome, DoNow);
+			setEventTrigger(MeetNode, inactive);
+		}
+	}
+}
+
+private	GROUP	player0Grp1;
+
+event ReturnHome(inactive)
+{
+	groupAddArea(player0Grp1, player, 28800, 17024, 31999, 24192);
+	orderGroupLoc(player0Grp1, DORDER_MOVE, 27589, 7471); // Delta Base
+	pause(90);
+	showConsoleText(_("Sgt.Jenks: After your team was .. detained .. the locally-based Coalition contacted us. They submitted the telemetry video and audio of your activities after you crashed."), player);
+	pause(70);
+	showConsoleText(_("Sgt.Jenks: From that data, we determined that the ECM Technology was feasible, and the Scientists at Omega Base are working to reverse-engineer it for our uses."), player);
+	pause(80);
+	showConsoleText(_("Sgt.Jenks: In the meantime, we are ordered to put Nexus's activities in this region to an end. This order is absolute, and we are to treat it as a priority."), player);
+	pause(80);
+	showConsoleText(_("Sgt.Jenks: We are also ordered to capture Dr. Reed. Alive ... if possible. Thanks to our new friends in the Coalition, we have his location."), player);
+	pause(70);
+	showConsoleText(_("Sgt.Jenks: The Coalition has agreed to join The Project, as the objectives of both groups are nearly identical. The other local group, the Red Alphas, are the ones your Team encountered when you crashed."), player);
+	pause(90);
+	showConsoleText(_("Sgt.Jenks: They are no more and no less than the slaves of Nexus. We are to assist with their liberation. The Coalition has provided data that suggests there is a way to disrupt the control mechanisms Nexus has imposed upon them."), player);
+	pause(80);
+	showConsoleText(_("Sgt.Jenks: Our first task is to free the Red Alphas. There are three Nexus Bases in the zone to the west. Each base contains the Synaptic Override Stations that we must destroy."), player);
+	pause(80);
+	showConsoleText(_("Sgt.Jenks: A disruption at any of those Stations will render the immediate area null of the Override signal, and those subject to its' influence will be free to act on their own again."), player);
+	pause(90);
+	showConsoleText(_("Sgt.Jenks: That only solves half the problem. As soon as anyone infected with the Synaptic Override Nanotechnology enters the next area, they'll be under Nexus control again."), player);
+	pause(90);
+	showConsoleText(_("Sgt.Jenks: So until we are able to purge these Nanites from the body -- Sergeant Gibbs, Sergeant Wilkes, and the rest of Team One -- you folks are Condition-Zero for this operation."), player);
+	pause(90);
+	showConsoleText(_("Sgt.Gibbs: That's probably a good idea. Not that we wouldn't love the opportunity to smash Nexus some more."), player);
+	pause(50);
+	showConsoleText(_("Sgt.Wilkes: No kidding!"), player);
+	pause(50);
+	showConsoleText(_("Sgt.Jenks: Never doubted it. Nexus might attempt a counter-attack, so if that occurs then defend Delta Base. The eastern half of the zone is Override-Nulled, so you folks should be fine."), player);
+	pause(90);
+	//showConsoleText(_("Sgt.Jenks: Team Three, proceed to the new objective point when ready. Operation 'Second Sun' will commence at that time."), player);
+	removeMessage(ObjC7BMsg, PROX_MSG, player);
+	//setEventTrigger(MissionD, DoNow);
+	//pause(90);
+}
+
+// New mission in M3 with Coalition
+event M3CoalitionMission(inactive)
+{
+	showConsoleText(_("Coalition Representative: Coalition HQ calling Delta Base, come in please."), player);
+	pause(70);
+	showConsoleText(_("Sgt.Jenks: Coalition HQ, this is Sergeant Jenks. We read you. Signal is decimal-five."), player);
+	pause(70);
+	showConsoleText(_("Coalition Representative: Were you folks able to retrieve Team One?"), player);
+	pause(70);
+	showConsoleText(_("Sgt.Jenks: That's affirm, Coalition HQ. Sergeant Gibbs, Sergeant Wilkes and the rest are en route to Delta Base for much-needed showers and some food."), player);
+	pause(90);
+	showConsoleText(_("Coalition Representative: Excellent. We have need of your services, Sergeant Jenks. We are preparing a mission to deal with the Nexus Base near our primary settlement."), player);
+	pause(70);
+	showConsoleText(_("Coalition Representative: Our agents have reported that the base in question is preparing a rather large assault force. We must secure the area before expanding operations into the rest of the zone."), player);
+	pause(90);
+	showConsoleText(_("Coalition Representative: Our agents have also said that there are forces massing at a location to the north, preparing to enter the zone and attack while your attention is elsewhere."), player);
+	pause(90);
+	showConsoleText(_("Coalition Representative: We believe that one of these two attack groups will be acting as a decoy for the other. Nexus has demonstrated a willingness to use misdirection in the past."), player);
+	pause(90);
+	showConsoleText(_("Coalition Representative: We ask that you accompany us while we carry out the mission on the South Base."), player);
+	pause(70);
+}
+
+// M4 -- aka 'The Beginning of the Second War'
+event MissionD(inactive)
+{
+	setMissionTime(-1);
+	pause(20);
+	addMessage(ObjC8Msg, PROX_MSG, player, false);
+	setEventTrigger(PlayerEntersAreaD, ConditionsTrigger);
+	playSoundPos(ObjSnd, player, ToWorld(129), ToWorld(188), 0);
+	pause(20);
+	setEventTrigger(MissionD, inactive);
+}
+
+event PlayerEntersAreaD(inactive)
+{
+	if (droidInArea(player, ToWorld(1), ToWorld(87), ToWorld(129), ToWorld(249)) == true)
+	{
+		setScrollParams(0, 0, 250, 250);
+		setEventTrigger(playerHasEnteredAreaD, ConditionsTrigger);
+		removeMessage(ObjC8Msg, PROX_MSG, player);
+		setAssemblyPoint(ScavFactoryIDD1, 10685, 16728); // East-Central base
+		setAssemblyPoint(ScavFactoryIDD2, 8314, 17865); // Central Base
+		setAssemblyPoint(ScavFactoryIDD3, 1906, 15512); // North Base
+		setAssemblyPoint(ScavFactoryIDD4, 3401, 23109); // West Base
+		setAssemblyPoint(ScavFactoryIDD5, 5854, 20408); // Central Base #2
+		showConsoleText(_("Sgt.Jenks: Alright, people. TEN Scavenger Bases and various points of contact with Nexus. Let's take this slow and steady. Remember -- they know we're here."), player);
+		setMissionTime(72000);
+		pause(20);
+		addMessage(ObjD1Msg, PROX_MSG, player, false);
+		addMessage(ObjD2Msg, PROX_MSG, player, false);
+		addMessage(ObjD3Msg, PROX_MSG, player, false);
+		addMessage(ObjD4Msg, PROX_MSG, player, false);
+		addMessage(ObjD5Msg, PROX_MSG, player, false);
+		addMessage(ObjD6Msg, PROX_MSG, player, false);
+		addMessage(ObjD7Msg, PROX_MSG, player, false);
+		addMessage(ObjD8Msg, PROX_MSG, player, false);
+		addMessage(ObjD9Msg, PROX_MSG, player, false);
+		addMessage(ObjD10Msg, PROX_MSG, player, false);
+		addMessage(ObjD11Msg, PROX_MSG, player, false);
+		addMessage(ObjD12Msg, PROX_MSG, player, false);
+		addMessage(ObjD13Msg, PROX_MSG, player, false);
+		addMessage(ObjD14Msg, PROX_MSG, player, false);
+		addMessage(ObjD15Msg, PROX_MSG, player, false);
+		setEventTrigger(ObjectiveD1, ConditionsTrigger);
+		setEventTrigger(ObjectiveD2, ConditionsTrigger);
+		setEventTrigger(ObjectiveD3, ConditionsTrigger);
+		setEventTrigger(ObjectiveD4, ConditionsTrigger);
+		setEventTrigger(ObjectiveD5, ConditionsTrigger);
+		setEventTrigger(ObjectiveD6, ConditionsTrigger);
+		setEventTrigger(ObjectiveD7, ConditionsTrigger);
+		setEventTrigger(ObjectiveD8, ConditionsTrigger);
+		setEventTrigger(ObjectiveD9, ConditionsTrigger);
+		setEventTrigger(ObjectiveD10, ConditionsTrigger);
+		setEventTrigger(ObjectiveD11, ConditionsTrigger);
+		setEventTrigger(NexusForwardBase, ConditionsTrigger);
+		setEventTrigger(PlayerEntersAreaD, inactive);
+	}
+}
+
+event ObjectiveD1(inactive) // ScavBase_D1 in FlaME - OBJECTIVED1_MSG
+{
+	if (structButNoWallsInArea(ScavBasePlayer, 11264, 15488, 12800, 17024) == false)
+	{	
+		killStructsInArea(ScavBasePlayer, REF_WALL, 11264, 15488, 12800, 17024, true, true);
+		removeMessage(ObjD1Msg, PROX_MSG, player);
+		showConsoleText(_("Sgt.Jenks: Objective One -- Complete."), player);
+		setEventTrigger(ObjectiveD1, inactive);
+	}
+}
+
+event ObjectiveD2(inactive) // ScavBase_D2 - OBJECTIVED2_MSG
+{
+	if (structButNoWallsInArea(ScavBasePlayer, 13312, 17664, 15104, 19712) == false)
+	{
+		killStructsInArea(ScavBasePlayer, REF_WALL, 13312, 17664, 15104, 19712, true, true);
+		removeMessage(ObjD2Msg, PROX_MSG, player);
+		showConsoleText(_("Sgt.Jenks: Objective Two -- Complete."), player);
+		setEventTrigger(ObjectiveD2, inactive);
+	}
+}
+
+event ObjectiveD3(inactive) // ScavBase_D3 - ObjectiveD6_MSG
+{
+	if (structButNoWallsInArea(ScavBasePlayer, 7296, 14848, 10496, 17536) == false)
+	{
+		killStructsInArea(ScavBasePlayer, REF_WALL, 7296, 14848, 10496, 17536, true, true);
+		removeMessage(ObjD6Msg, PROX_MSG, player);
+		showConsoleText(_("Sgt.Jenks: Objective Three -- Complete."), player);
+		setEventTrigger(ObjectiveD3, inactive);
+	}
+}
+
+event ObjectiveD4(inactive) // ScavBase_D4 - ObjectiveD7_MSG
+{
+	if (structButNoWallsInArea(ScavBasePlayer, 382, 13184, 5504, 17408) == false)
+	{
+		killStructsInArea(ScavBasePlayer, REF_WALL, 382, 13184, 5504, 17408, true, true);
+		removeMessage(ObjD7Msg, PROX_MSG, player);
+		showConsoleText(_("Sgt.Jenks: Objective Four -- Complete."), player);
+		setEventTrigger(ObjectiveD4, inactive);
+	}
+}
+
+event ObjectiveD5(inactive) // ScavBase_D5 - ObjectiveD8_MSG
+{
+	if (structButNoWallsInArea(ScavBasePlayer, 4608, 11904, 7424, 13824) == false)
+	{
+		killStructsInArea(ScavBasePlayer, REF_WALL, 4608, 11904, 7424, 13824, true, true);
+		removeMessage(ObjD8Msg, PROX_MSG, player);
+		showConsoleText(_("Sgt.Jenks: Objective Five -- Complete."), player);
+		setEventTrigger(ObjectiveD5, inactive);
+	}
+}
+
+event ObjectiveD6(inactive) // ScavBase_D6 - ObjectiveD9_MSG
+{
+	if (structButNoWallsInArea(ScavBasePlayer, 1280, 7040, 3200, 8832) == false)
+	{
+		killStructsInArea(ScavBasePlayer, REF_WALL, 1280, 7040, 3200, 8832, true, true);
+		removeMessage(ObjD9Msg, PROX_MSG, player);
+		showConsoleText(_("Sgt.Jenks: Objective Six -- Complete."), player);
+		setEventTrigger(ObjectiveD6, inactive);
+	}
+}
+
+event ObjectiveD7(inactive) // ScavBase_D7 - ObjectiveD10_MSG
+{
+	if (structButNoWallsInArea(ScavBasePlayer, 5376, 8576, 9600, 12416) == false)
+	{
+		killStructsInArea(ScavBasePlayer, REF_WALL, 5376, 8576, 9600, 12416, true, true);
+		removeMessage(ObjD10Msg, PROX_MSG, player);
+		showConsoleText(_("Sgt.Jenks: Objective Seven -- Complete."), player);
+		setEventTrigger(ObjectiveD7, inactive);
+	}
+}
+
+event ObjectiveD8(inactive) // ScavBase_D8 - ObjectiveD11_MSG
+{
+	if (structButNoWallsInArea(ScavBasePlayer, 9600, 8064, 12672, 13824) == false)
+	{
+		killStructsInArea(ScavBasePlayer, REF_WALL, 9600, 8064, 12672, 13824, true, true);
+		removeMessage(ObjD11Msg, PROX_MSG, player);
+		showConsoleText(_("Sgt.Jenks: Objective Eight -- Complete."), player);
+		setEventTrigger(ObjectiveD8, inactive);
+	}
+}
+
+event ObjectiveD9(inactive) // NXBase_D2 - ObjectiveD12_MSG, ObjectiveD13_MSG
+{
+	if (structButNoWallsInArea(NexusPlayer, 8960, 0, 14208, 7168) == false)
+	{
+		killStructsInArea(NexusPlayer, REF_WALL, 8960, 0, 14208, 7168, true, true);
+		removeMessage(ObjD12Msg, PROX_MSG, player);
+		removeMessage(ObjD13Msg, PROX_MSG, player);
+		showConsoleText(_("Sgt.Jenks: Objective Nine -- Complete."), player);
+		setEventTrigger(ObjectiveD9, inactive);
+	}
+}
+
+event ObjectiveD10(inactive) // NXBase_D3 - ObjectiveD14_MSG
+{	
+	if (droidInArea(player, 7040, 5504, 9472, 7680) == TRUE)
+	{
+		removeMessage(ObjD14Msg, PROX_MSG, player);
+		showConsoleText(_("Sgt.Gibbs: What the-? Sergeant Jenks -- we've got new signals on our Tactical Displays. Looks like you folks just kicked the hornet's nest. HARD."), player);
+		pause(90);
+		showConsoleText(_("Sgt.Jenks: I'm not surprised. We've been poking Nexus with a very large, sharp stick for the past two hours. Dr. Reed, are you listening?"), player);
+		setMissionTime(-1);
+		pause(70);
+		playSound(NexusLaugh,player);
+		showConsoleText(_("NEXUS: Indeed, Sergeant Jenks. I must congratulate you, Sergeant, and your secondaries -- you've done a magnificent job. Your Project is a worthy opponent."), player);
+		pause(80);
+		showConsoleText(_("Sgt.Jenks: It didn't HAVE to be this way, Dr. Reed. Your vanity and need for revenge is responsible for everything that has transpired since before The Collapse."), player);
+		pause(80);
+		showConsoleText(_("NEXUS: And your puny Project will be the proverbial 'Scales of Justice'? Hah. Your pitiful endeavour can NOT succeed. Not against ME."), player);
+		pause(80);
+		showConsoleText(_("Sgt.Jenks: Dr. Reed, I am obliged to state a proposal. This will be the only time it is offered. All NEXUS forces are to stand down -- immediately. All Synaptic Links deactivated."), player);
+		pause(90);
+		showConsoleText(_("Sgt.Jenks: You WILL surrender yourself, Dr. Reed. We promise you a fair trial and an end to this needless WAR you have waged upon Humanity."), player);
+		pause(80);
+		showConsoleText(_("Sgt.Jenks: If you do NOT accept, we will destroy Nexus by force, one piece at a time -- and we WILL capture you anyway, Dr. Reed."), player);
+		pause(80);
+		showConsoleText(_("NEXUS: Well, well. Stated as if you are the penultimate force of reckoning itself. I reject your arrogant proposal, Sergeant Jenks. It is YOU who shall surrender."), player);
+		pause(80);
+		showConsoleText(_("NEXUS: All Project forces in the area -- including the Coalition -- shall report to NEXUS Prime for processing and assimilation. This conflict need not end in your demise."), player);
+		pause(80);
+		showConsoleText(_("NEXUS: You shall have the power of Nexus as your ally -- and you shall carry the flag of Nexus to all corners of the Earth. I will make the Project second only to myself."), player);
+		pause(80);
+		showConsoleText(_("NEXUS: If your Project continues to defy me ... I shall destroy you. ALL of you. You have ten minutes to agree. End transmission."), player);
+		setMissionTime(6000);
+		pause(70);
+		showConsoleText(_("Sgt.Jenks: Like hell we'd agree to that."), player);
+		pause(50);
+		showConsoleText(_("Sgt.Gibbs: Gotta hand it to Dr. Reed, he sure knows how to threaten someone."), player);
+		pause(60);
+		showConsoleText(_("Sgt.Wilkes: Incoming transmission from Omega Base -- it's ... John Hammond himself ..."), player);
+		pause(50);
+		showConsoleText(_("Sgt.Jenks: Patch it through to all units, Sergeant Wilkes. Everyone should hear this."), player);
+		pause(50);
+		showConsoleText(_("Omega Base: .. repeat, this is John Hammond. My colleagues, under NO circumstances is Nexus or Dr. Reed to be permitted to continue operating."), player);
+		pause(50);
+		showConsoleText(_("Omega Base: Your Team is authorized and ordered to employ Directive Five-Seven against Nexus and Dr. Reed. Omega Base out."), player);
+		pause(50);
+		showConsoleText(_("Sgt.Gibbs: ... oh BOY."), player);
+		pause(50);
+		showConsoleText(_("Cpl.Higgins: What's 'Directive Five-Seven', Sarge?"), player);
+		pause(50);
+		showConsoleText(_("Sgt.Gibbs: Corporal, Directive Five-Seven authorizes us to use Laser Satellites, EMP's and Nuclear Weapons against an enemy deemed too dangerous to be left alive."), player);
+		pause(80);
+		showConsoleText(_("Sgt.Wilkes: In other words, Corporal, it's a kill order. Any means necessary. With extreme prejudice."), player);
+		pause(50);
+		showConsoleText(_("Sgt.Jenks: Okay everyone, cut the chatter. Research Teams -- start working on the LasSat Facility at ONCE. Team Three, continue the attack run."), player);
+		setEventTrigger(NexusBaseBegin, DoNow);
+		setEventTrigger(NexusGoesPostal, DoNow);
+		setEventTrigger(ObjectiveD10, inactive);
+	}
+}
+
+event NexusForwardBase(inactive) // NXBase_D1 - ObjectiveD3_MSG, ObjectiveD4_MSG, ObjectiveD5_MSG
+{
+	if (structButNoWallsInArea(NexusPlayer, 10752, 10112, 14592, 15488) == false)
+	{
+		killStructsInArea(NexusPlayer, REF_WALL, 10752, 10112, 14592, 15488, true, true);
+		removeMessage(ObjD3Msg, PROX_MSG, player);
+		removeMessage(ObjD4Msg, PROX_MSG, player);
+		removeMessage(ObjD5Msg, PROX_MSG, player);
+		setEventTrigger(NexusForwardBase, inactive);
+	}
+}
+
+event ObjectiveD11(inactive) // NXBase_D4 - ObjectiveD15_MSG
+{
+	if (structButNoWallsInArea(NexusPlayer, 0, 0, 2688, 2688) == false) 
+	{
+		removeMessage(ObjD15Msg, PROX_MSG, player);
+		showConsoleText(_("** DEBUG -- THIS SHOULD BE THE UPPER CORNER NEXUS BASE! **"), player);
+		setEventTrigger(ObjectiveD11, inactive);		
+	}
+}
+
+// Nexus Base Stuff
+
+event NexusBaseBegin(inactive) // The initial Nexus Base event .. this is what happens when it starts.
+{
+	setEventTrigger(CheckConditions, inactive);
+	setEventTrigger(NewConditions3, ConditionsTrigger);
+	setEventTrigger(DoAllOutAttack, AllOutAttackTrigger);
+	setEventTrigger(CheckForces, ConditionsTrigger);
+	addMessage(ObjE1Msg, PROX_MSG, player, false);
+	setEventTrigger(NexusBaseBegin, inactive);
+}
+
+event NewConditions1(inactive)
+{
+	if (Commander == NULLOBJECT)
+	{
+		showConsoleText(_("Nexus: Finally ... REVENGE! Goodbye, Commander!"), player);
+		playSound(NexusLaugh, player);
+		pause(60);
+		if (Gibbs != NULLOBJECT)
+		{
+			Gibbs = Commander;
+		}
+		else
+		{
+			// Tac Sergeant is NULLOBJECT and we have no leaders now
+			setEventTrigger(LoseEvent, DoNow);
+		}
+	}
+}
+
+event NewConditions3(inactive)
+{
+	if (anyStructButWallsLeft(NexusPlayer) == false)
+	{
+		showConsoleText(_("-- NEXUS HAS BEEN DEFEATED! --"), player);
+		removeMessage(ObjE1Msg, PROX_MSG, player);
+		killDroidsInArea(ToWorld(1), ToWorld(1), ToWorld(249), ToWorld(249), NexusPlayer);
+		killStructsInArea(NexusPlayer, REF_WALL, ToWorld(1), ToWorld(1), ToWorld(249), ToWorld(249), true, true);
+		killStructsInArea(NexusPlayer, REF_HQ, ToWorld(1), ToWorld(1), ToWorld(249), ToWorld(249), true, true);
+		killStructsInArea(NexusPlayer, REF_FACTORY, ToWorld(1), ToWorld(1), ToWorld(249), ToWorld(249), true, true);
+		killStructsInArea(NexusPlayer, REF_POWER_GEN, ToWorld(1), ToWorld(1), ToWorld(249), ToWorld(249), true, true);
+		killStructsInArea(NexusPlayer, REF_RESOURCE_EXTRACTOR, ToWorld(1), ToWorld(1), ToWorld(249), ToWorld(249), true, true);
+		killStructsInArea(NexusPlayer, REF_DEFENSE, ToWorld(1), ToWorld(1), ToWorld(249), ToWorld(249), true, true);
+		killStructsInArea(NexusPlayer, REF_RESEARCH, ToWorld(1), ToWorld(1), ToWorld(249), ToWorld(249), true, true);
+		killStructsInArea(NexusPlayer, REF_RESEARCH_MODULE, ToWorld(1), ToWorld(1), ToWorld(249), ToWorld(249), true, true);
+		killStructsInArea(NexusPlayer, REF_COMMAND_CONTROL, ToWorld(1), ToWorld(1), ToWorld(249), ToWorld(249), true, true);
+		killStructsInArea(NexusPlayer, REF_CYBORG_FACTORY, ToWorld(1), ToWorld(1), ToWorld(249), ToWorld(249), true, true);
+		killStructsInArea(NexusPlayer, REF_VTOL_FACTORY, ToWorld(1), ToWorld(1), ToWorld(249), ToWorld(249), true, true);
+		killStructsInArea(NexusPlayer, REF_REARM_PAD, ToWorld(1), ToWorld(1), ToWorld(249), ToWorld(249), true, true);
+		setEventTrigger(DoAllOutAttack, inactive);
+		setEventTrigger (NewConditions1, inactive);
+		pause(50);
+		setEventTrigger(WinEvent, DoNow);
+		setEventTrigger (NewConditions3, inactive);
+	}
+	if (anyStructButWallsLeft(player) == false) // make it possible for us to actually lose now.
+	{
+		if (anyDroidsLeft(player) == false)
+		{
+			setEventTrigger(LoseEvent, DoNow);
+		}
+	}
+}
+
+event DoAllOutAttack(inactive)
+{
+	addDroid(NXWyvernGauss, ToWorld(83), ToWorld(228), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(84), ToWorld(228), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(85), ToWorld(228), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(83), ToWorld(229), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(84), ToWorld(229), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(83), ToWorld(228), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(84), ToWorld(228), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(85), ToWorld(228), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(83), ToWorld(229), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(84), ToWorld(229), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(85), ToWorld(229), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(86), ToWorld(229), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(83), ToWorld(230), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(84), ToWorld(230), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(85), ToWorld(230), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(85), ToWorld(229), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(86), ToWorld(229), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(83), ToWorld(230), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(84), ToWorld(230), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(85), ToWorld(230), NexusPlayer);
+	pause(20);
+	// Southeast Group -- aka 'M7NXSpawnSoutheast' in FlaME
+	addDroid(NXWyvernGauss, ToWorld(227), ToWorld(229), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(228), ToWorld(229), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(229), ToWorld(229), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(227), ToWorld(230), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(228), ToWorld(230), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(227), ToWorld(229), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(228), ToWorld(229), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(229), ToWorld(229), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(227), ToWorld(230), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(228), ToWorld(230), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(229), ToWorld(230), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(230), ToWorld(230), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(227), ToWorld(231), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(228), ToWorld(231), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(229), ToWorld(231), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(229), ToWorld(230), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(230), ToWorld(230), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(227), ToWorld(231), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(228), ToWorld(231), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(229), ToWorld(231), NexusPlayer);
+	pause(20);
+	// Southwest Group -- aka 'M7NXSpawnSouthwest' in FlaME
+	addDroid(NXWyvernGauss, ToWorld(12), ToWorld(231), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(13), ToWorld(231), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(14), ToWorld(231), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(12), ToWorld(232), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(13), ToWorld(232), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(12), ToWorld(231), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(13), ToWorld(231), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(14), ToWorld(231), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(12), ToWorld(232), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(13), ToWorld(232), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(14), ToWorld(232), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(15), ToWorld(232), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(12), ToWorld(233), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(13), ToWorld(233), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(14), ToWorld(233), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(14), ToWorld(232), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(15), ToWorld(232), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(12), ToWorld(233), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(13), ToWorld(233), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(14), ToWorld(233), NexusPlayer);
+	groupAddArea(AttackGroup1, NexusPlayer, 1, 1, 31999, 31999);
+	orderGroupLoc(AttackGroup1, DORDER_MOVE, Jenks.x, Jenks.y);
+	pause(20);
+	//Think we'll do this too.
+	setEventTrigger(NexusSpawnsInSouth, DoNow);
+	setEventTrigger(NexusSpawnsInNorth, DoNow);
+}
+
+//Exploration Event - Rewards
+
+event ExplorationReward1(ConditionsTrigger)
+{
+	if (droidInArea(player, 26988, 8956, 27654, 9642) == TRUE)
+	{
+		showConsoleText(_("Exploration Reward 1 -- Unlocked."), player);
+		playSoundPos(rewardSnd, player, ToWorld(212), ToWorld(74), 0);
+		addDroid(PythonAsltLaser, ToWorld(212), ToWorld(74), player);
+		addDroid(PythonAsltLaser, ToWorld(212), ToWorld(75), player);
+		addDroid(ViperRepair, ToWorld(212), ToWorld(76), player);
+		completeResearch(P0Research[62], player);
+		completeResearch(P0Research[63], player);
+		completeResearch(P0Research[64], player);
+		setEventTrigger(ExplorationReward1, inactive);
+	}
+}
+
+event ExplorationReward2(ConditionsTrigger)
+{
+	if (droidInArea(player, 23741, 14577, 24675, 15178) == TRUE)
+	{
+		showConsoleText(_("Exploration Reward 2 -- Unlocked."), player);
+		playSoundPos(rewardSnd, player, ToWorld(187), ToWorld(116), 0);
+		addDroid(PythonAsltLaser, ToWorld(188), ToWorld(116), player);
+		addDroid(PythonAsltLaser, ToWorld(189), ToWorld(116), player);
+		addDroid(ViperRepair, ToWorld(190), ToWorld(116), player);
+		completeResearch(P0Research[62], player);
+		completeResearch(P0Research[63], player);
+		completeResearch(P0Research[64], player);
+		setEventTrigger(ExplorationReward2, inactive);
+	}
+}
+
+event ExplorationReward3(ConditionsTrigger)
+{
+	if (droidInArea(player, 29194, 8183, 30165, 9034) == TRUE)
+	{
+		showConsoleText(_("Exploration Reward 3 -- Unlocked."), player);
+		playSoundPos(rewardSnd, player, ToWorld(236), ToWorld(71), 0);
+		addDroid(PythonAsltLaser, ToWorld(236), ToWorld(71), player);
+		addDroid(PythonAsltLaser, ToWorld(237), ToWorld(71), player);
+		addDroid(ViperRepair, ToWorld(238), ToWorld(71), player);
+		completeResearch(P0Research[62], player);
+		completeResearch(P0Research[63], player);
+		completeResearch(P0Research[64], player);
+		setEventTrigger(ExplorationReward3, inactive);
+	}
+}
+
+event RescueTeamArrives(inactive)
+{
+	Jenks = addDroid(JenksSuperPulse, 31553, 12463, player);
+	setDroidKills(Jenks, 64);
+	pause(30);
+	showConsoleText(_("Sgt.Jenks: Grid Two-Four-Six Dash Nine-Nine is clear of hostiles. Team 3, proceed to the Coalition Base and form up."), player);
+	groupAddDroid(RescueTeam, Jenks);
+	orderDroidLoc(Jenks, DORDER_MOVE, 28596, 12860);
+	pause(70);
+	addDroid(ViperRail, 31553, 12207, player);
+	addDroid(ViperAssault, 31553, 12335, player);
+	addDroid(ViperRail, 31553, 12463, player);
+	groupAddArea(RescueTeam, player, 30909, 11470, 31686, 13001);
+	orderGroupLoc(RescueTeam, DORDER_MOVE, 28596, 12860);
+	pause(50);
+	addDroid(ViperSpade, 31553, 12207, player);
+	addDroid(ViperRepair, 31553, 12335, player);
+	addDroid(ViperAssault, 31553, 12463, player);
+	groupAddArea(RescueTeam, player, 30909, 11470, 31686, 13001);
+	orderGroupLoc(RescueTeam, DORDER_MOVE, 28596, 12860);
+	pause(50);
+	addDroid(ViperSpade, 31553, 12207, player);
+	addDroid(ViperRepair, 31553, 12335, player);
+	groupAddArea(RescueTeam, player, 30909, 11470, 31686, 13001);
+	orderGroupLoc(RescueTeam, DORDER_MOVE, 28596, 12860);
+	pause(50);
+	addDroid(ViperRail, 31553, 12207, player);
+	addDroid(ViperAssault, 31553, 12335, player);
+	addDroid(ViperRail, 31553, 12463, player);
+	groupAddArea(RescueTeam, player, 30909, 11470, 31686, 13001);
+	orderGroupLoc(RescueTeam, DORDER_MOVE, 28596, 12860);
+	pause(50);
+	addDroid(ViperRail, 31553, 12207, player);
+	addDroid(ViperAssault, 31553, 12335, player);
+	addDroid(ViperRail, 31553, 12463, player);
+	groupAddArea(RescueTeam, player, 30909, 11470, 31686, 13001);
+	orderGroupLoc(RescueTeam, DORDER_MOVE, 28596, 12860);
+	pause(50);
+	addDroid(ViperSpade, 31553, 12207, player);
+	addDroid(ViperRepair, 31553, 12335, player);
+	addDroid(ViperAssault, 31553, 12463, player);
+	groupAddArea(RescueTeam, player, 30909, 11470, 31686, 13001);
+	orderGroupLoc(RescueTeam, DORDER_MOVE, 28596, 12860);
+	completeResearch(P0Research[62], player);
+	completeResearch(P0Research[63], player);
+	completeResearch(P0Research[64], player);
+	playSound(rewardSnd, player);
+	pause(80);
+	orderGroupLoc(RescueTeam, DORDER_MOVE, 27970, 7498);
+	setEventTrigger(RescueTeamArrives, inactive);
+}
+
+// Got this from cam1a.slo :D
+/* Base Under Attack */
+event baseHit(CALL_STRUCT_ATTACKED, selectedPlayer, ref hitStruc, ref attackerObj)
+{
+	if (t >= 20)
+	{
+		t=0;
+		if (hitStruc != NULLOBJECT)
+		{
+			playSoundPos(attackSnd1, selectedPlayer, hitStruc.x, hitStruc.y, hitStruc.z);	//show position if still alive
+		}
+		else
+		{
+			playSound(attackSnd1, selectedPlayer);
+		}
+	}
+}
+
+event everySec(every, 20)
+{
+	t=t+1;
+}
+
+event seeBaseHit(CALL_MISSION_END)
+{
+	// go to where the structure being attacked is on CTRL B
+	if (hitStruc!=NULLOBJECT)
+	{
+		centreView(hitStruc);
+		t=0;			//flag known about!
+	}
+}
+
+// Scavenger stuff moved here from AI-7.slo
+event StartScavsAttackM1(inactive)
+{
+	//wait until player has left the initial starting spot and the scenario dialogue has happened
+	if (droidInArea(player, 16768, 8448, 27136, 16256))
+	{
+		pause(1800); // Should be long enough..
+		setEventTrigger(ScavsAttackM1, ScavsAttackTriggerM1);
+		setEventTrigger(StartScavsAttackM1, inactive);
+	}
+}
+
+event ScavsAttackM1(inactive)
+{
+	//Gather up all forces we own in this area
+	groupAddArea(ScavGroupM1, ScavBasePlayer, 16768, 8448, 27136, 16256);
+	//Send them right to the TransportOne, since we already know where they are
+	orderGroupLoc(ScavGroupM1, DORDER_MOVE, TransportOne.x + 256, TransportOne.y);
+}
+
+event playerHasEnteredAreaB(inactive) // Mission 2
+{
+	if (droidInArea(player, 18432, 5917, 19766, 7263))
+	{
+		setEventTrigger(ScavsBuildStuffIDB1, scavsBuildTrigger);
+		setEventTrigger(ScavsBuildStuffIDB2, scavsBuildTrigger);
+		setEventTrigger(ScavsBuildStuffIDB3, scavsBuildTrigger);
+		setEventTrigger(ScavsAttackM1, inactive);
+		setEventTrigger(ScavsAttackM2, ScavsAttackTrigger);
+		addPower(3500, ScavBasePlayer);
+		// add other event triggers related to Mission 2 here!
+		setEventTrigger(playerHasEnteredAreaB, inactive); // Only toggle it once.
+	}
+}
+
+event ScavsAttackM2(inactive)
+{
+	//Gather up all forces we own in this area
+	groupAddArea(ScavGroupM2, ScavBasePlayer, ToWorld(103), ToWorld(0), ToWorld(218), ToWorld(128));
+	//Send them right to the Commander, since we already know where they are
+	orderGroupLoc(ScavGroupM2, DORDER_MOVE, Gibbs.x, Gibbs.y);
+}
+
+event playerHasEnteredAreaC(inactive) // Mission 3
+{
+	if (droidInArea(player, 16452, 16709, 31959, 24941))
+	{
+		setEventTrigger(ScavsBuildStuffIDC1, scavsBuildTrigger);
+		setEventTrigger(ScavsBuildStuffIDC2, scavsBuildTrigger);
+		setEventTrigger(ScavsBuildStuffIDC3, scavsBuildTrigger);
+		// add other event triggers related to Mission 3 here!
+		setEventTrigger(ScavsAttackM2, inactive);
+		setEventTrigger(playerHasEnteredAreaC, inactive); // Only toggle it once.
+	}
+}
+
+event playerHasEnteredAreaD(inactive) // Mission 4
+{
+	if (droidInArea(player, 15311, 23652, 16198, 24888))
+	{
+		createAlliance(ScavBasePlayer, NexusPlayer);
+		setEventTrigger(AreaDChecks, ConditionsTrigger);
+		setEventTrigger(ScavsBuildStuffIDD1, scavsBuildTrigger);
+		setEventTrigger(ScavsBuildStuffIDD2, scavsBuildTrigger);
+		setEventTrigger(ScavsBuildStuffIDD3, scavsBuildTrigger);
+		setEventTrigger(ScavsBuildStuffIDD4, scavsBuildTrigger);
+		setEventTrigger(ScavsBuildStuffIDD5, scavsBuildTrigger);
+		setEventTrigger(WhenScavsAttack, ScavsAttackTrigger);
+		// add other event triggers related to Mission 4 here!
+		setEventTrigger(playerHasEnteredAreaD, inactive); // Only toggle it once. We're using this like CALL_GAME_INIT to start things per-area rather than per-map.
+	}
+}
+
+// MISSION A STUFF
+event ScavsBuildStuffIDA1(scavsBuildTrigger) // Yes, the script errors were my fault after all. Heh.
+{
+	if (ScavFactoryIDA1 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDA1, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDA1, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDA1, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDA1, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDA1, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+event ScavsBuildStuffIDA2(scavsBuildTrigger)
+{
+	if (ScavFactoryIDA2 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDA2, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDA2, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDA2, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDA2, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDA2, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+event ScavsBuildStuffIDA3(scavsBuildTrigger)
+{
+	if (ScavFactoryIDA3 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDA3, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDA3, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDA3, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDA3, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDA3, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+event ScavsBuildStuffIDA4(scavsBuildTrigger)
+{
+	if (ScavFactoryIDA4 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDA4, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDA4, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDA4, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDA4, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDA4, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+// MISSION B STUFF
+
+event ScavsBuildStuffIDB1(inactive)
+{
+	if (ScavFactoryIDB1 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDB1, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDB1, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDB1, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDB1, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDB1, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+event ScavsBuildStuffIDB2(inactive)
+{
+	if (ScavFactoryIDB2 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDB2, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDB2, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDB2, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDB2, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDB2, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+event ScavsBuildStuffIDB3(inactive)
+{
+	if (ScavFactoryIDB3 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDB3, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDB3, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDB3, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDB3, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDB3, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+// MISSION C STUFF
+
+event ScavsBuildStuffIDC1(inactive)
+{
+	if (ScavFactoryIDC1 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDC1, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDC1, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDC1, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDC1, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDC1, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+event ScavsBuildStuffIDC2(inactive)
+{
+	if (ScavFactoryIDC2 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDC2, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDC2, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDC2, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDC2, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDC2, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+event ScavsBuildStuffIDC3(inactive)
+{
+	if (ScavFactoryIDC3 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDC3, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDC3, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDC3, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDC3, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDC3, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+event ScavsBuildStuffIDC4(inactive)
+{
+	if (ScavFactoryIDC4 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDC4, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDC4, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDC4, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDC4, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDC4, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+// MISSION D STUFF
+
+event AreaDChecks(inactive)
+{
+	if (numDroidsInArea(ScavBasePlayer, ToWorld(2), ToWorld(89), ToWorld(123), ToWorld(221)) >= 120) // Turn it off when we have 120 or more -- this should control the Scavenger population. Have your Scavengers spayed and neutered! >:-D
+	{
+		setEventTrigger(ScavsBuildStuffIDD1, inactive);
+		setEventTrigger(ScavsBuildStuffIDD2, inactive);
+		setEventTrigger(ScavsBuildStuffIDD3, inactive);
+		setEventTrigger(ScavsBuildStuffIDD4, inactive);
+		setEventTrigger(ScavsBuildStuffIDD5, inactive);
+	}
+}
+
+event ScavsBuildStuffIDD1(inactive)
+{
+	if (ScavFactoryIDD1 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDD1, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDD1, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDD1, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDD1, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDD1, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+event ScavsBuildStuffIDD2(inactive)
+{
+	if (ScavFactoryIDD2 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDD2, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDD2, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDD2, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDD2, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDD2, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+event ScavsBuildStuffIDD3(inactive)
+{
+	if (ScavFactoryIDD3 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDD3, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDD3, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDD3, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDD3, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDD3, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+event ScavsBuildStuffIDD4(inactive)
+{
+	if (ScavFactoryIDD4 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDD4, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDD4, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDD4, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDD4, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDD4, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+event ScavsBuildStuffIDD5(inactive)
+{
+	if (ScavFactoryIDD5 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildStuffIDD5, inactive);
+	}
+	else
+	{
+		buildDroid(Trike, ScavFactoryIDD5, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(Bloke, ScavFactoryIDD5, ScavBasePlayer, 2);
+		pause(120);
+		buildDroid(FireCan, ScavFactoryIDD5, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(BusCan, ScavFactoryIDD5, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+event WhenScavsAttack(inactive)
+{
+	groupAddArea(ScavGroup1, ScavBasePlayer, ToWorld(2), ToWorld(81), ToWorld(115), ToWorld(248));
+	orderGroupLoc(ScavGroup1, DORDER_MOVE, Gibbs.x, Gibbs.y);
+	pause(100);
+	orderGroupLoc(ScavGroup1, DORDER_MOVE, Gibbs.x, Gibbs.y);
+	pause(100);
+	orderGroupLoc(ScavGroup1, DORDER_MOVE, Gibbs.x, Gibbs.y);
+	pause(100);
+	orderGroupLoc(ScavGroup1, DORDER_MOVE, Gibbs.x, Gibbs.y);
+	pause(100);
+	orderGroupLoc(ScavGroup1, DORDER_MOVE, Gibbs.x, Gibbs.y);
+	pause(100);
+}
+
+event WhenScavsAttack2(inactive)
+{
+	groupAddArea(ScavGroup1, ScavBasePlayer, ToWorld(218), ToWorld(80), ToWorld(249), ToWorld(110));
+	orderGroupLoc(ScavGroup1, DORDER_MOVE, Gibbs.x, Gibbs.y);
+	pause(100);
+	orderGroupLoc(ScavGroup1, DORDER_MOVE, Gibbs.x, Gibbs.y);
+	pause(100);
+	orderGroupLoc(ScavGroup1, DORDER_MOVE, Gibbs.x, Gibbs.y);
+	pause(100);
+	orderGroupLoc(ScavGroup1, DORDER_MOVE, Gibbs.x, Gibbs.y);
+	pause(100);
+	orderGroupLoc(ScavGroup1, DORDER_MOVE, Gibbs.x, Gibbs.y);
+	pause(100);
+	orderGroupLoc(ScavGroup1, DORDER_MOVE, Gibbs.x, Gibbs.y);
+	pause(100);
+	orderGroupLoc(ScavGroup1, DORDER_MOVE, Gibbs.x, Gibbs.y);
+	pause(100);
+}
+
+event NexusBuildsStuff1(inactive)
+{
+	if (Factory1 == NULLOBJECT)
+	{
+		setEventTrigger(NexusBuildsStuff1, inactive);
+	}
+	else
+	{
+		buildDroid(NXFlashHover, Factory1, NexusPlayer, 1);
+		buildDroid(NXMissHover, Factory1, NexusPlayer,1);
+		buildDroid(Constructor, Factory1, NexusPlayer, 1);
+	}
+}
+
+event NexusBuildsStuff2(inactive)
+{
+	if (Factory2 == NULLOBJECT)
+	{
+		setEventTrigger(NexusBuildsStuff2, inactive);
+	}	
+	else
+	{
+		buildDroid(NXFlashHover, Factory2, NexusPlayer, 1);
+		buildDroid(NXMissHover, Factory2, NexusPlayer,1);
+		buildDroid(Constructor, Factory2, NexusPlayer, 1);
+	}
+}
+
+event NexusBuildsStuff3(inactive)
+{
+	if (CybFact1 == NULLOBJECT)
+	{
+		setEventTrigger(NexusBuildsStuff3, inactive);
+	}
+	else
+	{	
+		buildDroid(NXFlashCyb, CybFact1, NexusPlayer, 2);
+		buildDroid(NXNeedleCyb, CybFact1, NexusPlayer, 2);
+	}
+}
+
+event NexusBuildsStuff4(inactive)
+{
+	if (CybFact2 == NULLOBJECT)
+	{
+		setEventTrigger(NexusBuildsStuff4, inactive);
+	}
+	else
+	{	
+		buildDroid(NXFlashCyb, CybFact2, NexusPlayer, 2);
+		buildDroid(NXNeedleCyb, CybFact2, NexusPlayer, 2);
+	}
+}
+
+event NexusSpawnsInNorth(inactive)
+{
+	addDroid(NXFlashHover, ToWorld(97), ToWorld(106), NexusPlayer); // North Group
+	addDroid(NXFlashHover, ToWorld(98), ToWorld(106), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(99), ToWorld(106), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(100), ToWorld(106), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(101), ToWorld(106), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(97), ToWorld(107), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(98), ToWorld(107), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(99), ToWorld(107), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(100), ToWorld(107), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(101), ToWorld(107), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(3), ToWorld(8), NexusPlayer); // West Group
+	addDroid(NXFlashHover, ToWorld(3), ToWorld(9), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(3), ToWorld(10), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(3), ToWorld(14), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(3), ToWorld(15), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(4), ToWorld(8), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(4), ToWorld(9), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(4), ToWorld(10), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(4), ToWorld(14), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(4), ToWorld(15), NexusPlayer);
+	groupAddArea(ReconForce4, NexusPlayer, 1, 1, 1378, 2397);
+	groupAddArea(ReconForce2, NexusPlayer, 11429, 13333, 13791, 14307);
+	orderGroupLoc(ReconForce2, DORDER_MOVE, Jenks.x, Jenks.y);
+	orderGroupLoc(ReconForce4, DORDER_MOVE, Jenks.x, Jenks.y);
+}
+
+event NexusSpawnsInSouth(inactive)
+{
+	addDroid(NXFlashHover, ToWorld(14), ToWorld(237), NexusPlayer); // South Group
+	addDroid(NXFlashHover, ToWorld(15), ToWorld(237), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(16), ToWorld(237), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(17), ToWorld(237), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(18), ToWorld(237), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(14), ToWorld(238), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(15), ToWorld(238), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(16), ToWorld(238), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(17), ToWorld(238), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(18), ToWorld(238), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(124), ToWorld(3), NexusPlayer); // East Group
+	addDroid(NXFlashHover, ToWorld(125), ToWorld(3), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(126), ToWorld(3), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(127), ToWorld(3), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(128), ToWorld(3), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(124), ToWorld(4), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(125), ToWorld(4), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(126), ToWorld(4), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(127), ToWorld(4), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(128), ToWorld(4), NexusPlayer);
+	groupAddArea(ReconForce5, NexusPlayer, 15091, 36, 16793, 1561);
+	groupAddArea(ReconForce3, NexusPlayer, 1481, 29831, 2728, 30974);
+	orderGroupLoc(ReconForce3, DORDER_MOVE, Jenks.x, Jenks.y);
+	orderGroupLoc(ReconForce5, DORDER_MOVE, Jenks.x, Jenks.y);
+}
+
+event NexusGoesAfterPlayer(inactive)
+{
+	orderGroupLoc(ReconForce2, DORDER_MOVE, Jenks.x, Jenks.y);
+	orderGroupLoc(ReconForce3, DORDER_MOVE, Jenks.x, Jenks.y);
+}
+
+event NexusAttacksStuff(inactive) // Yeah, more of my dumb "Patrol AI" that just runs around harassing peeps..
+{
+	if (getDroidCount(NexusPlayer) > 0)
+	{
+	orderGroupLoc(ReconForce2, DORDER_MOVE, Jenks.x, Jenks.y);
+	orderGroupLoc(ReconForce3, DORDER_MOVE, Jenks.x, Jenks.y);
+	}
+	else
+	{
+		setEventTrigger(NexusAttacksStuff, PatrolTimer);
+	}
+}
+
+event NexusInvadesWest(inactive)
+{
+	addDroid(NXFlashHover, ToWorld(3), ToWorld(8), NexusPlayer); // West Group
+	addDroid(NXFlashHover, ToWorld(3), ToWorld(9), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(3), ToWorld(10), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(3), ToWorld(14), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(3), ToWorld(15), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(4), ToWorld(8), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(4), ToWorld(9), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(4), ToWorld(10), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(4), ToWorld(14), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(4), ToWorld(15), NexusPlayer);
+	groupAddArea(ReconForce4, NexusPlayer, 1, 1, 1378, 2397);
+	orderGroupLoc(ReconForce4, DORDER_MOVE, Jenks.x, Jenks.y);
+}
+
+event NexusInvadesEast(inactive)
+{
+	addDroid(NXFlashHover, ToWorld(124), ToWorld(3), NexusPlayer); // East Group
+	addDroid(NXFlashHover, ToWorld(125), ToWorld(3), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(126), ToWorld(3), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(127), ToWorld(3), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(128), ToWorld(3), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(124), ToWorld(4), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(125), ToWorld(4), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(126), ToWorld(4), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(127), ToWorld(4), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(128), ToWorld(4), NexusPlayer);
+	groupAddArea(ReconForce5, NexusPlayer, 15091, 36, 16793, 1561);
+	orderGroupLoc(ReconForce5, DORDER_MOVE, Jenks.x, Jenks.y);
+}
+
+event M2ScavAttack1(inactive)
+{
+	groupAddArea(M2ScavAttackGrp, ScavBasePlayer, 14341, 4095, 21631, 11249);
+	orderGroupLoc(M2ScavAttackGrp, DORDER_MOVE, Gibbs.x, Gibbs.y);
+	setEventTrigger(M2ScavAttack1, inactive);
+}
+
+// New Scavenger VTOL Events (yay!)
+event ScavsBuildChoppersA1(inactive)
+{
+	if (ScavVTOLFacA1 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildChoppersA1, inactive);
+	}
+	else
+	{
+		buildDroid(Chopper1, ScavVTOLFacA1, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(Chopper2, ScavVTOLFacA1, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(HeavyChopper, ScavVTOLFacA1, ScavBasePlayer, 1);
+		pause(120);
+	}
+}
+
+event ScavsBuildChoppersA2(inactive)
+{
+	if (ScavVTOLFacA2 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildChoppersA2, inactive);
+	}
+	else
+	{
+		buildDroid(Chopper1, ScavVTOLFacA2, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(Chopper2, ScavVTOLFacA2, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(HeavyChopper, ScavVTOLFacA2, ScavBasePlayer, 1);
+	}
+}
+
+event ScavsBuildChoppersB1(inactive)
+{
+	if (ScavVTOLFacB1 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildChoppersB1, inactive);
+	}
+	else
+	{
+		buildDroid(Chopper1, ScavVTOLFacB1, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(Chopper2, ScavVTOLFacB1, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(HeavyChopper, ScavVTOLFacB1, ScavBasePlayer, 1);
+	}
+}
+
+event ScavsBuildChoppersB2(inactive)
+{
+	if (ScavVTOLFacB2 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildChoppersB2, inactive);
+	}
+	else
+	{
+		buildDroid(Chopper1, ScavVTOLFacB2, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(Chopper2, ScavVTOLFacB2, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(HeavyChopper, ScavVTOLFacB2, ScavBasePlayer, 1);
+	}
+}
+
+event ScavsBuildChoppersB3(inactive)
+{
+	if (ScavVTOLFacB3 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildChoppersB3, inactive);
+	}
+	else
+	{
+		buildDroid(Chopper1, ScavVTOLFacB3, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(Chopper2, ScavVTOLFacB3, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(HeavyChopper, ScavVTOLFacB3, ScavBasePlayer, 1);
+	}
+}
+
+event ScavsBuildChoppersB4(inactive)
+{
+	if (ScavVTOLFacB4 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildChoppersB4, inactive);
+	}
+	else
+	{
+		buildDroid(Chopper1, ScavVTOLFacB4, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(Chopper2, ScavVTOLFacB4, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(HeavyChopper, ScavVTOLFacB4, ScavBasePlayer, 1);
+	}
+}
+
+event ScavsBuildChoppersC1(inactive)
+{
+	if (ScavVTOLFacC1 == NULLOBJECT)
+	{
+		setEventTrigger(ScavsBuildChoppersC1, inactive);
+	}
+	else
+	{
+		buildDroid(Chopper1, ScavVTOLFacC1, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(Chopper2, ScavVTOLFacC1, ScavBasePlayer, 1);
+		pause(120);
+		buildDroid(HeavyChopper, ScavVTOLFacC1, ScavBasePlayer, 1);
+	}
+}
+
+// M3ThreadB stuff -- the "new" Campaign
+event M3ThreadB(inactive)
+{
+	takeOverStructsInArea(CoalitionPlayer, player, 25984, 5888, 29440, 9216);
+	playSound(AreaDoneSnd, player);
+	removeMessage(ObjC7BMsg, PROX_MSG, player);
+	showConsoleText(_("Coalition Representative: Welcome to Alaska, Sergeant Jenks. No doubt your Team is eager to get started. I will brief you on what you need to know in this area."), player);
+	pause(70);
+	showConsoleText(_("Coalition Representative: There is another group operating here called the Red Alphas. I'm sure you remember them from the mission video."), player);
+	pause(70);
+	showConsoleText(_("Coalition Representative: The Red Alphas are no less than the slaves of NEXUS, now. Two years ago, they were much like us -- peaceful and simply trying to make the best of things."), player);
+	pause(70);
+	showConsoleText(_("Coalition Representative: That's when this story begins. NEXUS fled the lower fourty-eight after being defeated. He brought his remaining forces here and began to rebuild."), player);
+	pause(70);
+	showConsoleText(_("Coalition Representative: Eventually, NEXUS enslaved the Red Alphas using a technology called the 'Synaptic Override'. It allows him to control the biological as he can the technological."), player);
+	pause(70);
+	showConsoleText(_("Coalition Representative: It is introduced into the body by way of Nanotechnology. We've prevented NEXUS and the Red Alphas from infecting our people thus far."), player);
+	pause(70);
+	showConsoleText(_("Coalition Representative: There are two main NEXUS Bases in this region. The first one is in the extreme southwest of this zone. The other is further south, along the coast."), player);
+	pause(70);
+	showConsoleText(_("Coalition Representative: The first order of business is to secure technologies that will ensure that your people don't suffer the same fate as Teams One and Two did."), player);
+	pause(70);
+	showConsoleText(_("Coalition Representative: When that task is complete, we will proceed with Phase Two. In the meantime, we give you this base. Do with it what you will."), player);
+	pause(70);
+	showConsoleText(_("**PRIMARY MISSION -- Build up and fortify the base. When ready, send your attack force to the green marker on your map. **"), player);
+	setEventTrigger(PlayerEntersAreaC, ConditionsTrigger);
+	addMessage(ObjB7Msg, PROX_MSG, player, false);
+	setEventTrigger(M3ThreadB, inactive);
+}
+
+/*event CheckNXVisibility(inactive) // Not working. Type mismatches, syntax errors, etc. Ugh. Yet another broken function.
+{
+	if(droidHasSeen(DROID_WEAPON, NexusPlayer) == TRUE)
+	{
+		setEventTrigger(NexusGoesPostal, DoNow);
+		setEventTrigger(CheckNXVisibility, inactive);
+	}
+}*/
+
+event NexusGoesPostal(inactive)
+{
+	showConsoleText(_("** NEXUS ATTACK EVENT BEGINS NOW! **"), player);
+	playSound(ObjSnd, player);
+	setScrollParams(0, 0, 250, 250);
+	groupAddArea(M2ScavAttackGrp, ScavBasePlayer, 1, 1, 32000, 32000);
+	if (Jenks != NULLOBJECT)
+	{
+		orderGroupLoc(M2ScavAttackGrp, DORDER_MOVE, Jenks.x, Jenks.y);
+		setEventTrigger(NexusSpawnIn, inactive);
+	}
+	
+	if (Gibbs != NULLOBJECT)
+	{
+		orderGroupLoc(M2ScavAttackGrp, DORDER_MOVE, Gibbs.x, Gibbs.y);
+		setEventTrigger(NexusSpawnIn, inactive);
+	}
+	
+	if (Wilkes != NULLOBJECT)
+	{
+			orderGroupLoc(M2ScavAttackGrp, DORDER_MOVE, Wilkes.x, Wilkes.y);
+			setEventTrigger(NexusSpawnIn, inactive);
+	}
+	setEventTrigger(NexusBuildsStuff1, PatrolTimer);
+	setEventTrigger(NexusBuildsStuff2, PatrolTimer);
+	setEventTrigger(NexusBuildsStuff3, PatrolTimer);
+	setEventTrigger(NexusBuildsStuff4, PatrolTimer);
+	setEventTrigger(NexusSpawnsInNorth, PatrolTimer);
+	setEventTrigger(NexusSpawnsInSouth, PatrolTimer);
+	setEventTrigger(NexusGoesAfterPlayer, PatrolTimer);
+	setEventTrigger(NexusInvadesWest, PatrolTimer);
+	setEventTrigger(NexusInvadesEast, PatrolTimer);
+	setEventTrigger(NexusBaseBegin, DoNow);
+	setEventTrigger(NexusSpawnIn, DoNow);
+	setEventTrigger(NexusGoesPostal, inactive);
+}
+
+event NexusSpawnIn(inactive)
+{
+	// South Group 1 - aka 'M7NXSpawnSouth1' in FlaME
+	addDroid(NXWyvernGauss, ToWorld(83), ToWorld(228), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(84), ToWorld(228), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(85), ToWorld(228), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(83), ToWorld(229), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(84), ToWorld(229), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(85), ToWorld(229), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(86), ToWorld(229), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(83), ToWorld(230), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(84), ToWorld(230), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(85), ToWorld(230), NexusPlayer);
+	pause(20);
+	// Southeast Group -- aka 'M7NXSpawnSoutheast' in FlaME
+	addDroid(NXWyvernGauss, ToWorld(227), ToWorld(229), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(228), ToWorld(229), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(229), ToWorld(229), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(227), ToWorld(230), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(228), ToWorld(230), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(229), ToWorld(230), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(230), ToWorld(230), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(227), ToWorld(231), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(228), ToWorld(231), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(229), ToWorld(231), NexusPlayer);
+	pause(20);
+	// Southwest Group -- aka 'M7NXSpawnSouthwest' in FlaME
+	addDroid(NXWyvernGauss, ToWorld(12), ToWorld(231), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(13), ToWorld(231), NexusPlayer);
+	addDroid(NXWyvernGauss, ToWorld(14), ToWorld(231), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(12), ToWorld(232), NexusPlayer);
+	addDroid(NXWyvernScourge, ToWorld(13), ToWorld(232), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(14), ToWorld(232), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(15), ToWorld(232), NexusPlayer);
+	addDroid(NXFlashHover, ToWorld(12), ToWorld(233), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(13), ToWorld(233), NexusPlayer);
+	addDroid(NXMissHover, ToWorld(14), ToWorld(233), NexusPlayer);
+	// Add everything on the map to group 1 -- make sure this large of a group isn't causing too much lag!
+	groupAddArea(AttackGroup1, NexusPlayer, 1, 1, 31999, 31999);
+	// Send them after a target of opportunity!
+	if (Jenks != NULLOBJECT)
+	{
+		orderGroupLoc(AttackGroup1, DORDER_MOVE, Jenks.x, Jenks.y);
+		setEventTrigger(NexusSpawnIn, inactive);
+	}
+	
+	if (Gibbs != NULLOBJECT)
+	{
+		orderGroupLoc(AttackGroup1, DORDER_MOVE, Gibbs.x, Gibbs.y);
+		setEventTrigger(NexusSpawnIn, inactive);
+	}
+	
+	if (Wilkes != NULLOBJECT)
+	{
+			orderGroupLoc(AttackGroup1, DORDER_MOVE, Wilkes.x, Wilkes.y);
+			setEventTrigger(NexusSpawnIn, inactive);
+	}
+	
+	else
+	{
+		setEventTrigger(NexusSpawnIn, inactive);
+	}
+}
+
+event CheckForces(inactive)
+{
+	if (numDroidsInArea(NexusPlayer,0,0,ToWorld(250),ToWorld(250)) >= 50) // Okay let's try 50 .. perhaps adjust the number automatically according to game difficulty?
+	{
+		setEventTrigger(NexusInvadesWest, inactive);
+		setEventTrigger(NexusInvadesEast, inactive);
+		setEventTrigger(NexusSpawnsInNorth, inactive);
+		setEventTrigger(NexusSpawnsInSouth, inactive);
+		setEventTrigger(NexusBuildsStuff1, inactive);
+		setEventTrigger(NexusBuildsStuff2, inactive);
+		setEventTrigger(NexusBuildsStuff3, inactive);
+		setEventTrigger(NexusBuildsStuff4, inactive);
+		setEventTrigger(CheckForces, PatrolTimer); // Check again in 1 minute
+	}
+	else
+	{
+		// fire them off now, then set the proper timers
+		setEventTrigger(NexusInvadesWest, DoNow);
+		setEventTrigger(NexusInvadesEast, DoNow);
+		setEventTrigger(NexusSpawnsInNorth, DoNow);
+		setEventTrigger(NexusSpawnsInSouth, DoNow);
+		setEventTrigger(NexusBuildsStuff1, DoNow);
+		setEventTrigger(NexusBuildsStuff2, DoNow);
+		setEventTrigger(NexusBuildsStuff3, DoNow);
+		setEventTrigger(NexusBuildsStuff4, DoNow);
+		pause(40); // let the commands filter down
+		// Now set them to their proper timers!
+		setEventTrigger(NexusInvadesWest, PatrolTimer);
+		setEventTrigger(NexusInvadesEast, PatrolTimer);
+		setEventTrigger(NexusSpawnsInNorth, PatrolTimer);
+		setEventTrigger(NexusSpawnsInSouth, PatrolTimer);
+		setEventTrigger(NexusBuildsStuff1, PatrolTimer);
+		setEventTrigger(NexusBuildsStuff2, PatrolTimer);
+		setEventTrigger(NexusBuildsStuff3, PatrolTimer);
+		setEventTrigger(NexusBuildsStuff4, PatrolTimer);
+		setEventTrigger(NexusSpawnIn, DoNow); // this should moderate them somewhat without being TOO weak
+		setEventTrigger(CheckForces, PatrolTimer); // Check again in 1 minute
+	}
+}
+
+// Nexus Truck stuff (prototype) -- This subroutine will be used to upgrade NEXUS Prime structures .. eventually.
+	// Pick a truck
+	// Upgrade a struct
+	// Upgrade factories twice
+	// Start production from these factories
+	
+// Coalition attack stuff -- This subroutine will be used to conduct our own raids and missions, and will keep the player informed about what they are up to. They'll even help the player with missions!
+	// Add groups
+	// Shadow the player units
+	// Assist with attacking stuff, and even run some of our own missions!
+
+//Begin=Functions=============================================================
+
+function int ToWorld(int TileCoords)
+{
+	// This should give the center of the tile.
+	// If you need to define a box around something make it a little oversize if you can.
+	// This is based on my (untested in game) figures that show tile coords * 128 to be the 
+	// top left corner of the referenced tile.
+	// This should be correct if the top left tile is 0x0. If this tile is 1x1 in your coords
+	// use "return ((TileCoords * 128) - 64)". (flaME uses 0x0)
+	return ((TileCoords * 128) + 64);
+}

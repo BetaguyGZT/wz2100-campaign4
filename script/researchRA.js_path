@@ -1,0 +1,131 @@
+// Part of the Campaign 4 Weapon Paths Research implementation
+// by Goth | September 2013 | wz2100.net
+
+//Weapons - Railguns
+function eventResearched(research, structure)
+{
+	if (structure.player == selectedPlayer && research.done == true)
+	{
+		if (research.name == "R-PATH-Wpn-Railgun")
+		{
+			enableResearch("R-Wpn-Rail-Accuracy01", selectedPlayer); // They only go up to 6!
+			enableResearch("R-Wpn-Rail-Damage01", selectedPlayer);
+			enableResearch("R-Wpn-Rail-ROF01", selectedPlayer);
+			enableResearch("R-Wpn-Railgun-Proto", selectedPlayer);
+			resPathRail=1;
+		}
+		
+		if (research.name == "R-Wpn-Rail-ROF01")
+		{
+			enableResearch("R-Wpn-Railgun-Aslt", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rail-Damage01")
+		{
+			enableResearch("R-Wpn-RailGun01", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rail-Accuracy01")
+		{
+			enableResearch("R-Wpn-Railgun-Flak", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rail-ROF02")
+		{
+			enableResearch("R-Wpn-Railgun-ProtoTankDest", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rail-Damage02")
+		{
+			enableResearch("R-Wpn-RailGun02", selectedPlayer);
+			resPathRail=2;
+		}
+		
+		if (research.name == "R-Wpn-Rail-Accuracy02")
+		{
+			enableResearch("R-Wpn-Railgun-Shotgun", selectedPlayer);
+		}
+		
+		// Level 2
+		if (research.name == "R-Wpn-Rail-Accuracy03")
+		{
+			enableResearch("R-Wpn-Railgun-Sniper", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rail-Damage03")
+		{
+			enableResearch("R-Wpn-RailGun03", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rail-ROF03")
+		{
+			enableResearch("R-Wpn-Railgun-TwinAslt", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Railgun-TankDestLgt")
+		{
+			enableResearch("R-Wpn-Railgun-TankDest", selectedPlayer);
+			resPathRail=3;
+		}
+		
+		if (research.name == "R-Wpn-RailGun03")
+		{
+			enableResearch("R-Wpn-Railgun-TankDestLgt", selectedPlayer);
+		}
+		
+		// Level 3 -- Yep, gonna make ya work for it.
+		if (research.name == "R-Wpn-Rail-Accuracy04")
+		{
+			enableResearch("R-Wpn-Rail-Accuracy05", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rail-Damage04")
+		{
+			enableResearch("R-Wpn-Rail-Damage05", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rail-ROF04")
+		{
+			enableResearch("R-Wpn-Rail-ROF05", selectedPlayer);
+			enableResearch("R-Wpn-Railgun-Gattling", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Railgun-Gattling")
+		{
+			resPathRail=4;
+		}
+		
+		if (research.name == "R-Wpn-Rail-Accuracy06")
+		{
+			enableResearch("R-Wpn-Railgun-GattlingAT", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rail-Damage06")
+		{
+			enableResearch("R-Defense-MassDriver", selectedPlayer);
+			enableResearch("R-Defense-Super-RailgunGattlingPlas", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rail-ROF06")
+		{
+			enableResearch("R-Wpn-Railgun-GattlingTwin", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Railgun-GattlingTwin")
+		{
+			enableResearch("R-Defense-Super-RotRailgun", selectedPlayer);
+			enableResearch("R-Defense-Super-RailgunGattling", selectedPlayer);
+		}
+		
+		if (research.name == "R-Defense-Super-RailgunGattling")
+		{
+			enableResearch("R-Defense-Super-RotRailgun", selectedPlayer);
+			enableResearch("R-Defense-Super-RailgunGattling2", selectedPlayer);
+		}
+		
+		if (research.name == "R-Defense-Super-RailgunGattlingPlas")
+		{
+			enableResearch("R-Defense-Super-RailgunGattlingPlas2", selectedPlayer);
+		}
+	}
+}

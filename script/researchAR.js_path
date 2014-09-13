@@ -1,0 +1,101 @@
+// Part of the Campaign 4 Weapon Paths Research implementation
+// by Goth | September 2013 | wz2100.net
+
+// Weapons - Artillery
+function eventResearched(research, structure)
+{
+	if (structure.player == selectedPlayer && research.done == true)
+	{
+		if (research.name == "R-PATH-Wpn-Arty")
+		{
+			enableResearch("R-Wpn-HowitzerMk1", selectedPlayer);
+			resPathArty=1;
+		}
+		
+		if (research.name == "R-Wpn-HowitzerMk1")
+		{
+			enableResearch("R-Wpn-Howitzer-Accuracy01", selectedPlayer); // 3 -- One per Upgrade tier
+			enableResearch("R-Wpn-Howitzer-Damage01", selectedPlayer); //6 -- Two per tier
+			enableResearch("R-Wpn-Howitzer-ROF01", selectedPlayer); //4 -- One per tier then last one at Forts
+		}
+		
+		if (research.name == "R-Wpn-Howitzer-Damage01")
+		{
+			enableResearch("R-Wpn-Howitzer-Damage02", selectedPlayer); //6 -- Two per tier
+			enableResearch("R-Wpn-HvyHowitzer", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Howitzer-ROF01")
+		{
+			enableResearch("R-Wpn-Howitzer03-Rot", selectedPlayer); //6 -- Two per tier
+		}
+		
+		if (research.name == "R-Wpn-Howitzer-Damage02")
+		{
+			resPathArty=2;
+		}
+		
+		// Level 2
+		if (research.name == "R-Wpn-Howitzer-Damage03")
+		{
+			
+			enableResearch("R-Wpn-HowitzerRamjet", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Howitzer-ROF02")
+		{
+			enableResearch("R-Wpn-HowitzerRamjetRot", selectedPlayer);
+			resPathArty=3;
+		}
+		
+		if (research.name == "R-Wpn-Howitzer-Accuracy02")
+		{
+			enableResearch("R-Wpn-HowitzerRamjetHvy", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Howitzer-Damage04")
+		{
+			enableResearch("R-Wpn-HowitzerGauss", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Howitzer-ROF03")
+		{
+			enableResearch("R-Wpn-HowitzerGattling", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Howitzer-Accuracy03")
+		{
+			enableResearch("R-Wpn-HowitzerBB", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-HowitzerGauss")
+		{
+			enableResearch("R-Wpn-HowitzerGaussHvy", selectedPlayer);
+			enableResearch("R-Wpn-HowitzerGaussRot", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-HowitzerGattling")
+		{
+			enableResearch("R-Wpn-HowitzerGattlingGauss", selectedPlayer);
+			
+		}
+		
+		if (research.name == "R-Wpn-HowitzerBB")
+		{
+			enableResearch("R-Wpn-HowitzerGaussBB", selectedPlayer);
+			resPathArty=4;
+		}
+		
+		if (research.name == "R-Wpn-Howitzer-Damage05")
+		{
+			enableResearch("R-Wpn-HowitzerGaussRamjet", selectedPlayer);
+			enableResearch("R-Wpn-Howitzer-Damage06", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-HowitzerGaussRamjet")
+		{
+			enableResearch("R-Wpn-HowitzerGaussRamjetHvy", selectedPlayer);
+			enableResearch("R-Wpn-HowitzerGaussRamjetRot", selectedPlayer);
+		}
+	}
+}

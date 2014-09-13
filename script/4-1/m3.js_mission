@@ -1,0 +1,12 @@
+// Warzone 2100 3.2 | Campaign 4-1
+// Mission script for M3
+// Goth Zagog-Thou | Nov 2013 | wz2100.net
+
+// Script testing functions
+
+function scriptM3(str)
+{
+	// str = "Script M3 reporting in!"
+}
+
+queue("scriptM3", 9000, "Script M3 reporting in!");

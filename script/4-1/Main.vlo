@@ -1,0 +1,373 @@
+script "Main.slo"
+run
+{
+// Value file for cam 4-1: general cam game initialization and win conditions
+
+// General Values
+player				int			0
+ScavBasePlayer		int			4
+CoalitionPlayer		int			7
+NexusPlayer			int			3
+
+TransportOne		STRUCTURE	1011670 	//at 20429 x 13199 | M1
+TransportTwo		STRUCTURE	1009443 //at 29759 x 1332 | M2
+CommandTurret		TEMPLATE	"P0Cam4CobraCommandWheels" //at 21055 x 12984
+TacSergeantGibbs	TEMPLATE	"P0Cam4GibbsPythonTwinAssltHT" //at 20925 x 12990
+RailGun1		TEMPLATE	"P0Cam4PythonAsstLasTracks"
+RailGun2		TEMPLATE	"P0Cam4ViperRailWheels"
+RailGun3		TEMPLATE	"P0Cam4ViperRailWheels"
+AssaultGun1	TEMPLATE	"P0Cam4PythonAsstLasTracks"
+AssaultGun2	TEMPLATE	"P0Cam4ViperRotMgWheels"
+AssaultGun3	TEMPLATE	"P0Cam4ViperRotMgWheels"
+RepairTurret1		TEMPLATE	"ViperRepairWheels"
+RepairTurret2		TEMPLATE	"ViperRepairWheels"
+Research4			STRUCTURE	1002175 // M2
+Research5			STRUCTURE	1011803 //at 25091 x 12025 | M1
+Research6			STRUCTURE	1001336 //at 25214 x 20467 | M3
+ObjUplink			STRUCTURE	1011936 //Main Base in M4
+ResearchFacility	STRUCTURE	1001336 // same as M3 one
+ScavFacM5			STRUCTURE	1005554 //at 28791 x 10417 (AA Base)
+Power1				STRUCTURE	1006782 //at 30967 x 5740
+Research7			STRUCTURE	1009501 //at 27782 x 1645 in M2
+Research8			STRUCTURE	1001431 //at 30991 x 22745 in M3-End Base
+Research9			STRUCTURE	1012144 //at 12538 x 5483 in M4
+Research10			STRUCTURE	1011630 //at 18163 x 14326 in M1
+UplinkSensor			STRUCTURESTAT	"A0Sat-linkCentre"
+FakeHQ				STRUCTURESTAT	"P0Cam4FakeHQ"
+HQ				STRUCTURESTAT	"A0CommandCentre"
+AssaultLaser	STRUCTURESTAT	"WallTower-TwinAssaultLaser"
+HQOne			STRUCTURE	1005967 // M3 Base
+Fac1			STRUCTURE	1011206 //M3 Base
+Pow1			STRUCTURE	1001430 //M3 Base
+Res2			STRUCTURE	1001306 // M3 Base
+Cyb1			STRUCTURE	1011207 // M3 Base
+Oil1			STRUCTURE	1002262	//M3 Base
+ScavVTOL	STRUCTURESTAT	"A0BaBaVtolFactory"
+Chopper1	TEMPLATE		"ScavChopper1"
+Chopper2	TEMPLATE		"ScavChopper2"
+HeavyChopper	TEMPLATE		"ScavHeavyChopper"
+ScavVTOLFacA1		STRUCTURE	1011544
+ScavVTOLFacA2		STRUCTURE	1011569
+ScavVTOLFacB1		STRUCTURE	1011336
+ScavVTOLFacB2		STRUCTURE	1011337
+ScavVTOLFacB3		STRUCTURE	1011338
+ScavVTOLFacB4		STRUCTURE	1011339
+ScavVTOLFacC1		STRUCTURE	1011340
+
+numTech	INT	0
+numStruct	INT	0
+numWeap	INT	0
+numEnable	INT	0
+numTech2		INT	0
+numStruct2		INT	0
+numWeap2		INT	0
+numEnable2		INT	0
+
+// Factories in order of appearance
+ScavFactoryIDA1		STRUCTURE			1011414 //Factory A 1
+ScavFactoryIDA2		STRUCTURE			1011568 //Factory A 2
+ScavFactoryIDA3		STRUCTURE			1011661 //Factory A 3
+ScavFactoryIDA4		STRUCTURE			1011879 //Factory A 4
+ScavFactoryIDB1		STRUCTURE			1005550 //Factory B 1
+ScavFactoryIDB2		STRUCTURE			1005549 //Factory B 2
+ScavFactoryIDB3		STRUCTURE			1005547 //Factory B 3
+ScavFactoryIDC1		STRUCTURE			1005551 //Factory #1
+ScavFactoryIDC2		STRUCTURE			1005552 //Factory #2
+ScavFactoryIDC3		STRUCTURE			1005553 //Factory #3
+ScavFactoryIDC4		STRUCTURE			1005554 //AA Site Factory
+ScavFactoryIDD1		STRUCTURE			1012249 //First one
+ScavFactoryIDD2		STRUCTURE			1011943 // SouthWest
+ScavFactoryIDD3		STRUCTURE			1012502 // Central 1
+ScavFactoryIDD4		STRUCTURE			1012404 // West
+ScavFactoryIDD5		STRUCTURE			1012269 // Central 2
+
+CybFact1			STRUCTURE	1012305
+CybFact2			STRUCTURE	1012466
+Factory1			STRUCTURE	1012178
+Factory2			STRUCTURE	1012284
+
+// Messages
+endMsg				INTMESSAGE	"END"
+winMsg				INTMESSAGE	"WIN"
+wonSnd				SOUND		"pcv460.ogg"
+lostSnd				SOUND		"pcv470.ogg"
+rewardSnd			SOUND		"pcv486.ogg"
+
+// Audio to go with captions!
+brief1				SOUND		"m1_tech_a.ogg"
+brief2				SOUND		"m1_tech_b.ogg"
+brief3				SOUND		"m1_gibbs_c.ogg"
+brief4				SOUND		"m1_gibbs_e1.ogg"
+brief5				SOUND		"m1_gibbs_e2.ogg"
+brief6				SOUND		"m1_gibbs_e3.ogg"
+brief7				SOUND		"m1_gibbs_e4.ogg"
+brief8				SOUND		"m1_gibbs_e5.ogg"
+brief9				SOUND		"m1_gibbs_e6.ogg"
+brief10				SOUND		"m1_gibbs_f.ogg"
+trans_fried			SOUND		"m1_zappage.ogg"
+
+// Templates
+RewardTemplate			TEMPLATE	"P0Cam4RetribSpyTurret01Wheels"
+ViperSpade				TEMPLATE 	"ConstructionDroid"
+CobraCommand			TEMPLATE	"P0Cam4CobraCommandWheels"
+ViperRail				TEMPLATE	"P0Cam4ViperRailWheels"
+NeedleGunner			TEMPLATE	"P0Cam4CyborgRail1Ground"
+ViperRepair				TEMPLATE	"ViperRepairWheels"
+AssaultGunner			TEMPLATE	"P0Cam4ViperRotMgWheels"
+NXWyvernGauss			TEMPLATE	"WyvernGaussTracks"
+NXFlashHover			TEMPLATE	"NX-L-Flash-Hover"
+NXMissHover				TEMPLATE	"NX-L-Missile-MdArt-Hover"
+NXFlashCyb				TEMPLATE	"Cyb-Laser1-GROUND"
+NXNeedleCyb				TEMPLATE	"Cyb-Rail1-GROUND"
+NXVengWSS				TEMPLATE	"P0Cam4NXVengWSS"
+NXWyvernScourge			TEMPLATE	"WyvernScourgeTracks"
+NXWyvernPulse			TEMPLATE	"WyvernPulseTracks"
+NXWyvernHeavy			TEMPLATE	"WyvernHvLaserTracks"
+NXRepair				TEMPLATE	"SK-Retal-Hover-Repair"
+PRAssltTrooper			TEMPLATE	"P0Cam4ProjectAssaultTrooper"
+PRPulseTrooper			TEMPLATE	"P0Cam4ProjectPulseTrooper"
+PRMissTrooper			TEMPLATE	"P0Cam4ProjectATMissileTrooper"
+PRMedic					TEMPLATE	"P0Cam4ProjectMedic"
+PRCommander				TEMPLATE	"P0Cam4ProjectCommander"
+PRGibbs					TEMPLATE	"P0Cam4ProjectGibbs"
+PythonHvLaser			TEMPLATE	"P0Cam4PythonHvLaserTracks"
+PythonGauss				TEMPLATE	"P0Cam4PythonGaussTracks"
+PythonAsltLaser			TEMPLATE	"P0Cam4PythonAsstLasTracks"
+PythonTwAsltLaser		TEMPLATE	"P0Cam4PythonTwinAsstLasTracks"
+SuperTrans				TEMPLATE	"SuperTransport"
+WilkesSuperAC			TEMPLATE	"P0Cam4WilkesPythonTwinAcannonHT"
+JenksSuperPulse			TEMPLATE	"P0Cam4Cyb-Jenks-PulseLsr"
+Trike					TEMPLATE	"BarbarianTrike"
+Bloke					TEMPLATE	"BaBaPeople"
+BusCan					TEMPLATE	"BabaBusCan"
+FireCan					TEMPLATE	"BabaFireCan"
+ViperMGWheels			TEMPLATE	"ViperLtMGHalfTracks"
+CobraRepair				TEMPLATE	"A-Rep-Cobra-Trk"
+ViperAssault			TEMPLATE	"P0Cam4ViperRotMgWheels"
+NexusLink2				TEMPLATE	"P0Cam4RetribSpyTurret01Wheels"
+NXScourgeHover			TEMPLATE	"SK-Retre-Hover-Scourge"
+NXSensor				TEMPLATE	"SK-Retal-Hover-Sensor"
+Constructor				TEMPLATE 	"ConstructionDroid"
+
+//Reward Templates
+REWSuperGSPL		TEMPLATE		"P0Cam4REWGSPLMor"
+REWSuperAA			TEMPLATE		"P0Cam4REWTAALas"
+REWSuperPlasTK		TEMPLATE		"P0Cam4REWPlasTKDCan"
+
+// Objective Markers-A
+RetreatSnd			SOUND		"pcv379.ogg" // Enemy Base detected
+RetreatMsg			INTMESSAGE	"SAFE_ZONE"
+ScavBaseSnd			SOUND		"pcv374.ogg" // "Scavenger Base detected"
+ScavBaseMsg			INTMESSAGE	"SCAV_BASE"
+Obj1Msg			INTMESSAGE	"OBJECTIVEA1_MSG" //at 21884 x 9109 | "Retreat Location"
+Obj2Msg			INTMESSAGE	"OBJECTIVEA2_MSG" //at 25088 x 10175 | "Scavenger Base - Objective 1"
+Obj3Msg			INTMESSAGE	"OBJECTIVEA3_MSG" //at 22460 x 14018 | "Scavenger Base - Objective 2"
+Obj3BMsg			INTMESSAGE	"OBJECTIVEA3B_MSG" //also for Objective-B
+Obj4Msg			INTMESSAGE	"OBJECTIVEA4_MSG" //at 18369 x 13825 | "Scavenger Base - Objective 3"
+Obj4BMsg			INTMESSAGE	"OBJECTIVEA4B_MSG"
+Obj5Msg			INTMESSAGE	"OBJECTIVEA5_MSG"
+ObjSnd					SOUND		"beacon.ogg" // Ping!
+NexusLaugh			SOUND		"laugh3.ogg"
+LasStkSnd				SOUND		"lasstrk.ogg"
+ArtifactSnd1			SOUND		"pcv351.ogg" // "Artifact detected"
+ArtifactSnd2			SOUND		"pcv352.ogg" // "Artifact recovered"
+//Sounds
+NexusLaugh1			SOUND		"laugh1.ogg"
+NexusLaugh2			SOUND		"laugh2.ogg"
+NexusLaugh3			SOUND		"laugh3.ogg"
+NexusDefAbsrbd		SOUND		"defabsrd.ogg"
+NexusStrAbsrbd		SOUND		"strutabs.ogg"
+NexusUnitAbsrbd		SOUND		"untabsrd.ogg"
+EnemyDetSnd			SOUND		"pcv379.ogg"
+AreaDoneSnd			SOUND		"pcv460.ogg"
+
+// Base under attack stuff, nicked from cam1a.vlo
+/* Base Under Attack */
+attackSnd1	SOUND		"pcv337.ogg" // "Structure under attack"
+
+// Objective Markers-B
+ObjB1Msg			INTMESSAGE	"OBJECTIVEB1_MSG" // Run-n-hide location
+ObjB2Msg			INTMESSAGE "OBJECTIVEB2_MSG" // Base east of hide spot
+ObjB3Msg			INTMESSAGE "OBJECTIVEB3_MSG" // To the north
+ObjB4Msg			INTMESSAGE "OBJECTIVEB4_MSG" // North-west base
+ObjB5Msg			INTMESSAGE "OBJECTIVEB5_MSG" // Rally Point
+ObjB6Msg			INTMESSAGE	"OBJECTIVEB6_MSG" // Where Recon gets dealt with
+ObjB7Msg			INTMESSAGE	"OBJECTIVEB7_MSG" // Gateway to next area
+ObjB8Msg			INTMESSAGE	"OBJECTIVEB8_MSG" // Northeast Scavenger Base
+ObjB9Msg			INTMESSAGE	"OBJECTIVEB9_MSG" // Team Two Rendevous Point
+ObjB92Msg			INTMESSAGE	"OBJECTIVEB92_MSG" // Transport Two
+ObjB9DMsg			INTMESSAGE	"OBJECTIVEB9THREADM4"
+ObjB9CMsg			INTMESSAGE	"OBJECTIVEB9THREADM3"
+
+// Objective Markers - C
+ObjC1Msg			INTMESSAGE	"OBJECTIVEC1_MSG" // West base
+ObjC2Msg			INTMESSAGE	"OBJECTIVEC2_MSG" // Base southwest of Research
+ObjC3Msg			INTMESSAGE	"OBJECTIVEC3_MSG" // Base Northwest of Research
+ObjC4Msg			INTMESSAGE	"OBJECTIVEC4_MSG" // Research Base
+ObjC5Msg			INTMESSAGE	"OBJECTIVEC5_MSG" // AA Site
+ObjC6Msg			INTMESSAGE	"OBJECTIVEC6_MSG" // Scav Base Near Node
+ObjC7Msg			INTMESSAGE	"OBJECTIVEC7_MSG" // NODE's Base
+ObjC7BMsg			INTMESSAGE	"OBJECTIVEC7B_MSG" // Abandoned NASDA Base
+ObjC8Msg			INTMESSAGE	"OBJECTIVEC8_MSG" // Gateway to Mission D
+ObjC8StartMsg		INTMESSAGE	"OBJECTIVEC8B_MSG" // Outside Node base
+ObjC9Msg			INTMESSAGE 	"OBJECTIVEC9_MSG" // New Base in M3
+
+// Mission D Objective Markers
+ObjD1Msg			INTMESSAGE	"OBJECTIVED1_MSG"	// South-East Scavenger Base
+ObjD2Msg			INTMESSAGE	"OBJECTIVED2_MSG"	// South-Southeast Scavenger Base
+ObjD3Msg			INTMESSAGE	"OBJECTIVED3_MSG"	// Southeast-Central Scavenger Base
+ObjD4Msg			INTMESSAGE	"OBJECTIVED4_MSG"	// East Scavenger Base
+ObjD5Msg			INTMESSAGE	"OBJECTIVED5_MSG"	// South Scavenger Base
+ObjD6Msg			INTMESSAGE	"OBJECTIVED6_MSG"	// East-Central Scavenger Base
+ObjD7Msg			INTMESSAGE	"OBJECTIVED7_MSG"	// South-Central Scavenger Base
+ObjD8Msg			INTMESSAGE	"OBJECTIVED8_MSG"	// Central Scavenger Base
+ObjD9Msg			INTMESSAGE	"OBJECTIVED9_MSG"	// North-West Scavenger Base
+ObjD10Msg		INTMESSAGE	"OBJECTIVED10_MSG"	// West-Southwest Scavenger Base
+ObjD11Msg		INTMESSAGE	"OBJECTIVED11_MSG"	// Objective Base 1 (Sat Uplink Center)
+ObjD12Msg		INTMESSAGE	"OBJECTIVED12_MSG"	// Objective Base 2 (Com Relay Center)
+ObjD13Msg		INTMESSAGE	"OBJECTIVED13_MSG"	// Escape Location
+ObjD14Msg		INTMESSAGE	"OBJECTIVED14_MSG"	// New beacon for North Nexus Base
+ObjD15Msg		INTMESSAGE	"OBJECTIVED15_MSG"	// Nexus Corner Base
+
+// Mission E Objective Markers
+ObjE1Msg			INTMESSAGE	"OBJECTIVEE1_MSG"	// Nexus Prime
+
+//Variables-B
+ObjBFlag		int		0
+
+//Variables-C
+ObjCFlag1		int		0
+ObjCFlag2		int		0
+ObjCFlag3		int		0
+ObjCFlag4		int		0
+ObjCFlag5		int		0
+ObjCFlag6		int		0
+
+// Variables-E
+ObjEFlag1		int		0
+ObjEFlag2		int		0
+ObjEFlag3		int		0
+ObjEFlag4		int		0
+ObjEFlag5		int		0
+
+// Variables-F
+ObjFFlag1		int		0
+ObjFFlag2		int		0
+ObjFFlag3		int		0
+ObjFFlag4		int		0
+ObjFFlag5		int		0
+ObjFFlag6		int		0
+
+P0Struct[0]	STRUCTURESTAT	"A0ComDroidControl"
+P0Struct[1]	STRUCTURESTAT	"A0CommandCentre"
+P0Struct[2]	STRUCTURESTAT	"A0CyborgFactory"
+P0Struct[3]	STRUCTURESTAT	"A0FacMod1"
+P0Struct[4]	STRUCTURESTAT	"A0HardcreteMk1CWall"
+P0Struct[5]	STRUCTURESTAT	"A0HardcreteMk1Wall"
+P0Struct[6]	STRUCTURESTAT	"A0LightFactory"
+P0Struct[7]	STRUCTURESTAT	"A0PowerGenerator"
+P0Struct[8]	STRUCTURESTAT	"A0PowMod1"
+P0Struct[9]	STRUCTURESTAT	"A0VtolPad"
+P0Struct[10]	STRUCTURESTAT	"A0ResearchFacility"
+P0Struct[11]	STRUCTURESTAT	"A0ResearchModule1"
+P0Struct[12]	STRUCTURESTAT	"A0ResourceExtractor"
+P0Struct[13]	STRUCTURESTAT	"A0TankTrap"
+P0Struct[14]	STRUCTURESTAT	"TankTrapC"
+P0Struct[15]	STRUCTURESTAT	"A0VTolFactory1"
+
+P0CompBody[0]		BODY	"Body1REC" 
+P0CompBody[1]		BODY	"Body5REC"
+P0CompBody[2]		BODY	"Body11ABT"
+
+P0CompProp[0]		PROPULSION	"wheeled01"
+P0CompProp[1]		PROPULSION	"tracked01"
+P0CompProp[2]		PROPULSION	"hover01"
+P0CompProp[3]		PROPULSION	"V-Tol"
+P0CompProp[4]		PROPULSION	"HalfTrack"
+
+P0CompSensor		SENSOR	"SensorTurret1Mk1"
+P0CompRepair		REPAIR	"LightRepair1"
+P0CompConst			CONSTRUCT	"Spade1Mk1"
+
+P0CompWeap[0]	WEAPON		"MG1Mk1"
+P0CompWeap[1]	WEAPON		"Cannon1Mk1"
+
+// Stuff we really need
+P0Research[0]	RESEARCHSTAT	"R-Comp-CommandTurret03" 
+P0Research[1]	RESEARCHSTAT	"R-Cyborg-HvyConst"
+P0Research[2]	RESEARCHSTAT	"R-Defense-TankTrapGate"
+P0Research[3]	RESEARCHSTAT	"R-Defense-HardcreteGate"
+P0Research[4]	RESEARCHSTAT	"R-Sys-SpyTurret"
+P0Research[5]	RESEARCHSTAT	"R-Defense-TowerConst01"
+P0Research[6]	RESEARCHSTAT	"R-Defense-EmplConst01"
+P0Research[7]	RESEARCHSTAT	"R-Defense-WallTowerConst01"
+P0Research[8]	RESEARCHSTAT	"R-Defense-BunkerConst01"
+P0Research[9]	RESEARCHSTAT	"R-Defense-WallUpgrade01"
+P0Research[10]	RESEARCHSTAT	"R-Wpn-Rocket-PodTwin"
+P0Research[11]	RESEARCHSTAT	"R-Wpn-Bomb01"
+P0Research[12]	RESEARCHSTAT	"R-Struc-PowerModuleMk1"
+P0Research[13]	RESEARCHSTAT	"R-Struc-Research-Module"
+P0Research[14]	RESEARCHSTAT	"R-Struc-Factory-Module"
+P0Research[15]	RESEARCHSTAT	"R-Struc-Factory-Cyborg"
+P0Research[16]	RESEARCHSTAT	"R-Struc-VTOLFactory"
+P0Research[17]	RESEARCHSTAT	"R-Struc-CommandRelay"
+P0Research[18]	RESEARCHSTAT	"R-Struc-RepairFacility"
+P0Research[19]	RESEARCHSTAT	"R-Struc-VTOLPad"
+P0Research[20]	RESEARCHSTAT	"R-Defense-Empl-MortarRot"
+P0Research[21]	RESEARCHSTAT	"R-Sys-Engineering01"
+P0Research[22]	RESEARCHSTAT	"R-Sys-Spade1Mk1"
+P0Research[23]	RESEARCHSTAT	"R-Sys-Spade1Hvy"
+P0Research[24]	RESEARCHSTAT	"R-Sys-MobileRepairTurret01"
+P0Research[25]	RESEARCHSTAT	"R-Sys-MobileRepairTurretHvy1"
+P0Research[26]	RESEARCHSTAT	"R-Vehicle-Prop-Wheels"
+P0Research[27]	RESEARCHSTAT	"R-Vehicle-Prop-Halftracks"
+P0Research[28]	RESEARCHSTAT	"R-Vehicle-Prop-Tracks"
+P0Research[29]	RESEARCHSTAT	"R-Vehicle-Prop-Hover"
+P0Research[30]	RESEARCHSTAT	"R-Vehicle-Prop-VTOL"
+// Now for rewards!
+P0Research[31]  RESEARCHSTAT "R-Sys-Sensor-TurretHvy" 
+P0Research[32]  RESEARCHSTAT "R-Comp-SynapticLink" 
+P0Research[33]  RESEARCHSTAT "R-Struc-Factory-Upgrade06" 
+P0Research[34]  RESEARCHSTAT "R-Struc-Materials04" 
+P0Research[35]  RESEARCHSTAT "R-Struc-Power-Upgrade03a" 
+P0Research[36]  RESEARCHSTAT "R-Struc-Research-Upgrade04" 
+P0Research[37]  RESEARCHSTAT "R-Struc-RprFac-Upgrade04" 
+P0Research[38]  RESEARCHSTAT "R-Defense-WallTower3-MG4IncTwin"
+P0Research[39]  RESEARCHSTAT "R-Defense-WallTower-Cannon-TwinAslt"
+P0Research[40]  RESEARCHSTAT "R-Sys-Sensor-Upgrade03" 
+P0Research[41]  RESEARCHSTAT "R-Vehicle-Armor-Heat05" 
+P0Research[42]  RESEARCHSTAT "R-Vehicle-Armor-Kinetic05" 
+P0Research[43]  RESEARCHSTAT "R-Vehicle-Engine10" 
+P0Research[44]  RESEARCHSTAT "R-Vehicle-Metals05" 
+P0Research[45]  RESEARCHSTAT "R-Wpn-Cannon-Accuracy09" 
+P0Research[46]  RESEARCHSTAT "R-Wpn-Cannon-Damage10" 
+P0Research[47]  RESEARCHSTAT "R-Wpn-Cannon-ROF09" 
+P0Research[48]  RESEARCHSTAT "R-Wpn-Energy-Accuracy06" 
+P0Research[49]  RESEARCHSTAT "R-Wpn-Energy-Damage06" 
+P0Research[50]  RESEARCHSTAT "R-Wpn-Energy-ROF06" 
+P0Research[51]  RESEARCHSTAT "R-Wpn-MG-Accuracy10" 
+P0Research[52]  RESEARCHSTAT "R-Sys-Sensor-WSTower"
+P0Research[53]  RESEARCHSTAT "R-Wpn-MG-Damage10" 
+P0Research[54]  RESEARCHSTAT "R-Wpn-MG-ROF10" 
+P0Research[55]  RESEARCHSTAT "R-Wpn-Rail-Accuracy06" 
+P0Research[56]  RESEARCHSTAT "R-Wpn-Rail-Damage06" 
+P0Research[57]  RESEARCHSTAT "R-Wpn-Rail-ROF06"
+// Stuff we research at the beginning automatically
+P0Research[58]  RESEARCHSTAT "R-Vehicle-Body01"
+P0Research[59]  RESEARCHSTAT "R-Vehicle-Prop-Wheels"
+P0Research[60]  RESEARCHSTAT "R-Sys-Spade1Mk1"
+P0Research[61]  RESEARCHSTAT "R-Comp-SynapticLink"
+// For Dummy Autorepair Tech. Need to do all 3, each time, or it won't work at all.
+P0Research[62]  RESEARCHSTAT "R-REW-Sys-Autorepair-General"
+P0Research[63]  RESEARCHSTAT "R-REW-Sys-Autorepair-Upgrade01"
+P0Research[64]  RESEARCHSTAT "R-REW-Sys-Autorepair-Upgrade02"
+// Stuff we enable at the beginning
+P0ResEnable[0]	RESEARCHSTAT "R-Vehicle-Body04"
+P0ResEnable[1]	RESEARCHSTAT "R-Vehicle-Prop-Halftracks"
+P0ResEnable[2]	RESEARCHSTAT "R-Defense-TankTrap01"
+P0ResEnable[3]	RESEARCHSTAT "R-Wpn-MG1Mk1"
+P0ResEnable[4]	RESEARCHSTAT "R-Sys-Engineering01"
+P0ResEnable[5]	RESEARCHSTAT "R-Vehicle-Engine01"
+P0ResEnable[6]	RESEARCHSTAT "R-Sys-SpyTurret"
+
+}

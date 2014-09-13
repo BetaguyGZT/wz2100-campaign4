@@ -1,0 +1,72 @@
+// Part of the Campaign 4 Weapon Paths Research implementation
+// by Goth | September 2013 | wz2100.net
+
+// VTOL Bombs -- For use when we research VTOL Landing Pads, since they won't be useful without them ...
+function eventResearched(research, structure)
+{
+	if (structure.player == selectedPlayer && research.done == true)
+	{
+		if (research.name == "R-Struc-VTOLPad")
+		{
+			enableResearch("R-Wpn-Bomb01", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Bomb01")
+		{
+			enableResearch("R-Wpn-Bomb-Accuracy01", selectedPlayer); //We'll throttle these to every 2 bombs researched
+			enableResearch("R-Wpn-Bomb-Damage01", selectedPlayer); //We'll throttle bombs according to damage upgrades
+		}
+		
+		if (research.name == "R-Wpn-Bomb-Damage01")
+		{
+			enableResearch("R-Wpn-Bomb-Damage02", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Bomb-Damage02")
+		{
+			enableResearch("R-Wpn-Bomb02", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Bomb02")
+		{
+			enableResearch("R-Wpn-Bomb-Damage03", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Bomb-Damage03")
+		{
+			enableResearch("R-Wpn-Bomb03", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Bomb03")
+		{
+			enableResearch("R-Wpn-Bomb-Damage04", selectedPlayer);
+			enableResearch("R-Wpn-Bomb-Accuracy02", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Bomb-Damage04")
+		{
+			enableResearch("R-Wpn-Bomb04", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Bomb04")
+		{
+			enableResearch("R-Wpn-Bomb-Damage05", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Bomb-Damage05")
+		{
+			enableResearch("R-Wpn-Bomb05", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Bomb05")
+		{
+			enableResearch("R-Wpn-Bomb-Damage06", selectedPlayer);
+			enableResearch("R-Wpn-Bomb-Accuracy03", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Bomb-Damage06")
+		{
+			enableResearch("R-Wpn-Bomb06", selectedPlayer);
+		}
+	}
+}

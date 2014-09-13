@@ -1,0 +1,26 @@
+/*
+ * Cam4-1.wrf
+ *
+ */
+
+/* Directory for Proximity messages and mission briefs */
+directory	"messages"
+
+file		SMSG		"cam4WinLose.txt"
+file		SMSG		"cam4-1Prox.txt"
+
+/* Directory for uncompiled script files */
+directory       "script/4-1"
+
+file		SCRIPT		"Main.slo"
+
+/* Directory for compiled script files */
+directory       "script/binary"
+
+/* Directory for script value files */
+directory       "script/4-1"
+file            SCRIPTVAL       "Main.vlo"
+
+/* Directory for mission-specific javascript */
+directory       "script/4-1"
+file		JAVASCRIPT		"cam4-1.js"

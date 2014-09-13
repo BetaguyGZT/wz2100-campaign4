@@ -1,0 +1,33 @@
+// multilim.slo
+//
+// define maximum limits for structures in limits screen here
+// only stats mentioned here will be added to limits screen.
+
+		
+public	STRUCTURESTAT		comCenter;
+public	STRUCTURESTAT		factory;				
+public	STRUCTURESTAT		oilDerrick;		
+public	STRUCTURESTAT		powerGen;		
+public	STRUCTURESTAT		research;
+public	STRUCTURESTAT		comdroid;
+public	STRUCTURESTAT		cybfac;
+public	STRUCTURESTAT		vtolfact;
+public	STRUCTURESTAT		satuplink;
+public	STRUCTURESTAT		lassat;
+public	STRUCTURESTAT		scavfact;
+public	STRUCTURESTAT		scavvtol;
+
+event initialisedEvent(init)
+{
+	setStructureLimits(comCenter,	128,	0);
+	setStructureLimits(factory, 	10,	0);
+	setStructureLimits(powerGen, 	64, 	0);
+	setStructureLimits(research, 	10, 	0);
+	setStructureLimits(comdroid, 	128, 	0);
+	setStructureLimits(cybfac, 	10, 	0);
+	setStructureLimits(vtolfact, 	10, 	0);
+	setStructureLimits(satuplink,	1,	0);
+	setStructureLimits(lassat,	1,	0);
+	setStructureLimits(scavfact,	20,	0);
+	setStructureLimits(scavvtol,	20,	0);
+}

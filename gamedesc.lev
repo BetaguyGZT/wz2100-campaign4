@@ -1,0 +1,64 @@
+/*
+ * GameDesc.lev
+ *
+ * Level data descriptions
+ */
+
+/******************************************************/
+/*     self contained test levels                     */
+
+level		PROG
+data		"wrf/vidmem.wrf"
+data		"wrf/basic.wrf"
+data		"wrf/cam1.wrf"
+data		"wrf/audio.wrf"
+data		"wrf/piestats.wrf"
+data		"wrf/stats.wrf"
+game		"multiplay/maps/4c-rush.gam"
+data		"wrf/prog.wrf"
+
+/******************************************************/
+/*     Tutorial dataset and levels                  */
+
+campaign	CAM_TUT3
+data		"wrf/vidmem3.wrf"
+data		"wrf/basic.wrf"
+data		"wrf/tut.wrf"
+data 		"wrf/audio.wrf"
+data		"wrf/tutorial/tutaudio.wrf"
+data		"wrf/piestats.wrf"
+data		"wrf/stats.wrf"
+data 		"wrf/cam1res.wrf"
+
+/* Tutorial Level 3 - Base Building. */
+camstart	TUTORIAL3
+dataset		CAM_TUT3
+game		"wrf/tutorial/newtut.gam"
+data		"wrf/tutorial/newtut.wrf"
+
+
+/******************************************************/
+/*     campaign 4 dataset and levels                  */
+
+campaign	CAM_4
+data		"wrf/vidmem.wrf"
+data		"wrf/basic.wrf"
+data		"wrf/cam4.wrf"
+data		"wrf/audio.wrf"
+data		"wrf/piestats.wrf"
+data		"wrf/stats.wrf"
+data		"wrf/cam4res.wrf"
+
+/* Campaign 4-1 "Crash Landing"*/
+camstart		CAM_1A
+dataset		CAM_4
+game		"wrf/cam4/cam4-1.gam"
+data		"wrf/cam4/cam4-1.wrf"
+
+/********************************************************/
+/* fast play 						*/
+
+camstart	FASTPLAY
+dataset		CAM_4
+game		"wrf/fastplay/fastdemo.gam"
+data		"wrf/fastplay/fastdemo.wrf"

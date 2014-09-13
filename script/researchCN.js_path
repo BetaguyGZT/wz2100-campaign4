@@ -1,0 +1,166 @@
+// Part of the Campaign 4 Weapon Paths Research implementation
+// by Goth | September 2013 | wz2100.net
+
+// Weapons - Cannons
+function eventResearched(research, structure)
+{
+	if (structure.player == selectedPlayer && research.done == true)
+	{
+		if (research.name == "R-PATH-Wpn-Cannon")
+		{
+			enableResearch("R-Wpn-Cannon1Mk1", selectedPlayer);
+			resPathCannon=1;
+		}
+		
+		if (research.name == "R-Wpn-Cannon1Mk1")
+		{
+			enableResearch("R-Wpn-Cannon-Accuracy01", selectedPlayer);
+			enableResearch("R-Wpn-Cannon-Damage01", selectedPlayer);
+			enableResearch("R-Wpn-Cannon-ROF01", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Accuracy01")
+		{
+			enableResearch("R-Wpn-Cannon-Accuracy02", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Accuracy02")
+		{
+			enableResearch("R-Wpn-Cannon-Accuracy03", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Accuracy03")
+		{
+			enableResearch("R-Wpn-Cannon-Accuracy03", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Damage01")
+		{
+			enableResearch("R-Wpn-Cannon-Damage02", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Damage02")
+		{
+			enableResearch("R-Wpn-Cannon-Damage03", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Damage03")
+		{
+			enableResearch("R-Wpn-Cannon2Mk1", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-ROF01")
+		{
+			enableResearch("R-Wpn-Cannon-ROF02", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-ROF02")
+		{
+			enableResearch("R-Wpn-Cannon-ROF03", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-ROF03")
+		{
+			enableResearch("R-Wpn-Cannon-HPVLgt", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-HPVLgt")
+		{
+			resPathCannon=2;
+			enableResearch("R-Wpn-Cannon3Mk1", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-ROF04")
+		{
+			enableResearch("R-Wpn-Cannon-ROF05", selectedPlayer);
+			enableResearch("R-Wpn-Cannon4AMk1", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-ROF05")
+		{
+			enableResearch("R-Wpn-Cannon5", selectedPlayer);
+			enableResearch("R-Wpn-Cannon-ROF06", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-ROF06")
+		{
+			enableResearch("R-Wpn-Cannon6TwinAslt", selectedPlayer);
+			resPathCannon=3;
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Damage04")
+		{
+			enableResearch("R-Wpn-Cannon-Damage05", selectedPlayer);
+			enableResearch("R-Wpn-Cannon-Shotgun", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Damage05")
+		{
+			enableResearch("R-Wpn-Cannon-Damage06", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Accuracy04")
+		{
+			enableResearch("R-Wpn-Cannon-Accuracy05", selectedPlayer);
+			enableResearch("R-Wpn-Cannon-Sniper", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Accuracy05")
+		{
+			enableResearch("R-Wpn-Cannon-Accuracy06", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-ROF07")
+		{
+			enableResearch("R-Wpn-Cannon-ROF08", selectedPlayer);
+			enableResearch("R-Wpn-Cannon-Pod3", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-ROF08")
+		{
+			enableResearch("R-Wpn-Cannon-ROF09", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-ROF09")
+		{
+			enableResearch("R-Wpn-Cannon-Gattling", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Pod3Quad")
+		{
+			resPathCannon=4; // Should be = 4 now - Flag us for the best weap in class!
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Damage07")
+		{
+			enableResearch("R-Wpn-Cannon-Damage08", selectedPlayer);
+			enableResearch("R-Wpn-Cannon-HPVTankDestLgt", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Damage08")
+		{
+			enableResearch("R-Wpn-Cannon-Damage09", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Accuracy07")
+		{
+			enableResearch("R-Wpn-Cannon-Accuracy08", selectedPlayer);
+			enableResearch("R-Wpn-Cannon-HPVGattling", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Accuracy08")
+		{
+			enableResearch("R-Wpn-Cannon-Accuracy09", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Cannon-Accuracy09")
+		{
+			enableResearch("R-Wpn-EMPCannon", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-EMPCannon")
+		{
+			enableResearch("R-Defense-Super-EMP", selectedPlayer);
+		}
+	}
+}

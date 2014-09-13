@@ -1,0 +1,25 @@
+// multilim.vlo
+//
+// define maximum limits for structures in limits screen here
+// only stats mentioned here will be added to limits screen.
+
+
+script "multilim.slo"
+run
+{
+
+//structures
+
+comCenter			STRUCTURESTAT		"A0CommandCentre"
+factory			STRUCTURESTAT		"A0LightFactory"
+oilDerrick		STRUCTURESTAT		"A0ResourceExtractor"
+powerGen		STRUCTURESTAT		"A0PowerGenerator"
+research		STRUCTURESTAT		"A0ResearchFacility"
+comdroid		STRUCTURESTAT		"A0ComDroidControl"
+cybfac			STRUCTURESTAT		"A0CyborgFactory"
+vtolfact		STRUCTURESTAT		"A0VTolFactory1"
+satuplink		STRUCTURESTAT		"A0Sat-linkCentre"
+lassat		STRUCTURESTAT		"A0LasSatCommand"
+scavfact		STRUCTURESTAT		"A0BaBaFactory"
+scavvtol		STRUCTURESTAT		"A0BaBaVtolFactory"
+}

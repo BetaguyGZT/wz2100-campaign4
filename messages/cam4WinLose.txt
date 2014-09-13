@@ -1,0 +1,2 @@
+END,0,1,1,end.ogg,1,END_MSG,0,0000
+WIN,0,1,1,victory.ogg,1,WIN_MSG,0,0000

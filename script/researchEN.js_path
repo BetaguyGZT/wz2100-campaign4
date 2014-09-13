@@ -1,0 +1,181 @@
+// Part of the Campaign 4 Weapon Paths Research implementation
+// by Goth | September 2013 | wz2100.net
+
+// Weapons - Lasers
+function eventResearched(research, structure)
+{
+	if (structure.player == selectedPlayer && research.done == true)
+	{
+		if (research.name == "R-PATH-Wpn-Energy")
+		{
+			enableResearch("R-Wpn-Laser-AP1", selectedPlayer);
+			enableResearch("R-Wpn-Laser-AT1", selectedPlayer);
+			resPathLaser=1;
+		}
+		
+		if (research.name == "R-Wpn-Laser-AP1")
+		{
+			enableResearch("R-Wpn-Energy-Accuracy01", selectedPlayer);
+			enableResearch("R-Wpn-Energy-ROF01", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Laser-AT1")
+		{
+			enableResearch("R-Wpn-Energy-Damage01", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-Damage01")
+		{
+			enableResearch("R-Wpn-Laser01", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Laser01")
+		{
+			enableResearch("R-Wpn-Energy-Damage02", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-Damage02")
+		{
+			enableResearch("R-Wpn-Energy-Damage03", selectedPlayer);
+			enableResearch("R-Wpn-Laser02", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-Damage03")
+		{
+			enableResearch("R-Wpn-HvyLaser", selectedPlayer);
+			resPathLaser=2;
+		}
+		
+		if (research.name == "R-Wpn-Energy-Accuracy01")
+		{
+			enableResearch("R-Wpn-Energy-Accuracy02", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-Accuracy02")
+		{
+			enableResearch("R-Wpn-Energy-Accuracy03", selectedPlayer);
+			enableResearch("R-Wpn-Laser-AT2", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-ROF01")
+		{
+			enableResearch("R-Wpn-Energy-ROF02", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-ROF02")
+		{
+			enableResearch("R-Wpn-Energy-ROF03", selectedPlayer);
+			enableResearch("R-Wpn-Laser-AP2", selectedPlayer);
+		}
+		
+		// Level 2
+		if (research.name == "R-Wpn-Energy-Accuracy04")
+		{
+			enableResearch("R-Wpn-Energy-Accuracy05", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-ROF04")
+		{
+			enableResearch("R-Wpn-Energy-ROF05", selectedPlayer);
+			enableResearch("R-Wpn-Laser-AP3", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-Damage04")
+		{
+			enableResearch("R-Wpn-Energy-Damage05", selectedPlayer);
+			enableResearch("R-Wpn-Laser-AT3", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-Accuracy05")
+		{
+			enableResearch("R-Wpn-Energy-Accuracy06", selectedPlayer);
+			enableResearch("R-Wpn-Laser-TankDestLgt", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-ROF05")
+		{
+			enableResearch("R-Wpn-Energy-ROF06", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-ROF06")
+		{
+			enableResearch("R-Wpn-Laser-AsltLsr", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-Damage05")
+		{
+			enableResearch("R-Wpn-Energy-Damage06", selectedPlayer);
+			enableResearch("R-Wpn-Laser-AT4", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-Damage06")
+		{
+			enableResearch("R-Wpn-Laser-Plasma", selectedPlayer);
+			enableResearch("R-Wpn-Laser-AP4", selectedPlayer);
+			resPathLaser=3;
+		}
+		
+		if (research.name == "R-Wpn-Energy-Accuracy06")
+		{
+			enableResearch("R-Wpn-Laser-TankDest", selectedPlayer);
+		}
+		
+		// Level 3
+		if (research.name == "R-Wpn-Energy-Accuracy07")
+		{
+			enableResearch("R-Wpn-Energy-Accuracy08", selectedPlayer);
+			enableResearch("R-Wpn-Laser-Sonic", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-Accuracy08")
+		{
+			enableResearch("R-Wpn-Energy-Accuracy09", selectedPlayer);
+			enableResearch("R-Wpn-Laser-Sonic-TankDest", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-ROF07")
+		{
+			enableResearch("R-Wpn-Energy-ROF08", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-ROF08")
+		{
+			enableResearch("R-Wpn-Energy-ROF09", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-ROF09")
+		{
+			enableResearch("R-Wpn-Laser-AsltLsrTwin", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-Damage07")
+		{
+			enableResearch("R-Wpn-Energy-Damage08", selectedPlayer);
+			enableResearch("R-Wpn-Laser-Plasma-TankDest", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-Damage08")
+		{
+			enableResearch("R-Wpn-Energy-Damage09", selectedPlayer);
+			enableResearch("R-Wpn-Laser-TankDest2", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Energy-Damage09")
+		{
+			enableResearch("R-Defense-Super-Laser", selectedPlayer);
+			enableResearch("R-Defense-Super-Laser2", selectedPlayer);
+			enableResearch("R-Defense-Super-LaserPlasma", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Laser-AsltLsr")
+		{
+			enableResearch("R-Defense-WallTower4-Laser-AsltLsr", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Laser-AsltLsrTwin")
+		{
+			enableResearch("R-Defense-WallTower4-Laser-AsltLsrTwin", selectedPlayer);
+		}
+		
+	}
+}

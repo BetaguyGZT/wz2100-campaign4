@@ -1,0 +1,195 @@
+// Part of the Campaign 4 Weapon Paths Research implementation
+// by Goth | September 2013 | wz2100.net
+
+// Weapons - Rockets
+function eventResearched(research, structure)
+{
+	if (structure.player == selectedPlayer && research.done == true)
+	{
+		if (research.name == "R-PATH-Wpn-Rocket")
+		{
+			enableResearch("R-Wpn-Rocket05-MiniPod", selectedPlayer);
+			resPathRocket=1;
+		}
+		
+		if (research.name == "R-Wpn-Rocket05-MiniPod")
+		{
+			enableResearch("R-Wpn-Rocket-Accuracy01", selectedPlayer);
+			enableResearch("R-Wpn-Rocket-Damage01", selectedPlayer);
+			enableResearch("R-Wpn-Rocket-ROF01", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Accuracy01")
+		{
+			enableResearch("R-Wpn-Rocket-Accuracy02", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Accuracy02")
+		{
+			enableResearch("R-Wpn-Rocket-Accuracy03", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Accuracy03")
+		{
+			enableResearch("R-Wpn-Rocket-Accuracy03", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Damage01")
+		{
+			enableResearch("R-Wpn-Rocket-Damage02", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Damage02")
+		{
+			enableResearch("R-Wpn-Rocket-Damage03", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Damage03")
+		{
+			enableResearch("R-Wpn-Rocket01-LtAT", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-ROF01")
+		{
+			enableResearch("R-Wpn-Rocket-ROF02", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-ROF02")
+		{
+			enableResearch("R-Wpn-Rocket-ROF03", selectedPlayer);
+			enableResearch("R-Wpn-Rocket-PodTwin", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-ROF03")
+		{
+			enableResearch("R-Wpn-Rocket-PodQuad", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-PodQuad")
+		{
+			resPathRocket=2;
+			enableResearch("R-Wpn-Rocket02-MRL", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-ROF04")
+		{
+			enableResearch("R-Wpn-Rocket-ROF05", selectedPlayer);
+			enableResearch("R-Wpn-Missile-ROF01", selectedPlayer);
+			enableResearch("R-Wpn-Rocket-Pod2", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-ROF05")
+		{
+			enableResearch("R-Wpn-Rocket-Pod2Twin", selectedPlayer);
+			enableResearch("R-Wpn-Rocket-ROF06", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-ROF06")
+		{
+			enableResearch("R-Wpn-Rocket-Pod2Quad", selectedPlayer);
+			resPathRocket=3;
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Damage04")
+		{
+			enableResearch("R-Wpn-Missile-Damage01", selectedPlayer);
+			enableResearch("R-Wpn-Rocket-Damage05", selectedPlayer);
+			enableResearch("R-Wpn-Rocket06-IDF", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Damage05")
+		{
+			enableResearch("R-Wpn-Rocket-Damage06", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Accuracy04")
+		{
+			enableResearch("R-Wpn-Rocket-Accuracy05", selectedPlayer);
+			enableResearch("R-Wpn-Missile-LtSAM", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Accuracy05")
+		{
+			enableResearch("R-Wpn-Rocket-Accuracy06", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-ROF07")
+		{
+			enableResearch("R-Wpn-Rocket-ROF08", selectedPlayer);
+			enableResearch("R-Wpn-Missile-ROF02", selectedPlayer);
+			enableResearch("R-Wpn-Rocket-Pod3", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-ROF08")
+		{
+			enableResearch("R-Wpn-Rocket-ROF09", selectedPlayer);
+			enableResearch("R-Wpn-Missile-ROF03", selectedPlayer);
+			enableResearch("R-Wpn-Rocket-Pod3Twin", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-ROF09")
+		{
+			enableResearch("R-Wpn-Rocket-Pod3Quad", selectedPlayer);
+			enableResearch("R-Wpn-Rocket-Gattling", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Pod3Quad")
+		{
+			resPathRocket=4; // Should be = 4 now - Flag us for the best weap in class!
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Damage07")
+		{
+			enableResearch("R-Wpn-Missile-Damage02", selectedPlayer);
+			enableResearch("R-Wpn-Rocket-Damage08", selectedPlayer);
+			enableResearch("R-Wpn-MdArtMissile", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Damage08")
+		{
+			enableResearch("R-Wpn-Rocket-Damage09", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Accuracy07")
+		{
+			enableResearch("R-Wpn-Rocket-Accuracy08", selectedPlayer);
+			enableResearch("R-Wpn-Missile-LtSAM2", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Accuracy08")
+		{
+			enableResearch("R-Wpn-Rocket-Accuracy09", selectedPlayer);
+		}
+
+		if (research.name == "R-Wpn-Rocket-Damage09")
+		{
+			enableResearch("R-Wpn-Rocket-TopAtkInc", selectedPlayer);
+			enableResearch("R-Wpn-Rocket-TopAtkPlas", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-TopAtkInc")
+		{
+			enableResearch("R-Wpn-Rocket-TopAtkIncHvy", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-TopAtkPlas")
+		{
+			enableResearch("R-Wpn-Rocket-TopAtkPlasHvy", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-Accuracy09")
+		{
+			enableResearch("R-Wpn-Rocket-LasProp-AT", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-LasProp-AT")
+		{
+			enableResearch("R-Wpn-Rocket-LasProp-AP", selectedPlayer);
+		}
+		
+		if (research.name == "R-Wpn-Rocket-LasProp-AP")
+		{
+			enableResearch("R-Wpn-Rocket-LasProp-Plas", selectedPlayer);
+		}
+	}
+}
